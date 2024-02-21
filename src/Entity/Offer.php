@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
-class Offer
+class Offer extends AbstractPublishedEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,23 +20,8 @@ class Offer
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $beginDate = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $creationDate = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $publicationDate = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $endProvidDate = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $lastEditDate = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
     private array $keyWords = [];
@@ -74,54 +59,6 @@ class Offer
         return $this;
     }
 
-    public function getBeginDate(): ?\DateTimeInterface
-    {
-        return $this->beginDate;
-    }
-
-    public function setBeginDate(?\DateTimeInterface $beginDate): static
-    {
-        $this->beginDate = $beginDate;
-
-        return $this;
-    }
-
-    public function getEndDate(): ?\DateTimeInterface
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(?\DateTimeInterface $endDate): static
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): static
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    public function getPublicationDate(): ?\DateTimeInterface
-    {
-        return $this->publicationDate;
-    }
-
-    public function setPublicationDate(?\DateTimeInterface $publicationDate): static
-    {
-        $this->publicationDate = $publicationDate;
-
-        return $this;
-    }
-
     public function getEndProvidDate(): ?\DateTimeInterface
     {
         return $this->endProvidDate;
@@ -130,18 +67,6 @@ class Offer
     public function setEndProvidDate(\DateTimeInterface $endProvidDate): static
     {
         $this->endProvidDate = $endProvidDate;
-
-        return $this;
-    }
-
-    public function getLastEditDate(): ?\DateTimeInterface
-    {
-        return $this->lastEditDate;
-    }
-
-    public function setLastEditDate(?\DateTimeInterface $lastEditDate): static
-    {
-        $this->lastEditDate = $lastEditDate;
 
         return $this;
     }

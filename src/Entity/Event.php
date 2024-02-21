@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-class Event
+class Event extends AbstractPublishedEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,12 +34,6 @@ class Event
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $adhPrice = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $beginDate = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $quotaStu = null;
 
@@ -51,15 +45,6 @@ class Event
 
     #[ORM\Column]
     private ?bool $cancel = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $publicationDate = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $creationDate = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $lastEditDate = null;
 
     #[ORM\ManyToMany(targetEntity: EventType::class)]
     private Collection $types;
@@ -150,30 +135,6 @@ class Event
         return $this;
     }
 
-    public function getBeginDate(): ?\DateTimeInterface
-    {
-        return $this->beginDate;
-    }
-
-    public function setBeginDate(?\DateTimeInterface $beginDate): static
-    {
-        $this->beginDate = $beginDate;
-
-        return $this;
-    }
-
-    public function getEndDate(): ?\DateTimeInterface
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(?\DateTimeInterface $endDate): static
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
     public function getQuotaStu(): ?int
     {
         return $this->quotaStu;
@@ -218,42 +179,6 @@ class Event
     public function setCancel(bool $cancel): static
     {
         $this->cancel = $cancel;
-
-        return $this;
-    }
-
-    public function getPublicationDate(): ?\DateTimeInterface
-    {
-        return $this->publicationDate;
-    }
-
-    public function setPublicationDate(?\DateTimeInterface $publicationDate): static
-    {
-        $this->publicationDate = $publicationDate;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): static
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    public function getLastEditDate(): ?\DateTimeInterface
-    {
-        return $this->lastEditDate;
-    }
-
-    public function setLastEditDate(?\DateTimeInterface $lastEditDate): static
-    {
-        $this->lastEditDate = $lastEditDate;
 
         return $this;
     }
@@ -305,4 +230,5 @@ class Event
 
         return $this;
     }
+
 }
