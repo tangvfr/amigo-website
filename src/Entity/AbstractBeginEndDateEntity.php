@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\MappedSuperclass]
-class AbstractBeginEndDateEntity
+class AbstractBeginEndDateEntity extends AbstractEditableEntity
 {
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
