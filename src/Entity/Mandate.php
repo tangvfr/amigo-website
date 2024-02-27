@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\AbstractEditableEntity;
+use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\MandateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MandateRepository::class)]
-class Mandate extends AbstractBeginEndDateEntity
+class Mandate extends AbstractEditableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,8 +27,12 @@ class Mandate extends AbstractBeginEndDateEntity
     #[ORM\Column]
     private ?bool $visible = null;
 
+    #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    private BeginEndDateEmbeddable $bgedDate;
+
     public function __construct()
     {
+        $this->bgedDate = new BeginEndDateEmbeddable();
         $this->roles = new ArrayCollection();
     }
 
@@ -82,4 +88,17 @@ class Mandate extends AbstractBeginEndDateEntity
 
         return $this;
     }
+
+    public function getBgedDate(): BeginEndDateEmbeddable
+    {
+        return $this->bgedDate;
+    }
+
+    public function setBgedDate(BeginEndDateEmbeddable $bgedDate): static
+    {
+        $this->bgedDate = $bgedDate;
+
+        return $this;
+    }
+
 }

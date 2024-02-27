@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\AbstractEditableEntity;
 use App\Repository\StudentRepository;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student extends AbstractEditableEntity

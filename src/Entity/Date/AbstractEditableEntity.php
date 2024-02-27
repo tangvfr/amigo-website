@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Date;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
@@ -26,6 +26,11 @@ class AbstractEditableEntity
         $this->creationDate = $creationDate;
 
         return $this;
+    }
+
+    public function isEdited(): bool
+    {
+        return $this->lastEditDate !== null;
     }
 
     public function getLastEditDate(): ?DateTimeInterface

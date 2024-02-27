@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\AbstractPublishableEntity;
+use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\OfferRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
-class Offer extends AbstractPublishedEntity
+class Offer extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,6 +31,14 @@ class Offer extends AbstractPublishedEntity
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $provide = null;
+
+    #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    private BeginEndDateEmbeddable $bgedDate;
+
+    public function __construct()
+    {
+        $this->bgedDate = new BeginEndDateEmbeddable();
+    }
 
     public function getId(): ?int
     {
@@ -94,4 +104,17 @@ class Offer extends AbstractPublishedEntity
 
         return $this;
     }
+
+    public function getBgedDate(): BeginEndDateEmbeddable
+    {
+        return $this->bgedDate;
+    }
+
+    public function setBgedDate(BeginEndDateEmbeddable $bgedDate): static
+    {
+        $this->bgedDate = $bgedDate;
+
+        return $this;
+    }
+
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Date;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\MappedSuperclass]
-class AbstractPublishedEntity extends AbstractBeginEndDateEntity
+class AbstractPublishableEntity extends AbstractEditableEntity
 {
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
