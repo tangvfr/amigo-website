@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Date;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\MappedSuperclass]
-class AbstractBeginEndDateEntity
+#[ORM\Embeddable]
+class BeginEndDateEmbeddable implements IBeginEndDateEmbeddable
 {
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]

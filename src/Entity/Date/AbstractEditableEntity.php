@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Date;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\MappedSuperclass]
-class AbstractPublishedEntity extends AbstractBeginEndDateEntity
+class AbstractEditableEntity
 {
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
@@ -15,9 +15,6 @@ class AbstractPublishedEntity extends AbstractBeginEndDateEntity
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $lastEditDate = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTimeInterface $publicationDate = null;
 
     public function getCreationDate(): ?DateTimeInterface
     {
@@ -31,6 +28,11 @@ class AbstractPublishedEntity extends AbstractBeginEndDateEntity
         return $this;
     }
 
+    public function isEdited(): bool
+    {
+        return $this->lastEditDate !== null;
+    }
+
     public function getLastEditDate(): ?DateTimeInterface
     {
         return $this->lastEditDate;
@@ -39,18 +41,6 @@ class AbstractPublishedEntity extends AbstractBeginEndDateEntity
     public function setLastEditDate(?DateTimeInterface $lastEditDate): static
     {
         $this->lastEditDate = $lastEditDate;
-
-        return $this;
-    }
-
-    public function getPublicationDate(): ?DateTimeInterface
-    {
-        return $this->publicationDate;
-    }
-
-    public function setPublicationDate(?DateTimeInterface $publicationDate): static
-    {
-        $this->publicationDate = $publicationDate;
 
         return $this;
     }

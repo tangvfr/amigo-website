@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\AbstractPublishableEntity;
+use App\Entity\Date\BeginEndDateTimeEmbeddable;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-class Event extends AbstractPublishedEntity
+class Event extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,11 +43,8 @@ class Event extends AbstractPublishedEntity
     #[ORM\Column(nullable: true)]
     private ?int $quotaComp = null;
 
-    #[Assert\Range(
-        min: 0,
-        max: 5,
-    )]
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 5)]
     private ?int $note = null;
 
     #[ORM\Column]
@@ -57,10 +56,14 @@ class Event extends AbstractPublishedEntity
     #[ORM\ManyToMany(targetEntity: Location::class)]
     private Collection $situated;
 
+    #[ORM\Embedded(class: BeginEndDateTimeEmbeddable::class, columnPrefix: false)]
+    private BeginEndDateTimeEmbeddable $bgedDate;
+
     public function __construct()
     {
         $this->types = new ArrayCollection();
         $this->situated = new ArrayCollection();
+        $this->bgedDate = new BeginEndDateTimeEmbeddable();
     }
 
     public function getId(): ?int
@@ -232,6 +235,18 @@ class Event extends AbstractPublishedEntity
     public function removeSituated(Location $situated): static
     {
         $this->situated->removeElement($situated);
+
+        return $this;
+    }
+
+    public function getBgedDate(): BeginEndDateTimeEmbeddable
+    {
+        return $this->bgedDate;
+    }
+
+    public function setBgedDate(BeginEndDateTimeEmbeddable $bgedDate): static
+    {
+        $this->bgedDate = $bgedDate;
 
         return $this;
     }

@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\AbstractPublishableEntity;
+use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\PartnerRepository;
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
-class Partner extends AbstractPublishedEntity
+class Partner extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +25,14 @@ class Partner extends AbstractPublishedEntity
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $advantages = null;
+
+    #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    private BeginEndDateEmbeddable $bgedDate;
+
+    public function __construct()
+    {
+        $this->bgedDate = new BeginEndDateEmbeddable();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +71,18 @@ class Partner extends AbstractPublishedEntity
     public function setAdvantages(?string $advantages): static
     {
         $this->advantages = $advantages;
+
+        return $this;
+    }
+
+    public function getBgedDate(): BeginEndDateEmbeddable
+    {
+        return $this->bgedDate;
+    }
+
+    public function setBgedDate(BeginEndDateEmbeddable $bgedDate): static
+    {
+        $this->bgedDate = $bgedDate;
 
         return $this;
     }
