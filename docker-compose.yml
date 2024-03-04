@@ -1,0 +1,45 @@
+version: '3'
+services:
+  php-fpm:
+    container_name: amigows_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: "${USERNAME}"
+        UID: ${UID}
+        EMAIL: "${GIT_EMAIL}"
+        NAME: "${GIT_NAME}"
+    depends_on:
+      - "db"
+    volumes:
+      - ./dev:/var/www/html
+    ports:
+      - "8000:8000"
+      - "8010:8010"
+      - "8020:8020"
+    environment:
+      PHP_IDE_CONFIG: serverName=fww_sa_amigows
+      PS1: "[ $$(whoami) | $$(pwd) ] "
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: "${DB_USERNAME}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 18080:8080
+    depends_on:
+      - "db"
+volumes:
+  database:
+  dev:
