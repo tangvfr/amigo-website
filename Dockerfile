@@ -29,11 +29,18 @@ RUN apk add symfony-cli
 # installation de Angular
 RUN npm install -g typescript  && npm install -g @angular/cli
 
-# Gestion user
+# gestion user
 RUN echo "UID_MAX 9223372036854775807" > /etc/login.defs
 RUN adduser -h /home/$USERNAME -D -s /bin/bash -u $UID $USERNAME
 USER $USERNAME
+
+# setup git info
 RUN git config --global user.email "$EMAIL" \
     && git config --global user.name "$NAME"
+
+#setup terminal
+RUN echo "parse_git_branch() {" >> /home/$USERNAME/.bashrc \
+    && echo "    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'" >> /home/$USERNAME/.bashrc \
+    && echo "}" >> /home/$USERNAME/.bashrc
 
 WORKDIR /var/www/html
