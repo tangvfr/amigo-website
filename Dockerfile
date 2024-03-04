@@ -12,10 +12,16 @@ RUN echo "==============================="
 # installation bash
 RUN apk --no-cache update && apk --no-cache add bash git npm shadow \ 
     && apk --no-cache add 'nodejs>20.11'
+#sgdbr postgres
 RUN set -ex \
 	&& apk --no-cache add postgresql-libs postgresql-dev \
-	&& docker-php-ext-install pgsql pdo_pgsql\
+	&& docker-php-ext-install pgsql pdo_pgsql\ 
 	&& apk del postgresql-dev
+#PHP intl (datetime de EsayAdmin en a besoin)
+RUN apk --no-cache add icu-dev 
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install intl
+RUN docker-php-ext-enable intl
 
 # installation de composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -24,7 +30,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 # installation de symfony
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
-RUN apk add symfony-cli
+RUN apk --no-cache add symfony-cli
 
 # installation de Angular
 RUN npm install -g typescript  && npm install -g @angular/cli
