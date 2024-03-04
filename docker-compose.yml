@@ -1,6 +1,6 @@
 version: '3'
 services:
-  php-fpm:
+  amigows.web:
     container_name: amigows_web
     build:
       context: .
@@ -11,7 +11,7 @@ services:
         EMAIL: "${GIT_EMAIL}"
         NAME: "${GIT_NAME}"
     depends_on:
-      - "db"
+      - "amigows.db"
     volumes:
       - ./dev:/var/www/html
     ports:
@@ -21,8 +21,8 @@ services:
     environment:
       PHP_IDE_CONFIG: serverName=fww_sa_amigows
       PS1: "[ $$(whoami) | $$(pwd) ] "
-  db:
-    container_name: db
+  amigows.db:
+    container_name: amigows_db
     image: postgres
     restart: always
     environment:
@@ -33,13 +33,14 @@ services:
       - ./database:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  adminer:
+  amigows.db.adminer:
+    container_name: amigows_db_adminer
     image: adminer
     restart: always
     ports:
       - 18080:8080
     depends_on:
-      - "db"
+      - "amigows.db"
 volumes:
   database:
   dev:

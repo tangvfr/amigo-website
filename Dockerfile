@@ -1,4 +1,4 @@
-FROM php:8-fpm-alpine
+FROM php:8-fpm-alpine3.19
 ARG USERNAME
 ARG UID
 ARG EMAIL
@@ -12,6 +12,10 @@ RUN echo "==============================="
 # installation bash
 RUN apk --no-cache update && apk --no-cache add bash git npm shadow \ 
     && apk --no-cache add 'nodejs>20.11'
+RUN set -ex \
+	&& apk --no-cache add postgresql-libs postgresql-dev \
+	&& docker-php-ext-install pgsql pdo_pgsql\
+	&& apk del postgresql-dev
 
 # installation de composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -27,7 +31,7 @@ RUN npm install -g typescript  && npm install -g @angular/cli
 
 # Gestion user
 RUN echo "UID_MAX 9223372036854775807" > /etc/login.defs
-RUN /usr/sbin/useradd -m -s /bin/sh -u "$UID" $USERNAME
+RUN adduser -h /home/$USERNAME -D -s /bin/bash -u $UID $USERNAME
 USER $USERNAME
 RUN git config --global user.email "$EMAIL" \
     && git config --global user.name "$NAME"
