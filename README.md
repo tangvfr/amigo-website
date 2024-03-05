@@ -1,6 +1,6 @@
 # Environement docker
 ## Paramétrage de votre environement
-- copier et renommer le fichier '.env.example' en '.env' 
+- copier et renommer le fichier `.env.example` en `.env` 
 - puis changer les valeurs des variables pour corespondre a votre profil/github
 ## Setup de l'environement
 - *effectuer la commande `docker-compose config` afin de vérifier que les variables d'environement on bien été prise en compte dans la configuration*
