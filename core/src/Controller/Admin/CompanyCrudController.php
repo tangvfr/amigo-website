@@ -39,18 +39,18 @@ class CompanyCrudController extends AbstractCrudController
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->setSortable(false),
             ImageField::new('banner', 'Bannière')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->setSortable(false),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
-            AssociationField::new('located', 'Emplacements')
-                ->hideOnIndex(),
-            AssociationField::new('activities', 'Activités')
-                ->hideOnIndex(),
+            AssociationField::new('located', 'Emplacements'),
+            AssociationField::new('activities', 'Activités'),
         ];
     }
 
