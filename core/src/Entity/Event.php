@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateTimeEmbeddable;
 use App\Repository\EventRepository;
@@ -9,35 +12,61 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/now',
+            normalizationContext: ['groups' => ['minimalEvent']],
+        ),
+         new GetCollection(
+            uriTemplate: '/past',
+            normalizationContext: ['groups' => ['minimalEvent']],
+         ),
+        new Get(
+            uriTemplate: '/{id}',
+            normalizationContext: ['groups' => 'detailEvent']
+        ),
+    ],
+    routePrefix: 'events'
+)]
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    //#[Groups(['detailEvent', 'minimalEvent'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $img = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('detailEvent')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups('detailEvent')]
     private ?bool $onlyMiagist = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups('detailEvent')]
     private ?string $nadhPrice = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups('detailEvent')]
     private ?string $adhPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups('detailEvent')]
     private ?int $quotaStu = null;
 
     #[ORM\Column(nullable: true)]
@@ -51,12 +80,15 @@ class Event extends AbstractPublishableEntity
     private ?bool $cancel = null;
 
     #[ORM\ManyToMany(targetEntity: EventType::class)]
+    #[Groups('detailEvent')]
     private Collection $types;
 
     #[ORM\ManyToMany(targetEntity: Location::class)]
+    #[Groups('detailEvent')]
     private Collection $situated;
 
     #[ORM\Embedded(class: BeginEndDateTimeEmbeddable::class, columnPrefix: false)]
+    #[Groups(['detailEvent'])]
     private BeginEndDateTimeEmbeddable $bgedDate;
 
     public function __construct()

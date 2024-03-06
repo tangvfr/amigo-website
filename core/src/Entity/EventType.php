@@ -2,22 +2,28 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Tests\Fixtures\Metadata\Get;
 use App\Repository\EventTypeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[Get(normalizationContext: ['groups' => 'detailEventType'])]
 #[ORM\Entity(repositoryClass: EventTypeRepository::class)]
 class EventType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    //#[Groups(['detailEventType', 'shortEventType'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['detailEventType', 'shortEventType', 'detailEvent'])]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('detailEventType')]
     private ?string $description = null;
 
     public function getId(): ?int

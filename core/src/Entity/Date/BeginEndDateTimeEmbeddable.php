@@ -5,15 +5,18 @@ namespace App\Entity\Date;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Embeddable]
 class BeginEndDateTimeEmbeddable implements IBeginEndDateEmbeddable
 {
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['detailEvent'])]
     private ?DateTimeInterface $beginDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups('detailEvent')]
     private ?DateTimeInterface $endDate = null;
 
     public function getBeginDate(): ?DateTimeInterface

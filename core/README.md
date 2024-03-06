@@ -1,4 +1,6 @@
 # Projet AMIGOWS parties API & Admin
+## Avant tout choses pour configurer votre bd ou environment
+- Copier et renommer le fichier `.env` vers `.env.local` pour que ce dernier avec vos clefs ou mdp ne sois pas commit.
 ## Commandes qui peuvent dépanner
 - `symfony composer install`
 - `symfony composer update`

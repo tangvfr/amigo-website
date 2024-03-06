@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
+#[Groups(['detailEvent', 'challengerCompany', 'discountCompany', 'infoCompany'])]
 class Location
 {
     #[ORM\Id]
