@@ -45,13 +45,6 @@ export interface paths {
      */
     get: operations["api_events_id_get"];
   };
-  "/api/locations/{id}": {
-    /**
-     * Retrieves a Location resource.
-     * @description Retrieves a Location resource.
-     */
-    get: operations["api_locations_id_get"];
-  };
   "/api/offers": {
     /**
      * Retrieves the collection of Offer resources.
@@ -142,6 +135,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
       description?: string;
@@ -157,6 +151,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
       banner?: string | null;
@@ -173,6 +168,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
       description?: string;
@@ -188,6 +184,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
     };
@@ -200,6 +197,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       label?: string;
     };
     "CompanyType.jsonld-discountCompany": {
@@ -211,6 +209,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       label?: string;
     };
     "CompanyType.jsonld-infoCompany": {
@@ -222,6 +221,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       label?: string;
     };
     "Event.jsonld-detailEvent": {
@@ -233,6 +233,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
       description?: string;
@@ -249,6 +250,7 @@ export interface components {
     "Event.jsonld-minimalEvent": {
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       name?: string;
       img?: string | null;
     };
@@ -261,6 +263,7 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       label?: string;
     };
     "EventType.jsonld-detailEventType": {
@@ -272,26 +275,9 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      label?: string;
-      description?: string;
-    };
-    "Location.jsonld": {
-      "@context"?: OneOf<[string, {
-        "@vocab": string;
-        /** @enum {string} */
-        hydra: "http://www.w3.org/ns/hydra/core#";
-        [key: string]: unknown;
-      }]>;
-      "@id"?: string;
-      "@type"?: string;
       id?: number;
       label?: string;
-      latitude?: number | null;
-      longitude?: number | null;
-      country?: string | null;
-      city?: string | null;
-      postalCode?: string | null;
-      adresse?: string | null;
+      description?: string;
     };
     "Location.jsonld-challengerCompany": {
       "@context"?: OneOf<[string, {
@@ -368,23 +354,26 @@ export interface components {
     "Offer.jsonld-listOffer": {
       "@id"?: string;
       "@type"?: string;
-      label?: string;
-      description?: string;
+      id: number;
+      label: string;
+      description: string;
       /** Format: date-time */
-      endProvidDate?: string;
+      endProvidDate: string;
       keyWords?: string[];
-      provide?: components["schemas"]["Company.jsonld-listOffer"];
+      provide: components["schemas"]["Company.jsonld-listOffer"];
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-listOffer"];
     };
     "Partner.jsonld-challengerCompany": {
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       company?: components["schemas"]["Company.jsonld-challengerCompany"];
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-challengerCompany"];
     };
     "Partner.jsonld-discountCompany": {
       "@id"?: string;
       "@type"?: string;
+      id?: number;
       company?: components["schemas"]["Company.jsonld-discountCompany"];
       advantages?: string | null;
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-discountCompany"];
@@ -585,30 +574,6 @@ export interface operations {
       200: {
         content: {
           "application/ld+json": components["schemas"]["Event.jsonld-detailEvent"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Retrieves a Location resource.
-   * @description Retrieves a Location resource.
-   */
-  api_locations_id_get: {
-    parameters: {
-      path: {
-        /** @description Location identifier */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Location resource */
-      200: {
-        content: {
-          "application/ld+json": components["schemas"]["Location.jsonld"];
         };
       };
       /** @description Resource not found */

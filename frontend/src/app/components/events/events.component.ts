@@ -3,7 +3,6 @@ import {NgFor} from "@angular/common";
 import {AmigowsApiService} from "../../services/amigows.api.service";
 import {EMPTY_HYDRA_LIST, HydraList} from "../../models/hydra-list";
 import {components} from "../../models/schema.api";
-type MinimalEvent = components["schemas"]["Event.jsonld-minimalEvent"];
 
 @Component({
   selector: 'app-events',
@@ -14,7 +13,7 @@ type MinimalEvent = components["schemas"]["Event.jsonld-minimalEvent"];
 })
 export class EventsComponent implements OnInit {
 
-  nowEvents: HydraList<MinimalEvent> = EMPTY_HYDRA_LIST;//components['schemas']['Event.jsonld-minimalEvent'][] | undefined;
+  nowEvents: HydraList<components["schemas"]["Event.jsonld-minimalEvent"]> = EMPTY_HYDRA_LIST;
 
   constructor(private amigowsApiService: AmigowsApiService) {}
 

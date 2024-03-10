@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\Tests\Fixtures\Metadata\Get;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[Get]
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 #[Groups(['detailEvent', 'challengerCompany', 'discountCompany', 'infoCompany'])]
 class Location

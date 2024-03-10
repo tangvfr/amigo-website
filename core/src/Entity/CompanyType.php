@@ -12,7 +12,7 @@ class CompanyType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    //#[Groups('companyType')]
+    #[Groups(['challengerCompany', 'discountCompany', 'infoCompany'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]

@@ -38,7 +38,7 @@ class Event extends AbstractPublishableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    //#[Groups(['detailEvent', 'minimalEvent'])]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

@@ -1,16 +1,14 @@
 # Projet AMIGOWS parties Vitrine
-
-## Générer les fichiers .ts en fonction de l'api
-`npm init @api-platform/client -f openapi3 http://amigows:8000/api/index.jsonopenapi src/models -- --generator typescript`
-mieux:
-`symfony console api:openapi:export --yaml --output ../openapi.test.yml`
-`npm i -D openapi-typescript typescript`
-`npx openapi-typescript ../openapi.test.yml -o ./src/app/models/schema.api.ts`
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-## Development server
+## Générer les fichiers .ts en fonction de l'api
+`symfony console api:openapi:export --output ../amigows.openapi.json`
+`npm i -D openapi-typescript typescript`
+`npx openapi-typescript ../amigows.openapi.json -o ./src/app/models/schema.api.ts`
 
+## Development server
+Est déja par default --configuration=development
+Command pour en dev`ng serve --host 0.0.0.0`
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding

@@ -10,6 +10,7 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[GetCollection(
     normalizationContext: ['groups' => 'listOffer']
@@ -20,18 +21,23 @@ class Offer extends AbstractPublishableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['listOffer'])]
+    #[NotNull]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['listOffer'])]
+    #[NotNull]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['listOffer'])]
+    #[NotNull]
     private ?DateTimeInterface $endProvidDate = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
@@ -41,6 +47,7 @@ class Offer extends AbstractPublishableEntity
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['listOffer'])]
+    #[NotNull]
     private ?Company $provide = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]

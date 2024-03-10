@@ -30,6 +30,7 @@ class Partner extends AbstractPublishableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['challengerCompany', 'discountCompany'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne]

@@ -15,11 +15,11 @@ class EventType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    //#[Groups(['detailEventType', 'shortEventType'])]
+    #[Groups(['detailEventType', 'detailEvent'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['detailEventType', 'shortEventType', 'detailEvent'])]
+    #[Groups(['detailEventType', 'detailEvent'])]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]

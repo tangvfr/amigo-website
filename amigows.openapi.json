@@ -399,49 +399,6 @@
             },
             "parameters": []
         },
-        "/api/locations/{id}": {
-            "get": {
-                "operationId": "api_locations_id_get",
-                "tags": [
-                    "Location"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Location resource",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Location.jsonld"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Retrieves a Location resource.",
-                "description": "Retrieves a Location resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Location identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "deprecated": false
-            },
-            "parameters": []
-        },
         "/api/offers": {
             "get": {
                 "operationId": "api_offers_get_collection",
@@ -1089,6 +1046,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1154,6 +1115,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"
@@ -1227,6 +1192,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1293,6 +1262,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1344,6 +1317,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "label": {
                         "type": "string"
                     }
@@ -1388,6 +1365,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "label": {
                         "type": "string"
@@ -1434,6 +1415,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "label": {
                         "type": "string"
                     }
@@ -1478,6 +1463,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"
@@ -1549,6 +1538,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1600,60 +1593,16 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "label": {
                         "type": "string"
                     }
                 }
             },
             "EventType.jsonld-detailEventType": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "oneOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "@vocab": {
-                                        "type": "string"
-                                    },
-                                    "hydra": {
-                                        "type": "string",
-                                        "enum": [
-                                            "http://www.w3.org/ns/hydra/core#"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "@vocab",
-                                    "hydra"
-                                ],
-                                "additionalProperties": true
-                            }
-                        ]
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "label": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Location.jsonld": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -1700,41 +1649,8 @@
                     "label": {
                         "type": "string"
                     },
-                    "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
-                    },
-                    "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
-                    },
-                    "country": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "city": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "postalCode": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "adresse": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                    "description": {
+                        "type": "string"
                     }
                 }
             },
@@ -2082,6 +1998,13 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label",
+                    "description",
+                    "endProvidDate",
+                    "provide"
+                ],
                 "properties": {
                     "@id": {
                         "readOnly": true,
@@ -2090,6 +2013,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "label": {
                         "type": "string"
@@ -2128,6 +2055,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "company": {
                         "$ref": "#/components/schemas/Company.jsonld-challengerCompany"
                     },
@@ -2148,6 +2079,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "company": {
                         "$ref": "#/components/schemas/Company.jsonld-discountCompany"
