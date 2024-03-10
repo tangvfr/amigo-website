@@ -1,2 +1,5 @@
 ###jetbrain ide
 /.idea
+
+###vscode
+/.vscode
