@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240304194825 extends AbstractMigration
+final class Version20240310190409 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -41,7 +41,7 @@ final class Version20240304194825 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_317E8709E51E9644 ON company_company_type (company_type_id)');
         $this->addSql('CREATE TABLE company_type (id INT NOT NULL, label VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_CFB34DC7EA750E8 ON company_type (label)');
-        $this->addSql('CREATE TABLE event (id INT NOT NULL, creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, last_edit_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, publication_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name VARCHAR(255) NOT NULL, img VARCHAR(255) DEFAULT NULL, description TEXT NOT NULL, only_miagist BOOLEAN NOT NULL, nadh_price NUMERIC(10, 2) DEFAULT NULL, adh_price NUMERIC(10, 2) NOT NULL, quota_stu INT DEFAULT NULL, quota_comp INT DEFAULT NULL, note INT NOT NULL, cancel BOOLEAN NOT NULL, begin_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE event (id INT NOT NULL, creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, last_edit_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, publication_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name VARCHAR(255) NOT NULL, img VARCHAR(255) DEFAULT NULL, description TEXT NOT NULL, only_miagist BOOLEAN NOT NULL, nadh_price NUMERIC(10, 2) DEFAULT NULL, adh_price NUMERIC(10, 2) DEFAULT NULL, quota_stu INT DEFAULT NULL, quota_comp INT DEFAULT NULL, note INT NOT NULL, cancel BOOLEAN NOT NULL, begin_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN event.creation_date IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE event_event_type (event_id INT NOT NULL, event_type_id INT NOT NULL, PRIMARY KEY(event_id, event_type_id))');
         $this->addSql('CREATE INDEX IDX_CBFBC2AD71F7E88B ON event_event_type (event_id)');
@@ -51,7 +51,7 @@ final class Version20240304194825 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_1872601B64D218E ON event_location (location_id)');
         $this->addSql('CREATE TABLE event_type (id INT NOT NULL, label VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_93151B82EA750E8 ON event_type (label)');
-        $this->addSql('CREATE TABLE hub (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE hub (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, priority INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE location (id INT NOT NULL, label VARCHAR(255) NOT NULL, latitude DOUBLE PRECISION DEFAULT NULL, longitude DOUBLE PRECISION DEFAULT NULL, country VARCHAR(255) DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, postal_code VARCHAR(5) DEFAULT NULL, adresse VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_5E9E89CBEA750E8 ON location (label)');
         $this->addSql('CREATE TABLE mandate (id INT NOT NULL, student_id INT NOT NULL, creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, last_edit_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, visible BOOLEAN NOT NULL, begin_date DATE DEFAULT NULL, end_date DATE DEFAULT NULL, PRIMARY KEY(id))');
@@ -67,7 +67,7 @@ final class Version20240304194825 extends AbstractMigration
         $this->addSql('CREATE TABLE partner (id INT NOT NULL, company_id INT NOT NULL, creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, last_edit_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, publication_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, challenge BOOLEAN NOT NULL, advantages TEXT DEFAULT NULL, begin_date DATE DEFAULT NULL, end_date DATE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_312B3E16979B1AD6 ON partner (company_id)');
         $this->addSql('COMMENT ON COLUMN partner.creation_date IS \'(DC2Type:datetime_immutable)\'');
-        $this->addSql('CREATE TABLE role (id INT NOT NULL, hub_id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE role (id INT NOT NULL, hub_id INT NOT NULL, name VARCHAR(255) NOT NULL, priority INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_57698A6A6C786081 ON role (hub_id)');
         $this->addSql('CREATE TABLE student (id INT NOT NULL, creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, last_edit_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, img VARCHAR(255) DEFAULT NULL, student_number VARCHAR(10) NOT NULL, email VARCHAR(255) NOT NULL, level VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN student.creation_date IS \'(DC2Type:datetime_immutable)\'');

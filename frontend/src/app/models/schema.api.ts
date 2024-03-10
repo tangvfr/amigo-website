@@ -52,6 +52,13 @@ export interface paths {
      */
     get: operations["api_offers_get_collection"];
   };
+  "/api/office": {
+    /**
+     * Retrieves the collection of Mandate resources.
+     * @description Retrieves the collection of Mandate resources.
+     */
+    get: operations["api_office_get_collection"];
+  };
   "/api/partner/challenger": {
     /**
      * Retrieves the collection of Partner resources.
@@ -72,6 +79,20 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    "BeginEndDateEmbeddable.jsonld": {
+      "@context"?: OneOf<[string, {
+        "@vocab": string;
+        /** @enum {string} */
+        hydra: "http://www.w3.org/ns/hydra/core#";
+        [key: string]: unknown;
+      }]>;
+      "@id"?: string;
+      "@type"?: string;
+      /** Format: date-time */
+      beginDate?: string | null;
+      /** Format: date-time */
+      endDate?: string | null;
+    };
     "BeginEndDateEmbeddable.jsonld-challengerCompany": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
@@ -279,6 +300,20 @@ export interface components {
       label?: string;
       description?: string;
     };
+    "Hub.jsonld": {
+      "@context"?: OneOf<[string, {
+        "@vocab": string;
+        /** @enum {string} */
+        hydra: "http://www.w3.org/ns/hydra/core#";
+        [key: string]: unknown;
+      }]>;
+      "@id"?: string;
+      "@type"?: string;
+      id: number;
+      name: string;
+      description: string;
+      roles?: components["schemas"]["Role.jsonld"][];
+    };
     "Location.jsonld-challengerCompany": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
@@ -351,6 +386,20 @@ export interface components {
       postalCode?: string | null;
       adresse?: string | null;
     };
+    "Mandate.jsonld": {
+      "@id"?: string;
+      "@type"?: string;
+      id?: number;
+      roles?: components["schemas"]["Role.jsonld"][];
+      student: components["schemas"]["Student.jsonld"];
+      visible?: boolean;
+      bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld"];
+      /** Format: date-time */
+      creationDate?: string;
+      /** Format: date-time */
+      lastEditDate?: string | null;
+      edited?: boolean;
+    };
     "Offer.jsonld-listOffer": {
       "@id"?: string;
       "@type"?: string;
@@ -377,6 +426,44 @@ export interface components {
       company?: components["schemas"]["Company.jsonld-discountCompany"];
       advantages?: string | null;
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-discountCompany"];
+    };
+    "Role.jsonld": {
+      "@context"?: OneOf<[string, {
+        "@vocab": string;
+        /** @enum {string} */
+        hydra: "http://www.w3.org/ns/hydra/core#";
+        [key: string]: unknown;
+      }]>;
+      "@id"?: string;
+      "@type"?: string;
+      id: number;
+      hub: components["schemas"]["Hub.jsonld"];
+      name: string;
+      priority?: number;
+    };
+    "Student.jsonld": {
+      "@context"?: OneOf<[string, {
+        "@vocab": string;
+        /** @enum {string} */
+        hydra: "http://www.w3.org/ns/hydra/core#";
+        [key: string]: unknown;
+      }]>;
+      "@id"?: string;
+      "@type"?: string;
+      id: number;
+      name: string;
+      lastName: string;
+      img?: string | null;
+      studentNumber: string;
+      /** Format: email */
+      email: string;
+      /** @enum {string} */
+      level: "l3" | "m1" | "m2" | "wk" | "oth";
+      /** Format: date-time */
+      creationDate?: string;
+      /** Format: date-time */
+      lastEditDate?: string | null;
+      edited?: boolean;
     };
   };
   responses: {
@@ -599,6 +686,63 @@ export interface operations {
         content: {
           "application/ld+json": {
             "hydra:member": components["schemas"]["Offer.jsonld-listOffer"][];
+            "hydra:totalItems"?: number;
+            /**
+             * @example {
+             *   "@id": "string",
+             *   "type": "string",
+             *   "hydra:first": "string",
+             *   "hydra:last": "string",
+             *   "hydra:previous": "string",
+             *   "hydra:next": "string"
+             * }
+             */
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: ({
+                  "@type"?: string;
+                  variable?: string;
+                  property?: string | null;
+                  required?: boolean;
+                })[];
+            };
+          };
+        };
+      };
+    };
+  };
+  /**
+   * Retrieves the collection of Mandate resources.
+   * @description Retrieves the collection of Mandate resources.
+   */
+  api_office_get_collection: {
+    parameters: {
+      query?: {
+        /** @description The collection page number */
+        page?: number;
+      };
+    };
+    responses: {
+      /** @description Mandate collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Mandate.jsonld"][];
             "hydra:totalItems"?: number;
             /**
              * @example {

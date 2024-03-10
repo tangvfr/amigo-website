@@ -2,9 +2,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
 ## Générer les fichiers .ts en fonction de l'api
-`symfony console api:openapi:export --output ../amigows.openapi.json`
-`npm i -D openapi-typescript typescript`
-`npx openapi-typescript ../amigows.openapi.json -o ./src/app/models/schema.api.ts`
+- `symfony console api:openapi:export --output ../amigows.openapi.json` creation format openapi
+- `npm i -D openapi-typescript typescript` intalaltion dépendence
+- `npx openapi-typescript ../amigows.openapi.json -o ./src/app/models/schema.api.ts` creation du shema pour ts
 
 ## Development server
 Est déja par default --configuration=development
