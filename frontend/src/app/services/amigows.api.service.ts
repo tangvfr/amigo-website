@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {catchError, throwError} from "rxjs";
+import {catchError, map, Observable, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {components} from "../models/schema.api";
 import {HydraList} from "../models/hydra-list";
 import {environment} from "../../environments/environment";
+import {Office} from "../models/office/office";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AmigowsApiService {
   }
 
   /**
-   * Permet de génrer les erreur avec l'api
+   * Permet de gérer les erreurs avec l'api
    * @param error l'erreur
    * @private
    */
@@ -32,60 +33,74 @@ export class AmigowsApiService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  getNowEvents()
+  getOffice(): Observable<Office>
+  {
+    return this.http.get<HydraList<components["schemas"]["Mandate.jsonld-office"]>>(
+      `${this.baseApiUrl}/office`
+    ).pipe(catchError(this.handleError), map(office => new Office(office)));
+  }
+
+  getNowEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
     (`${this.baseApiUrl}/events/now`)
       .pipe(catchError(this.handleError));
   }
 
-  getPastEvents()
+  getPastEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
     (`${this.baseApiUrl}/events/past`)
       .pipe(catchError(this.handleError));
   }
 
-  getOffers()
+  getOffers(): Observable<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
     (`${this.baseApiUrl}/offers`)
       .pipe(catchError(this.handleError));
   }
 
-  getChallengerPartner()
+  getChallengerPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
     (`${this.baseApiUrl}/parther/challenger`)
       .pipe(catchError(this.handleError));
   }
 
-  getDiscountPartner()
+  getDiscountPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
     (`${this.baseApiUrl}/parther/discount`)
       .pipe(catchError(this.handleError));
   }
 
-  getCompany(id: number)
+  getCompany(id: bigint): Observable<components["schemas"]["Company.jsonld-infoCompany"]>
   {
-    return this.http.get<HydraList<components["schemas"]["Company.jsonld-infoCompany"]>>
+    return this.http.get<components["schemas"]["Company.jsonld-infoCompany"]>
     (`${this.baseApiUrl}/companies/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getEventType(id: number)
+  getEvent(id: bigint): Observable<components["schemas"]["Event.jsonld-detailEvent"]>
   {
-    return this.http.get<HydraList<components["schemas"]["EventType.jsonld-detailEventType"]>>
+    return this.http.get<components["schemas"]["Event.jsonld-detailEvent"]>
+    (`${this.baseApiUrl}/events/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getEventType(id: bigint): Observable<components["schemas"]["EventType.jsonld-detailEventType"]>
+  {
+    return this.http.get<components["schemas"]["EventType.jsonld-detailEventType"]>
     (`${this.baseApiUrl}/event_types/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  /*getLocations(id: number)
+  getLocations(id: bigint): Observable<components["schemas"]["Location.jsonld"]>
   {
-    return this.http.get<HydraList<components["schemas"]["Location.jsonld"]>>
+    return this.http.get<components["schemas"]["Location.jsonld"]>
     (`${this.baseApiUrl}/locations/${id}`)
       .pipe(catchError(this.handleError));
-  }*/
+  }
 
 }

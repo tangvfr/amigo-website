@@ -1,0 +1,38 @@
+<!-- example d'utilisation de material, mais on vas use que pour les field et quelque truc je pense, genre les load (spiner)-->
+<!-- https://material.angular.io/components/categories -->
+<!-- https://fonts.google.com/icons -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Bureau</mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngIf="ready">
+    <p>feur</p>
+    @for (hub of office!.getHubs(); track hub) {
+      <h2>
+        {{ hub.name }}
+      </h2>
+      <p>
+        {{ hub.description }}
+      </p>
+
+      <div class="members">
+        <mat-chip disabled *ngFor="let post of hub.composition.values()">
+          {{ post.role.name }} | {{ post.student.name }} {{ post.student.lastName }} {{ post.student.level.toUpperCase() }}
+        </mat-chip>
+      </div>
+
+      @if (!$last) {
+        <mat-divider [inset]="true"></mat-divider>
+      }
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button color="accent" routerLink="/">
+      <mat-icon>home</mat-icon>
+      Retour
+    </a>
+  </mat-card-actions>
+  <mat-card-footer *ngIf="!ready">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

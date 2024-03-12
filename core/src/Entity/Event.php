@@ -26,7 +26,6 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => ['minimalEvent']],
          ),
         new Get(
-            uriTemplate: '/{id}',
             normalizationContext: ['groups' => 'detailEvent']
         ),
     ],

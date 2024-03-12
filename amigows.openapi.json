@@ -98,6 +98,49 @@
             },
             "parameters": []
         },
+        "/api/events/events/{id}": {
+            "get": {
+                "operationId": "api_eventsevents_id_get",
+                "tags": [
+                    "Event"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event resource",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Event.jsonld-detailEvent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "summary": "Retrieves a Event resource.",
+                "description": "Retrieves a Event resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Event identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
         "/api/events/now": {
             "get": {
                 "operationId": "api_eventsnow_get_collection",
@@ -356,19 +399,19 @@
             },
             "parameters": []
         },
-        "/api/events/{id}": {
+        "/api/locations/{id}": {
             "get": {
-                "operationId": "api_events_id_get",
+                "operationId": "api_locations_id_get",
                 "tags": [
-                    "Event"
+                    "Location"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Event resource",
+                        "description": "Location resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Event.jsonld-detailEvent"
+                                    "$ref": "#/components/schemas/Location.jsonld"
                                 }
                             }
                         }
@@ -377,13 +420,13 @@
                         "description": "Resource not found"
                     }
                 },
-                "summary": "Retrieves a Event resource.",
-                "description": "Retrieves a Event resource.",
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Event identifier",
+                        "description": "Location identifier",
                         "required": true,
                         "deprecated": false,
                         "allowEmptyValue": false,
@@ -507,6 +550,135 @@
                 },
                 "summary": "Retrieves the collection of Offer resources.",
                 "description": "Retrieves the collection of Offer resources.",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/office": {
+            "get": {
+                "operationId": "api_office_get_collection",
+                "tags": [
+                    "Mandate"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mandate collection",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Mandate.jsonld-office"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            },
+                                            "example": {
+                                                "@id": "string",
+                                                "type": "string",
+                                                "hydra:first": "string",
+                                                "hydra:last": "string",
+                                                "hydra:previous": "string",
+                                                "hydra:next": "string"
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves the collection of Mandate resources.",
+                "description": "Retrieves the collection of Mandate resources.",
                 "parameters": [
                     {
                         "name": "page",
@@ -830,6 +1002,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -879,6 +1054,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -886,6 +1064,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -935,6 +1116,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -942,6 +1126,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -991,6 +1178,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -998,6 +1188,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1517,6 +1710,9 @@
                         "$ref": "#/components/schemas/BeginEndDateTimeEmbeddable.jsonld-detailEvent"
                     },
                     "publicationDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1651,6 +1847,148 @@
                     },
                     "description": {
                         "type": "string"
+                    }
+                }
+            },
+            "Hub.jsonld-office": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "required": [
+                    "id",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Location.jsonld": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "country": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "city": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "postalCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "adresse": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
             },
@@ -1994,6 +2332,37 @@
                     }
                 }
             },
+            "Mandate.jsonld-office": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Role.jsonld-office"
+                        }
+                    },
+                    "student": {
+                        "$ref": "#/components/schemas/Student.jsonld-office"
+                    }
+                },
+                "required": [
+                    "student"
+                ]
+            },
             "Offer.jsonld-listOffer": {
                 "type": "object",
                 "description": "",
@@ -2095,6 +2464,137 @@
                     },
                     "bgedDate": {
                         "$ref": "#/components/schemas/BeginEndDateEmbeddable.jsonld-discountCompany"
+                    }
+                }
+            },
+            "Role.jsonld-office": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "required": [
+                    "id",
+                    "hub",
+                    "name"
+                ],
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "hub": {
+                        "$ref": "#/components/schemas/Hub.jsonld-office"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Student.jsonld-office": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "required": [
+                    "id",
+                    "name",
+                    "lastName",
+                    "level"
+                ],
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "img": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "level": {
+                        "type": "string",
+                        "enum": [
+                            "l3",
+                            "m1",
+                            "m2",
+                            "wk",
+                            "oth"
+                        ]
                     }
                 }
             }

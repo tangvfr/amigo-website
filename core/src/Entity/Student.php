@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Date\AbstractEditableEntity;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
@@ -13,27 +14,38 @@ class Student extends AbstractEditableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['office'])]
     private ?string $img = null;
 
     #[ORM\Column(length: 10)]
     #[Assert\Regex(pattern: '^o[0-9]{7,8}$')]
+    #[Assert\NotNull]
     private ?string $studentNumber = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Email]
+    #[Assert\NotNull]
     private ?string $email = null;
 
     #[ORM\Column(enumType: StudentType::class)]
-    private ?string $level = null;
+    #[Assert\NotNull]
+    #[Groups(['office'])]
+    private ?StudentType $level = null;
 
     public function getId(): ?int
     {
@@ -100,12 +112,12 @@ class Student extends AbstractEditableEntity
         return $this;
     }
 
-    public function getLevel(): ?string
+    public function getLevel(): ?StudentType
     {
         return $this->level;
     }
 
-    public function setLevel(?string $level): static
+    public function setLevel(?StudentType $level): static
     {
         $this->level = $level;
 
