@@ -24,6 +24,13 @@ export interface paths {
      */
     get: operations["api_event_types_id_get"];
   };
+  "/api/events/events/{id}": {
+    /**
+     * Retrieves a Event resource.
+     * @description Retrieves a Event resource.
+     */
+    get: operations["api_eventsevents_id_get"];
+  };
   "/api/events/now": {
     /**
      * Retrieves the collection of Event resources.
@@ -38,12 +45,12 @@ export interface paths {
      */
     get: operations["api_eventspast_get_collection"];
   };
-  "/api/events/{id}": {
+  "/api/locations/{id}": {
     /**
-     * Retrieves a Event resource.
-     * @description Retrieves a Event resource.
+     * Retrieves a Location resource.
+     * @description Retrieves a Location resource.
      */
-    get: operations["api_events_id_get"];
+    get: operations["api_locations_id_get"];
   };
   "/api/offers": {
     /**
@@ -79,20 +86,6 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    "BeginEndDateEmbeddable.jsonld": {
-      "@context"?: OneOf<[string, {
-        "@vocab": string;
-        /** @enum {string} */
-        hydra: "http://www.w3.org/ns/hydra/core#";
-        [key: string]: unknown;
-      }]>;
-      "@id"?: string;
-      "@type"?: string;
-      /** Format: date-time */
-      beginDate?: string | null;
-      /** Format: date-time */
-      endDate?: string | null;
-    };
     "BeginEndDateEmbeddable.jsonld-challengerCompany": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
@@ -300,7 +293,7 @@ export interface components {
       label?: string;
       description?: string;
     };
-    "Hub.jsonld": {
+    "Hub.jsonld-office": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
         /** @enum {string} */
@@ -312,7 +305,24 @@ export interface components {
       id: number;
       name: string;
       description: string;
-      roles?: components["schemas"]["Role.jsonld"][];
+    };
+    "Location.jsonld": {
+      "@context"?: OneOf<[string, {
+        "@vocab": string;
+        /** @enum {string} */
+        hydra: "http://www.w3.org/ns/hydra/core#";
+        [key: string]: unknown;
+      }]>;
+      "@id"?: string;
+      "@type"?: string;
+      id?: number;
+      label?: string;
+      latitude?: number | null;
+      longitude?: number | null;
+      country?: string | null;
+      city?: string | null;
+      postalCode?: string | null;
+      adresse?: string | null;
     };
     "Location.jsonld-challengerCompany": {
       "@context"?: OneOf<[string, {
@@ -386,19 +396,12 @@ export interface components {
       postalCode?: string | null;
       adresse?: string | null;
     };
-    "Mandate.jsonld": {
+    "Mandate.jsonld-office": {
       "@id"?: string;
       "@type"?: string;
       id?: number;
-      roles?: components["schemas"]["Role.jsonld"][];
-      student: components["schemas"]["Student.jsonld"];
-      visible?: boolean;
-      bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld"];
-      /** Format: date-time */
-      creationDate?: string;
-      /** Format: date-time */
-      lastEditDate?: string | null;
-      edited?: boolean;
+      roles?: components["schemas"]["Role.jsonld-office"][];
+      student: components["schemas"]["Student.jsonld-office"];
     };
     "Offer.jsonld-listOffer": {
       "@id"?: string;
@@ -427,7 +430,7 @@ export interface components {
       advantages?: string | null;
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-discountCompany"];
     };
-    "Role.jsonld": {
+    "Role.jsonld-office": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
         /** @enum {string} */
@@ -437,11 +440,10 @@ export interface components {
       "@id"?: string;
       "@type"?: string;
       id: number;
-      hub: components["schemas"]["Hub.jsonld"];
+      hub: components["schemas"]["Hub.jsonld-office"];
       name: string;
-      priority?: number;
     };
-    "Student.jsonld": {
+    "Student.jsonld-office": {
       "@context"?: OneOf<[string, {
         "@vocab": string;
         /** @enum {string} */
@@ -454,16 +456,8 @@ export interface components {
       name: string;
       lastName: string;
       img?: string | null;
-      studentNumber: string;
-      /** Format: email */
-      email: string;
       /** @enum {string} */
       level: "l3" | "m1" | "m2" | "wk" | "oth";
-      /** Format: date-time */
-      creationDate?: string;
-      /** Format: date-time */
-      lastEditDate?: string | null;
-      edited?: boolean;
     };
   };
   responses: {
@@ -523,6 +517,30 @@ export interface operations {
       200: {
         content: {
           "application/ld+json": components["schemas"]["EventType.jsonld-detailEventType"];
+        };
+      };
+      /** @description Resource not found */
+      404: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Retrieves a Event resource.
+   * @description Retrieves a Event resource.
+   */
+  api_eventsevents_id_get: {
+    parameters: {
+      path: {
+        /** @description Event identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Event resource */
+      200: {
+        content: {
+          "application/ld+json": components["schemas"]["Event.jsonld-detailEvent"];
         };
       };
       /** @description Resource not found */
@@ -646,21 +664,21 @@ export interface operations {
     };
   };
   /**
-   * Retrieves a Event resource.
-   * @description Retrieves a Event resource.
+   * Retrieves a Location resource.
+   * @description Retrieves a Location resource.
    */
-  api_events_id_get: {
+  api_locations_id_get: {
     parameters: {
       path: {
-        /** @description Event identifier */
+        /** @description Location identifier */
         id: string;
       };
     };
     responses: {
-      /** @description Event resource */
+      /** @description Location resource */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Event.jsonld-detailEvent"];
+          "application/ld+json": components["schemas"]["Location.jsonld"];
         };
       };
       /** @description Resource not found */
@@ -742,7 +760,7 @@ export interface operations {
       200: {
         content: {
           "application/ld+json": {
-            "hydra:member": components["schemas"]["Mandate.jsonld"][];
+            "hydra:member": components["schemas"]["Mandate.jsonld-office"][];
             "hydra:totalItems"?: number;
             /**
              * @example {
