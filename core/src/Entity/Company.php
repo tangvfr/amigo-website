@@ -22,12 +22,7 @@ class Company
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Image(
-        maxSize: '1024k',
-        mimeTypes: ['png'],
-        notFoundMessage: 'non',
-    )]
-    private ?File $img = null;
+    private ?string $img = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $banner = null;
