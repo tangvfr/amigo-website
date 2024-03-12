@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, map, Observable, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {components} from "../models/schema.api";
 import {HydraList} from "../models/hydra-list";
 import {environment} from "../../environments/environment";
+import {Office} from "../models/office/office";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,13 @@ export class AmigowsApiService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  getOffice(): Observable<Office>
+  {
+    return this.http.get<HydraList<components["schemas"]["Mandate.jsonld-office"]>>(
+      `${this.baseApiUrl}/office`
+    ).pipe(catchError(this.handleError), map(office => new Office(office)));
   }
 
   getNowEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>

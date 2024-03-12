@@ -6,6 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - `npm i -D openapi-typescript typescript` intalaltion dépendence
 - `npx openapi-typescript ../amigows.openapi.json -o ./src/app/models/schema.api.ts` creation du shema pour ts
 
+## Instalation material
+`ng add @angular/material`
+
 ## Development server
 Est déja par default --configuration=development
 Command pour en dev`ng serve --host 0.0.0.0`

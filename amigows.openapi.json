@@ -98,6 +98,49 @@
             },
             "parameters": []
         },
+        "/api/events/events/{id}": {
+            "get": {
+                "operationId": "api_eventsevents_id_get",
+                "tags": [
+                    "Event"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event resource",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Event.jsonld-detailEvent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "summary": "Retrieves a Event resource.",
+                "description": "Retrieves a Event resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Event identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
         "/api/events/now": {
             "get": {
                 "operationId": "api_eventsnow_get_collection",
@@ -356,19 +399,19 @@
             },
             "parameters": []
         },
-        "/api/events/{id}": {
+        "/api/locations/{id}": {
             "get": {
-                "operationId": "api_events_id_get",
+                "operationId": "api_locations_id_get",
                 "tags": [
-                    "Event"
+                    "Location"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Event resource",
+                        "description": "Location resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Event.jsonld-detailEvent"
+                                    "$ref": "#/components/schemas/Location.jsonld"
                                 }
                             }
                         }
@@ -377,13 +420,13 @@
                         "description": "Resource not found"
                     }
                 },
-                "summary": "Retrieves a Event resource.",
-                "description": "Retrieves a Event resource.",
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Event identifier",
+                        "description": "Location identifier",
                         "required": true,
                         "deprecated": false,
                         "allowEmptyValue": false,
@@ -545,7 +588,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Mandate.jsonld"
+                                                "$ref": "#/components/schemas/Mandate.jsonld-office"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -918,62 +961,6 @@
     },
     "components": {
         "schemas": {
-            "BeginEndDateEmbeddable.jsonld": {
-                "type": "object",
-                "description": "",
-                "deprecated": false,
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "oneOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "@vocab": {
-                                        "type": "string"
-                                    },
-                                    "hydra": {
-                                        "type": "string",
-                                        "enum": [
-                                            "http://www.w3.org/ns/hydra/core#"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "@vocab",
-                                    "hydra"
-                                ],
-                                "additionalProperties": true
-                            }
-                        ]
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "beginDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    },
-                    "endDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    }
-                }
-            },
             "BeginEndDateEmbeddable.jsonld-challengerCompany": {
                 "type": "object",
                 "description": "",
@@ -1015,6 +1002,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1064,6 +1054,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1071,6 +1064,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1120,6 +1116,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1127,6 +1126,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/Date"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1176,6 +1178,9 @@
                         "type": "string"
                     },
                     "beginDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1183,6 +1188,9 @@
                         "format": "date-time"
                     },
                     "endDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1702,6 +1710,9 @@
                         "$ref": "#/components/schemas/BeginEndDateTimeEmbeddable.jsonld-detailEvent"
                     },
                     "publicationDate": {
+                        "externalDocs": {
+                            "url": "https://schema.org/DateTime"
+                        },
                         "type": [
                             "string",
                             "null"
@@ -1839,7 +1850,7 @@
                     }
                 }
             },
-            "Hub.jsonld": {
+            "Hub.jsonld-office": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -1893,12 +1904,91 @@
                     },
                     "description": {
                         "type": "string"
+                    }
+                }
+            },
+            "Location.jsonld": {
+                "type": "object",
+                "description": "",
+                "deprecated": false,
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
                     },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Role.jsonld"
-                        }
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "country": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "city": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "postalCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "adresse": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 }
             },
@@ -2242,7 +2332,7 @@
                     }
                 }
             },
-            "Mandate.jsonld": {
+            "Mandate.jsonld-office": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -2262,32 +2352,11 @@
                     "roles": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Role.jsonld"
+                            "$ref": "#/components/schemas/Role.jsonld-office"
                         }
                     },
                     "student": {
-                        "$ref": "#/components/schemas/Student.jsonld"
-                    },
-                    "visible": {
-                        "type": "boolean"
-                    },
-                    "bgedDate": {
-                        "$ref": "#/components/schemas/BeginEndDateEmbeddable.jsonld"
-                    },
-                    "creationDate": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "lastEditDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    },
-                    "edited": {
-                        "readOnly": true,
-                        "type": "boolean"
+                        "$ref": "#/components/schemas/Student.jsonld-office"
                     }
                 },
                 "required": [
@@ -2398,7 +2467,7 @@
                     }
                 }
             },
-            "Role.jsonld": {
+            "Role.jsonld-office": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -2448,19 +2517,14 @@
                         "type": "integer"
                     },
                     "hub": {
-                        "$ref": "#/components/schemas/Hub.jsonld"
+                        "$ref": "#/components/schemas/Hub.jsonld-office"
                     },
                     "name": {
                         "type": "string"
-                    },
-                    "priority": {
-                        "minimum": -100,
-                        "maximum": 100,
-                        "type": "integer"
                     }
                 }
             },
-            "Student.jsonld": {
+            "Student.jsonld-office": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -2468,8 +2532,6 @@
                     "id",
                     "name",
                     "lastName",
-                    "studentNumber",
-                    "email",
                     "level"
                 ],
                 "properties": {
@@ -2524,16 +2586,6 @@
                             "null"
                         ]
                     },
-                    "studentNumber": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "format": "email",
-                        "externalDocs": {
-                            "url": "https://schema.org/email"
-                        },
-                        "type": "string"
-                    },
                     "level": {
                         "type": "string",
                         "enum": [
@@ -2543,21 +2595,6 @@
                             "wk",
                             "oth"
                         ]
-                    },
-                    "creationDate": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "lastEditDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    },
-                    "edited": {
-                        "readOnly": true,
-                        "type": "boolean"
                     }
                 }
             }
