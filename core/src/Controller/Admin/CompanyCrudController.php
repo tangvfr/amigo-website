@@ -16,16 +16,6 @@ use Symfony\Component\Validator\Constraints\Image;
 class CompanyCrudController extends AbstractCrudController
 {
 
-    public function isImage(?string $img): bool
-    {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type aka mimetype extension
-
-        $type_file = finfo_file($finfo, $img);
-
-        finfo_close($finfo);
-        return ($type_file == 'image/jpeg' || $type_file == 'image/png' || $type_file == 'image/gif');
-    }
-
     public static function getEntityFqcn(): string
     {
         return Company::class;
@@ -56,47 +46,50 @@ class CompanyCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'constraints' => [
                         new File([
-                            'maxSize' => '1024k',
+                            'maxSize' => 5 * 1024 * 1024, // 5 Mo en octets
                             'mimeTypes' => [
                                 'image/jpeg',
                                 'image/png',
                                 'image/gif',
                             ],
                             'mimeTypesMessage' => 'Veuillez télécharger une image au format JPEG, PNG ou GIF',
+                            'maxSizeMessage' => 'Fichier trop volumineux',
                         ]),
-                        // new Image([
-                        //     'maxWidth' => 1200,
-                        //     'maxHeight' => 1200,
-                        //     'maxWidthMessage' => 'La largeur de l\'image ne doit pas dépasser 1200 pixels',
-                        //     'maxHeightMessage' => 'La hauteur de l\'image ne doit pas dépasser 1200 pixels',
-                        // ]),
+                        new Image([
+                            'maxWidth' => 2100,
+                            'maxHeight' => 2100,
+                            'maxWidthMessage' => 'La largeur de l\'image ne doit pas dépasser 2100 pixels',
+                            'maxHeightMessage' => 'La hauteur de l\'image ne doit pas dépasser 2100 pixels',
+                        ]),
                     ],
-                ]),
+                ])
+                ->setHelp('jpeg, png, gif de 5Mo'),
             ImageField::new('banner', 'Bannière')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false)
                 ->setSortable(false)
-                ->setFormTypeOptions([
-                    'constraints' => [
-                        new File([
-                            'maxSize' => '1024k',
-                            'mimeTypes' => [
-                                'image/jpeg',
-                                'image/png',
-                                'image/gif',
-                            ],
-                            'mimeTypesMessage' => 'Veuillez télécharger une image au format JPEG, PNG ou GIF',
-                        ]),
-                        // new Image([
-                        //     'maxWidth' => 1200,
-                        //     'maxHeight' => 1200,
-                        //     'maxWidthMessage' => 'La largeur de l\'image ne doit pas dépasser 1200 pixels',
-                        //     'maxHeightMessage' => 'La hauteur de l\'image ne doit pas dépasser 1200 pixels',
-                        // ]),
-                    ],
-                ]),
+                // ->setFormTypeOptions([
+                //     'constraints' => [
+                //         new File([
+                //             'maxSize' => '1024k',
+                //             'mimeTypes' => [
+                //                 'image/jpeg',
+                //                 'image/png',
+                //                 'image/gif',
+                //             ],
+                //             'mimeTypesMessage' => 'Veuillez télécharger une image au format JPEG, PNG ou GIF',
+                //         ]),
+                //         // new Image([
+                //         //     'maxWidth' => 1200,
+                //         //     'maxHeight' => 1200,
+                //         //     'maxWidthMessage' => 'La largeur de l\'image ne doit pas dépasser 1200 pixels',
+                //         //     'maxHeightMessage' => 'La hauteur de l\'image ne doit pas dépasser 1200 pixels',
+                //         // ]),
+                //     ],
+                // ])
+                ,
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
             AssociationField::new('located', 'Emplacements'),
