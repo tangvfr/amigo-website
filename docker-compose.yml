@@ -16,8 +16,7 @@ services:
       - ./dev:/var/www/html
     ports:
       - "8000:8000"
-      - "8010:8010"
-      - "8020:8020"
+      - "4200:4200"
     environment:
       PHP_IDE_CONFIG: serverName=amigows
       PS1: '\[\033[0m\]\[\033[38;5;242m\]$$(whoami) \[\033[38;5;250m\]\[\033[48;5;23m\] $$(pwd) \[\033[48;5;58m\]$$(parse_git_branch)\[\033[0m\] '
