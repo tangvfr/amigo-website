@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {catchError, throwError} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {components} from "../models/schema.api";
 import {HydraList} from "../models/hydra-list";
@@ -32,7 +32,7 @@ export class AmigowsApiService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  getNowEvents()
+  getNowEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
     (`${this.baseApiUrl}/events/now`)

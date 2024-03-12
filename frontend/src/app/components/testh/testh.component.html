@@ -3,3 +3,9 @@
   <li><a routerLink="/events">event now try</a></li>
   <li><a routerLink="/offers">offer ?</a></li>
 </ol>
+<h2>Testage</h2>
+<ol>
+  <li *ngFor="let tt of testList">
+      <app-poster [test]="tt" />
+  </li>
+</ol>
