@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Image;
 
 class CompanyCrudController extends AbstractCrudController
 {
-
+    private const TYPE_IMAGE = 'image/png,image/gif,image/jpeg,image/webp';
     public static function getEntityFqcn(): string
     {
         return Company::class;
@@ -43,27 +43,21 @@ class CompanyCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false)
                 ->setSortable(false)
+                ->setHelp('jpeg, png, gif de 5Mo')
                 ->setFormTypeOptions([
-                    'constraints' => [
-                        new File([
-                            'maxSize' => 5 * 1024 * 1024, // 5 Mo en octets
-                            'mimeTypes' => [
-                                'image/jpeg',
-                                'image/png',
-                                'image/gif',
-                            ],
-                            'mimeTypesMessage' => 'Veuillez télécharger une image au format JPEG, PNG ou GIF',
-                            'maxSizeMessage' => 'Fichier trop volumineux',
-                        ]),
-                        new Image([
-                            'maxWidth' => 2100,
-                            'maxHeight' => 2100,
-                            'maxWidthMessage' => 'La largeur de l\'image ne doit pas dépasser 2100 pixels',
-                            'maxHeightMessage' => 'La hauteur de l\'image ne doit pas dépasser 2100 pixels',
-                        ]),
+                    'attr' => [
+                        'accept' => self::TYPE_IMAGE,
                     ],
-                ])
-                ->setHelp('jpeg, png, gif de 5Mo'),
+                    'constraints' => [
+                        new File(
+                            maxSize: '1024k',
+                            notFoundMessage: 'non',
+                            extensions: ['png'],
+                            extensionsMessage: 'Please upload a valid PDF',
+                        ),
+                    ]
+
+                ]),
             ImageField::new('banner', 'Bannière')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
@@ -119,9 +113,5 @@ class CompanyCrudController extends AbstractCrudController
 
         // Appel de la méthode parente pour effectuer la suppression de l'entité
         parent::deleteEntity($entityManager, $entityInstance);
-    }
-
-    public function createEntity(string $entityFqcn)
-    {
     }
 }

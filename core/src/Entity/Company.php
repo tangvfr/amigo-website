@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
@@ -20,7 +22,12 @@ class Company
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $img = null;
+    #[Assert\Image(
+        maxSize: '1024k',
+        mimeTypes: ['png'],
+        notFoundMessage: 'non',
+    )]
+    private ?File $img = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $banner = null;
