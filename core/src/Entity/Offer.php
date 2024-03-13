@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
+use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\OfferRepository;
+use App\State\OfferProvider;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +19,28 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[GetCollection(
+    order: [
+        'publicationDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+    ],
     normalizationContext: ['groups' => 'listOffer']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'keyWords' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'provide.name' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'provide.activities.label' => SearchFilterInterface::STRATEGY_IPARTIAL
+    ]
+)]
+#[ApiFilter(
+    DateFilter::class,
+    properties: [
+        'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
+        'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
+        'endProvidDate' => DateFilterInterface::PARAMETER_STRICTLY_BEFORE,
+    ]
 )]
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer extends AbstractPublishableEntity

@@ -47,8 +47,8 @@ class MandateRepository extends ServiceEntityRepository
                 $qb->expr()->lte(':now', 'm.bgedDate.endDate')
             ));
         //order
-        $qb->orderBy( 'h.priority', 'ASC')
-            ->addOrderBy('r.priority', 'ASC')
+        $qb->orderBy( 'h.priority', 'DESC')
+            ->addOrderBy('r.priority', 'DESC')
             ->addOrderBy('m.bgedDate.beginDate', 'ASC');
         //parameters
         $qb->setParameter('now', new DateTimeImmutable('now'), Types::DATETIME_IMMUTABLE);
