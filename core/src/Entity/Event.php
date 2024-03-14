@@ -88,7 +88,7 @@ class Event extends AbstractPublishableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull]
+    #[Assert\NotBlank]
     #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $name = null;
 
@@ -97,7 +97,7 @@ class Event extends AbstractPublishableEntity
     private ?string $img = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotNull]
+    #[Assert\NotBlank]
     #[Groups('detailEvent')]
     private ?string $description = null;
 
@@ -107,23 +107,26 @@ class Event extends AbstractPublishableEntity
     private ?bool $onlyMiagist = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\PositiveOrZero]
     #[Groups('detailEvent')]
     private ?string $nadhPrice = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\PositiveOrZero]
     #[Groups('detailEvent')]
     private ?string $adhPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
     #[Groups('detailEvent')]
     private ?int $quotaStu = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
     private ?int $quotaComp = null;
 
     #[ORM\Column]
-    #[Assert\NotNull]
-    #[Assert\Range(min: 0, max: 5)]
+    #[Assert\NotNull, Assert\Range(min: 0, max: 5)]
     private ?int $note = null;
 
     #[ORM\Column]

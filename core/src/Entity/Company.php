@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Get(
     normalizationContext: ['groups' => 'infoCompany']
@@ -16,13 +17,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
     #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?string $name = null;
 
@@ -35,6 +36,7 @@ class Company
     private ?string $banner = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     #[Groups(['challengerCompany', 'discountCompany', 'infoCompany'])]
     private ?string $description = null;
 

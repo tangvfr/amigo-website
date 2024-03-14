@@ -13,9 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: HubRepository::class)]
 class Hub
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
@@ -26,7 +24,7 @@ class Hub
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotNull]
+    #[Assert\NotBlank]
     #[Groups(['office'])]
     private ?string $description = null;
 
@@ -34,7 +32,7 @@ class Hub
     private Collection $roles;
 
     #[ORM\Column]
-    #[Assert\Range(min: -100, max: 100)]
+    #[Assert\NotNull, Assert\Range(min: -100, max: 100)]
     private ?int $priority = null;
 
     public function __construct()

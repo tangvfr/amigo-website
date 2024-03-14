@@ -22,9 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: MandateRepository::class)]
 class Mandate extends AbstractEditableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
@@ -32,13 +31,13 @@ class Mandate extends AbstractEditableEntity
     #[Groups(['office'])]
     private Collection $roles;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     #[Groups(['office'])]
     private ?Student $student = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $visible = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]

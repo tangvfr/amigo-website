@@ -53,6 +53,7 @@ class Partner extends AbstractPublishableEntity
     private ?bool $challenge = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     #[Groups(['discountCompany'])]
     private ?string $advantages = null;
 

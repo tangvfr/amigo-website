@@ -15,6 +15,7 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[GetCollection(
@@ -44,21 +45,19 @@ use Symfony\Component\Validator\Constraints\NotNull;
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Groups(['listOffer'])]
     #[NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['listOffer'])]
-    #[NotNull]
+    #[NotBlank]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['listOffer'])]
-    #[NotNull]
+    #[NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -70,11 +69,10 @@ class Offer extends AbstractPublishableEntity
     #[Groups(['listOffer'])]
     private array $keyWords = [];
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
     #[Groups(['listOffer'])]
     #[NotNull]
-    private ?Company $provide = null;
+    private ?Company $provider = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
     #[Groups(['listOffer'])]
@@ -138,14 +136,14 @@ class Offer extends AbstractPublishableEntity
         return $this;
     }
 
-    public function getProvide(): ?Company
+    public function getProvider(): ?Company
     {
-        return $this->provide;
+        return $this->provider;
     }
 
-    public function setProvide(?Company $provide): static
+    public function setProvider(?Company $provider): static
     {
-        $this->provide = $provide;
+        $this->provider = $provider;
 
         return $this;
     }
