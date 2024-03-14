@@ -59,17 +59,20 @@ class EventCrudController extends AbstractImageCrudController
             // DATE * 5
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('DATE'),
-            DateTimeField::new('bgedDate', 'Date de début')
-                ->setFormat('dd/MM/yyyy HH:mm')
-                ->setTemplatePath('admin/fields/bged_date.html.twig'),
-
             DateTimeField::new('bgedDate.beginDate', 'Début de l\'événement')
-                ->setFormat('dd/MM/yyyy HH:mm')
+                ->hideOnIndex(),
+            DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
+                ->hideOnIndex(),
+            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement')
                 ->hideOnIndex(),
 
-//
-//            DateTimeField::new('bgedDate.end', 'Fin de l\'événement')
-//                ->hideOnIndex(),
+            // pas besoins de les afficher mais ils existent
+            DateTimeField::new('CreationDate', 'CD')
+                ->hideOnIndex()
+                ->hideOnForm(),
+            DateTimeField::new('lastEditDate', 'LED')
+                ->hideOnIndex()
+                ->hideOnForm(),
 
 
             // BANNIERE
@@ -79,7 +82,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR),
             ChoiceField::new('note')
-                ->setChoices([1,2,3,4,5]),
+                ->setChoices([0,1,2,3,4,5]),
 
             // ARGENT
             FormField::addColumn('col-lg-8 col-xl-6'),
