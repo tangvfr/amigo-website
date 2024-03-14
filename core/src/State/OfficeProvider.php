@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ApiProvider;
+namespace App\State;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -11,7 +11,7 @@ use App\Repository\MandateRepository;
 /**
  * @implements ProviderInterface<Mandate[]|Mandate|null>
  */
-final class Office implements ProviderInterface
+final class OfficeProvider implements ProviderInterface
 {
 
     private MandateRepository $mandateRepository;

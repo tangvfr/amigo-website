@@ -24,26 +24,33 @@ export interface paths {
      */
     get: operations["api_event_types_id_get"];
   };
-  "/api/events/events/{id}": {
+  "/api/events/": {
     /**
-     * Retrieves a Event resource.
-     * @description Retrieves a Event resource.
+     * Retrieves the collection of Event resources.
+     * @description Retrieves the collection of Event resources.
      */
-    get: operations["api_eventsevents_id_get"];
+    get: operations["api_events_get_collection"];
   };
   "/api/events/now": {
     /**
      * Retrieves the collection of Event resources.
      * @description Retrieves the collection of Event resources.
      */
-    get: operations["api_eventsnow_get_collection"];
+    get: operations["now"];
   };
   "/api/events/past": {
     /**
      * Retrieves the collection of Event resources.
      * @description Retrieves the collection of Event resources.
      */
-    get: operations["api_eventspast_get_collection"];
+    get: operations["past"];
+  };
+  "/api/events/{id}": {
+    /**
+     * Retrieves a Event resource.
+     * @description Retrieves a Event resource.
+     */
+    get: operations["api_events_id_get"];
   };
   "/api/locations/{id}": {
     /**
@@ -71,14 +78,14 @@ export interface paths {
      * Retrieves the collection of Partner resources.
      * @description Retrieves the collection of Partner resources.
      */
-    get: operations["api_partnerchallenger_get_collection"];
+    get: operations["challenger"];
   };
   "/api/partner/discount": {
     /**
      * Retrieves the collection of Partner resources.
      * @description Retrieves the collection of Partner resources.
      */
-    get: operations["api_partnerdiscount_get_collection"];
+    get: operations["discount"];
   };
 }
 
@@ -247,14 +254,15 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
-      description?: string;
-      onlyMiagist?: boolean;
+      description: string;
+      onlyMiagist: boolean;
       nadhPrice?: string | null;
       adhPrice?: string | null;
       quotaStu?: number | null;
+      cancel: boolean;
       types?: components["schemas"]["EventType.jsonld-detailEvent"][];
       situated?: components["schemas"]["Location.jsonld-detailEvent"][];
       bgedDate?: components["schemas"]["BeginEndDateTimeEmbeddable.jsonld-detailEvent"];
@@ -264,9 +272,10 @@ export interface components {
     "Event.jsonld-minimalEvent": {
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
+      cancel: boolean;
     };
     "EventType.jsonld-detailEvent": {
       "@context"?: OneOf<[string, {
@@ -418,15 +427,15 @@ export interface components {
     "Partner.jsonld-challengerCompany": {
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      company?: components["schemas"]["Company.jsonld-challengerCompany"];
+      id: number;
+      company: components["schemas"]["Company.jsonld-challengerCompany"];
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-challengerCompany"];
     };
     "Partner.jsonld-discountCompany": {
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      company?: components["schemas"]["Company.jsonld-discountCompany"];
+      id: number;
+      company: components["schemas"]["Company.jsonld-discountCompany"];
       advantages?: string | null;
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-discountCompany"];
     };
@@ -526,10 +535,265 @@ export interface operations {
     };
   };
   /**
+   * Retrieves the collection of Event resources.
+   * @description Retrieves the collection of Event resources.
+   */
+  api_events_get_collection: {
+    parameters: {
+      query?: {
+        /** @description The collection page number */
+        page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
+      };
+    };
+    responses: {
+      /** @description Event collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Event.jsonld-minimalEvent"][];
+            "hydra:totalItems"?: number;
+            /**
+             * @example {
+             *   "@id": "string",
+             *   "type": "string",
+             *   "hydra:first": "string",
+             *   "hydra:last": "string",
+             *   "hydra:previous": "string",
+             *   "hydra:next": "string"
+             * }
+             */
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: ({
+                  "@type"?: string;
+                  variable?: string;
+                  property?: string | null;
+                  required?: boolean;
+                })[];
+            };
+          };
+        };
+      };
+    };
+  };
+  /**
+   * Retrieves the collection of Event resources.
+   * @description Retrieves the collection of Event resources.
+   */
+  now: {
+    parameters: {
+      query?: {
+        /** @description The collection page number */
+        page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
+      };
+    };
+    responses: {
+      /** @description Event collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Event.jsonld-minimalEvent"][];
+            "hydra:totalItems"?: number;
+            /**
+             * @example {
+             *   "@id": "string",
+             *   "type": "string",
+             *   "hydra:first": "string",
+             *   "hydra:last": "string",
+             *   "hydra:previous": "string",
+             *   "hydra:next": "string"
+             * }
+             */
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: ({
+                  "@type"?: string;
+                  variable?: string;
+                  property?: string | null;
+                  required?: boolean;
+                })[];
+            };
+          };
+        };
+      };
+    };
+  };
+  /**
+   * Retrieves the collection of Event resources.
+   * @description Retrieves the collection of Event resources.
+   */
+  past: {
+    parameters: {
+      query?: {
+        /** @description The collection page number */
+        page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
+      };
+    };
+    responses: {
+      /** @description Event collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Event.jsonld-minimalEvent"][];
+            "hydra:totalItems"?: number;
+            /**
+             * @example {
+             *   "@id": "string",
+             *   "type": "string",
+             *   "hydra:first": "string",
+             *   "hydra:last": "string",
+             *   "hydra:previous": "string",
+             *   "hydra:next": "string"
+             * }
+             */
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: ({
+                  "@type"?: string;
+                  variable?: string;
+                  property?: string | null;
+                  required?: boolean;
+                })[];
+            };
+          };
+        };
+      };
+    };
+  };
+  /**
    * Retrieves a Event resource.
    * @description Retrieves a Event resource.
    */
-  api_eventsevents_id_get: {
+  api_events_id_get: {
     parameters: {
       path: {
         /** @description Event identifier */
@@ -546,120 +810,6 @@ export interface operations {
       /** @description Resource not found */
       404: {
         content: never;
-      };
-    };
-  };
-  /**
-   * Retrieves the collection of Event resources.
-   * @description Retrieves the collection of Event resources.
-   */
-  api_eventsnow_get_collection: {
-    parameters: {
-      query?: {
-        /** @description The collection page number */
-        page?: number;
-      };
-    };
-    responses: {
-      /** @description Event collection */
-      200: {
-        content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Event.jsonld-minimalEvent"][];
-            "hydra:totalItems"?: number;
-            /**
-             * @example {
-             *   "@id": "string",
-             *   "type": "string",
-             *   "hydra:first": "string",
-             *   "hydra:last": "string",
-             *   "hydra:previous": "string",
-             *   "hydra:next": "string"
-             * }
-             */
-            "hydra:view"?: {
-              /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
-              /** Format: iri-reference */
-              "hydra:first"?: string;
-              /** Format: iri-reference */
-              "hydra:last"?: string;
-              /** Format: iri-reference */
-              "hydra:previous"?: string;
-              /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: ({
-                  "@type"?: string;
-                  variable?: string;
-                  property?: string | null;
-                  required?: boolean;
-                })[];
-            };
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Retrieves the collection of Event resources.
-   * @description Retrieves the collection of Event resources.
-   */
-  api_eventspast_get_collection: {
-    parameters: {
-      query?: {
-        /** @description The collection page number */
-        page?: number;
-      };
-    };
-    responses: {
-      /** @description Event collection */
-      200: {
-        content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Event.jsonld-minimalEvent"][];
-            "hydra:totalItems"?: number;
-            /**
-             * @example {
-             *   "@id": "string",
-             *   "type": "string",
-             *   "hydra:first": "string",
-             *   "hydra:last": "string",
-             *   "hydra:previous": "string",
-             *   "hydra:next": "string"
-             * }
-             */
-            "hydra:view"?: {
-              /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
-              /** Format: iri-reference */
-              "hydra:first"?: string;
-              /** Format: iri-reference */
-              "hydra:last"?: string;
-              /** Format: iri-reference */
-              "hydra:previous"?: string;
-              /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: ({
-                  "@type"?: string;
-                  variable?: string;
-                  property?: string | null;
-                  required?: boolean;
-                })[];
-            };
-          };
-        };
       };
     };
   };
@@ -696,6 +846,22 @@ export interface operations {
       query?: {
         /** @description The collection page number */
         page?: number;
+        label?: string;
+        keyWords?: string;
+        "provide.name"?: string;
+        "provide.activities.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
+        "endProvidDate[before]"?: string;
+        "endProvidDate[strictly_before]"?: string;
+        "endProvidDate[after]"?: string;
+        "endProvidDate[strictly_after]"?: string;
       };
     };
     responses: {
@@ -805,7 +971,7 @@ export interface operations {
    * Retrieves the collection of Partner resources.
    * @description Retrieves the collection of Partner resources.
    */
-  api_partnerchallenger_get_collection: {
+  challenger: {
     parameters: {
       query?: {
         /** @description The collection page number */
@@ -862,7 +1028,7 @@ export interface operations {
    * Retrieves the collection of Partner resources.
    * @description Retrieves the collection of Partner resources.
    */
-  api_partnerdiscount_get_collection: {
+  discount: {
     parameters: {
       query?: {
         /** @description The collection page number */

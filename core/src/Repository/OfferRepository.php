@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
+use Monolog\DateTimeImmutable;
 
 /**
  * @extends ServiceEntityRepository<Offer>
@@ -20,29 +22,26 @@ class OfferRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offer::class);
     }
+    public function findPublished()
+    {
+        //querry
+        $qb = $this->createQueryBuilder('o');
+        //select
+        $qb->addSelect('c');
+        //joined
+        $qb->innerJoin('o.provide', 'c');
+        //where
+        $qb->where($qb->expr()->andX(
+                $qb->expr()->isNotNull('o.publicationDate'),
+                $qb->expr()->lte('o.publicationDate', ':now')
+            ));
+        //order
+        $qb->orderBy( 'o.publicationDate', 'DESC')
+            ->addOrderBy('o.bgedDate.beginDate', 'DESC');
+        //parameters
+        $qb->setParameter('now', new DateTimeImmutable('now'), Types::DATETIME_IMMUTABLE);
+        //result
+        return $qb->getQuery()->getResult();
+    }
 
-    //    /**
-    //     * @return Offer[] Returns an array of Offer objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('o.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Offer
-    //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }
