@@ -10,6 +10,7 @@ use App\Repository\PartnerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
@@ -27,18 +28,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany'])]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany'])]
     private ?Company $company = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $challenge = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

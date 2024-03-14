@@ -18,29 +18,43 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new GetCollection(
-            uriTemplate: '/now',
+            uriTemplate: '/',
             normalizationContext: ['groups' => ['minimalEvent']],
         ),
-         new GetCollection(
+        new GetCollection(
+            uriTemplate: '/now',
+            normalizationContext: ['groups' => ['minimalEvent']],
+            name: Event::NOW_EVENT_API_NAME,
+        ),
+        new GetCollection(
             uriTemplate: '/past',
             normalizationContext: ['groups' => ['minimalEvent']],
-         ),
+            name: Event::PAST_EVENT_API_NAME,
+        ),
         new Get(
+            uriTemplate: '/{id}',
             normalizationContext: ['groups' => 'detailEvent']
         ),
     ],
     routePrefix: 'events'
 )]
+
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+/*
+ * Seul la date de fin de l'event est obligatoire
+ */
 class Event extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    const PAST_EVENT_API_NAME = 'past';
+    const NOW_EVENT_API_NAME = 'now';
+
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     #[Groups(['detailEvent', 'minimalEvent'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
     #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $name = null;
 
@@ -49,10 +63,12 @@ class Event extends AbstractPublishableEntity
     private ?string $img = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotNull]
     #[Groups('detailEvent')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     #[Groups('detailEvent')]
     private ?bool $onlyMiagist = null;
 
@@ -72,10 +88,13 @@ class Event extends AbstractPublishableEntity
     private ?int $quotaComp = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     #[Assert\Range(min: 0, max: 5)]
     private ?int $note = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Groups('detailEvent')]
     private ?bool $cancel = null;
 
     #[ORM\ManyToMany(targetEntity: EventType::class)]

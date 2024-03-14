@@ -11,7 +11,6 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\OfferRepository;
-use App\State\OfferProvider;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
