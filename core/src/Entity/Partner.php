@@ -2,31 +2,51 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\PartnerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/challenger',
+            normalizationContext: ['groups' => ['challengerCompany']],
+        ),
+        new GetCollection(
+            uriTemplate: '/discount',
+            normalizationContext: ['groups' => ['discountCompany']],
+        ),
+    ],
+    routePrefix: 'partner'
+)]
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['challengerCompany', 'discountCompany'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['challengerCompany', 'discountCompany'])]
     private ?Company $company = null;
 
     #[ORM\Column]
     private ?bool $challenge = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['discountCompany'])]
     private ?string $advantages = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    #[Groups(['challengerCompany', 'discountCompany'])]
     private BeginEndDateEmbeddable $bgedDate;
 
     public function __construct()

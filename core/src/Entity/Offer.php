@@ -2,37 +2,56 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\OfferRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotNull;
 
+#[GetCollection(
+    normalizationContext: ['groups' => 'listOffer']
+)]
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer extends AbstractPublishableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $endProvidDate = null;
+    #[Groups(['listOffer'])]
+    #[NotNull]
+    private ?DateTimeInterface $endProvidDate = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
+    #[Groups(['listOffer'])]
     private array $keyWords = [];
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?Company $provide = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    #[Groups(['listOffer'])]
     private BeginEndDateEmbeddable $bgedDate;
 
     public function __construct()

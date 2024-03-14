@@ -1,0 +1,13 @@
+<p>Nous avons {{ offers["hydra:totalItems"] }} offre de stage !</p>
+<ul>
+  <li *ngFor="let offer of offers['hydra:member']">
+    <h2>{{ offer.label}}</h2>
+    <p>
+      By: {{ offer.provide.name }}
+    </p>
+    <p>
+      <!-- Voir pour peu etre mettre un css spécial pour le h1 h2 h... p li ol dans les balises mardown-->
+      <markdown [data]="offer.description" />
+    </p>
+  </li>
+</ul>

@@ -1,9 +1,17 @@
 # Projet AMIGOWS parties Vitrine
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-## Development server
+## Générer les fichiers .ts en fonction de l'api
+- `symfony console api:openapi:export --output ../amigows.openapi.json` creation format openapi
+- `npm i -D openapi-typescript typescript` intalaltion dépendence
+- `npx openapi-typescript ../amigows.openapi.json -o ./src/app/models/schema.api.ts` creation du shema pour ts
 
+## Instalation material
+`ng add @angular/material`
+
+## Development server
+Est déja par default --configuration=development
+Command pour en dev`ng serve --host 0.0.0.0`
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
