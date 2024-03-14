@@ -21,7 +21,9 @@ class PartherFilterQueryExtension extends AbstractFilterQueryExtension
         if ($resourceClass === self::CLASS_APPLIED) {//test si on l'applique à la classe
             $alias = $qb->getRootAliases()[0];
             //condition
+            $challenge = (Partner::CHALLENGER_PARTNER === $operationName) ? 'true' : 'false';
             $qb->andWhere(
+                $qb->expr()->eq($alias.'.challenge', $challenge),
                 $qb->expr()->orX(
                     $qb->expr()->isNull($alias.'.bgedDate.beginDate'),
                     $qb->expr()->lte($alias.'.bgedDate.beginDate', ':now')

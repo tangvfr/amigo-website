@@ -17,10 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
         new GetCollection(
             uriTemplate: '/challenger',
             normalizationContext: ['groups' => ['challengerCompany']],
+            name: Partner::CHALLENGER_PARTNER,
         ),
         new GetCollection(
             uriTemplate: '/discount',
             normalizationContext: ['groups' => ['discountCompany']],
+            name: Partner::DISCOUNT_PARTNER,
         ),
     ],
     routePrefix: 'partner'
@@ -28,6 +30,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner extends AbstractPublishableEntity
 {
+    const CHALLENGER_PARTNER = 'challenger';
+    const DISCOUNT_PARTNER = 'discount';
+
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany'])]
