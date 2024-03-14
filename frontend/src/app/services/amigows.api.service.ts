@@ -54,6 +54,13 @@ export class AmigowsApiService {
       .pipe(catchError(this.handleError));
   }
 
+  getEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
+  {
+    return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
+    (`${this.baseApiUrl}/events`)
+      .pipe(catchError(this.handleError));
+  }
+
   getOffers(): Observable<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>

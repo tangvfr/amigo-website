@@ -78,14 +78,14 @@ export interface paths {
      * Retrieves the collection of Partner resources.
      * @description Retrieves the collection of Partner resources.
      */
-    get: operations["api_partnerchallenger_get_collection"];
+    get: operations["challenger"];
   };
   "/api/partner/discount": {
     /**
      * Retrieves the collection of Partner resources.
      * @description Retrieves the collection of Partner resources.
      */
-    get: operations["api_partnerdiscount_get_collection"];
+    get: operations["discount"];
   };
 }
 
@@ -275,6 +275,7 @@ export interface components {
       id: number;
       name: string;
       img?: string | null;
+      cancel: boolean;
     };
     "EventType.jsonld-detailEvent": {
       "@context"?: OneOf<[string, {
@@ -542,6 +543,34 @@ export interface operations {
       query?: {
         /** @description The collection page number */
         page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
       };
     };
     responses: {
@@ -599,6 +628,34 @@ export interface operations {
       query?: {
         /** @description The collection page number */
         page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
       };
     };
     responses: {
@@ -656,6 +713,34 @@ export interface operations {
       query?: {
         /** @description The collection page number */
         page?: number;
+        onlyMiagist?: boolean;
+        cancel?: boolean;
+        "adhPrice[between]"?: string;
+        "adhPrice[gt]"?: string;
+        "adhPrice[gte]"?: string;
+        "adhPrice[lt]"?: string;
+        "adhPrice[lte]"?: string;
+        "nadhPrice[between]"?: string;
+        "nadhPrice[gt]"?: string;
+        "nadhPrice[gte]"?: string;
+        "nadhPrice[lt]"?: string;
+        "nadhPrice[lte]"?: string;
+        "quotaStu[between]"?: string;
+        "quotaStu[gt]"?: string;
+        "quotaStu[gte]"?: string;
+        "quotaStu[lt]"?: string;
+        "quotaStu[lte]"?: string;
+        name?: string;
+        "types.label"?: string;
+        "situated.label"?: string;
+        "bgedDate.beginDate[before]"?: string;
+        "bgedDate.beginDate[strictly_before]"?: string;
+        "bgedDate.beginDate[after]"?: string;
+        "bgedDate.beginDate[strictly_after]"?: string;
+        "bgedDate.endDate[before]"?: string;
+        "bgedDate.endDate[strictly_before]"?: string;
+        "bgedDate.endDate[after]"?: string;
+        "bgedDate.endDate[strictly_after]"?: string;
       };
     };
     responses: {
@@ -886,7 +971,7 @@ export interface operations {
    * Retrieves the collection of Partner resources.
    * @description Retrieves the collection of Partner resources.
    */
-  api_partnerchallenger_get_collection: {
+  challenger: {
     parameters: {
       query?: {
         /** @description The collection page number */
@@ -943,7 +1028,7 @@ export interface operations {
    * Retrieves the collection of Partner resources.
    * @description Retrieves the collection of Partner resources.
    */
-  api_partnerdiscount_get_collection: {
+  discount: {
     parameters: {
       query?: {
         /** @description The collection page number */

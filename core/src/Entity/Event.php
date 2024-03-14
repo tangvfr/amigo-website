@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
-use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
@@ -128,7 +128,7 @@ class Event extends AbstractPublishableEntity
 
     #[ORM\Column]
     #[Assert\NotNull]
-    #[Groups('detailEvent')]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?bool $cancel = null;
 
     #[ORM\ManyToMany(targetEntity: EventType::class)]

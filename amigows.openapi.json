@@ -221,6 +221,398 @@
                         "style": "form",
                         "explode": false,
                         "allowReserved": false
+                    },
+                    {
+                        "name": "onlyMiagist",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "cancel",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "types.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "situated.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
                     }
                 ],
                 "deprecated": false
@@ -350,6 +742,398 @@
                         "style": "form",
                         "explode": false,
                         "allowReserved": false
+                    },
+                    {
+                        "name": "onlyMiagist",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "cancel",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "types.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "situated.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
                     }
                 ],
                 "deprecated": false
@@ -475,6 +1259,398 @@
                         "schema": {
                             "type": "integer",
                             "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "onlyMiagist",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "cancel",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "adhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "nadhPrice[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[between]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[gte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lt]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "quotaStu[lte]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "types.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "situated.label",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.beginDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_before]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "bgedDate.endDate[strictly_after]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
                         },
                         "style": "form",
                         "explode": false,
@@ -1055,7 +2231,7 @@
         },
         "/api/partner/challenger": {
             "get": {
-                "operationId": "api_partnerchallenger_get_collection",
+                "operationId": "challenger",
                 "tags": [
                     "Partner"
                 ],
@@ -1184,7 +2360,7 @@
         },
         "/api/partner/discount": {
             "get": {
-                "operationId": "api_partnerdiscount_get_collection",
+                "operationId": "discount",
                 "tags": [
                     "Partner"
                 ],
@@ -2090,7 +3266,8 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "name"
+                    "name",
+                    "cancel"
                 ],
                 "properties": {
                     "@id": {
@@ -2113,6 +3290,9 @@
                             "string",
                             "null"
                         ]
+                    },
+                    "cancel": {
+                        "type": "boolean"
                     }
                 }
             },
