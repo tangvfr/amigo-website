@@ -3,22 +3,18 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
-use EasyCorp\Bundle\EasyAdminBundle\Provider\FieldProvider;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 
 class EventCrudController extends AbstractImageCrudController
@@ -36,15 +32,13 @@ class EventCrudController extends AbstractImageCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
             ->setDateFormat('dd/MM/yyyy')
-            ->setPageTitle('index', 'Amigo Website - Event');
+            ->setPageTitle('index', 'Amigo Website - Event')
+            ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 
 
     public function configureFields(string $pageName): iterable
     {
-        // 14 écrit dans la classe
-        // 14
-        $var = 'hidden';
         return [
             IdField::new('id')
                 ->hideOnIndex()
@@ -53,8 +47,10 @@ class EventCrudController extends AbstractImageCrudController
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('INFORMATIONS PRINCIPALE'),
             TextField::new('name', 'Nom'),
-            TextEditorField::new('description', 'Description'),
-            BooleanField::new('cancel', 'Annuler'),
+            TextEditorField::new('description', 'Description')
+                ->hideOnIndex(),
+            BooleanField::new('cancel', 'Annuler')
+                ->hideOnIndex(),
 
             // DATE * 5
             FormField::addColumn('col-lg-8 col-xl-6'),
@@ -62,27 +58,41 @@ class EventCrudController extends AbstractImageCrudController
             DateTimeField::new('bgedDate.beginDate', 'Début de l\'événement')
                 ->hideOnIndex(),
             DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
-                ->hideOnIndex(),
+                ->setRequired(true)
+                ->setHelp('Si Début de l\'événement non rempli, Fin de l\'événement = début de l\'evenement')
+            ,
             DateTimeField::new('publicationDate', 'Date de publication de l\'évenement')
                 ->hideOnIndex(),
 
             // pas besoins de les afficher mais ils existent
-            DateTimeField::new('CreationDate', 'CD')
+            DateTimeField::new('creationDate', 'Date de création')
                 ->hideOnIndex()
-                ->hideOnForm(),
-            DateTimeField::new('lastEditDate', 'LED')
-                ->hideOnIndex()
-                ->hideOnForm(),
+                ->setRequired(false)
+                ->setDisabled()
 
+            ,
+            DateTimeField::new('lastEditDate', 'Dernière modification')
+                ->hideOnIndex()
+                ->setFormTypeOptions(['disabled' => 'disabled'])
+            ,
 
             // BANNIERE
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('BANNIERE'),
             ImageField::new('img', 'Image')
+                ->hideOnIndex()
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR),
             ChoiceField::new('note')
-                ->setChoices([0,1,2,3,4,5]),
+                ->hideOnIndex()
+                ->setChoices([
+                    'Cacher / Inregardable' => 0,
+                    'Très insatisfaits' => 1,
+                    'Insatisfaits' => 2,
+                    'Neutre' => 3,
+                    'Satisfait' => 4,
+                    'Très satisfait' => 5,
+                ]),
 
             // ARGENT
             FormField::addColumn('col-lg-8 col-xl-6'),
@@ -91,34 +101,45 @@ class EventCrudController extends AbstractImageCrudController
             MoneyField::new('adhPrice', 'Prix Adhérant')
                 ->setCurrency('EUR'),
             MoneyField::new('nadhPrice', 'Prix Non Adhérant')
-                ->setCurrency('EUR')
-
-                // ne marche pas
-                ->setCustomOption('conditionalVisibility', [
-                    'depends_on' => 'entity.onlyMiagist',
-                    'values' => [false],
-                ]),
+                ->setCurrency('EUR'),
 
             // QUOTA
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('QUOTA'),
-            IntegerField::new('quotaStu', 'Quota d\'éleve'),
-            IntegerField::new('quotaComp', 'Quota complet'),
+            IntegerField::new('quotaStu', 'Quota d\'éleve')
+                ->hideOnIndex(),
+            IntegerField::new('quotaComp', 'Quota complet')
+                ->hideOnIndex(),
 
             // Information sur l'evenement
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('INFO'),
-            AssociationField::new('types'),
-            AssociationField::new('situated', 'Localisation de l\'event'),
-
-
-
-
-
-
-
-
+            AssociationField::new('types')
+                ->hideOnIndex(),
+            AssociationField::new('situated', 'Localisation de l\'event')
+                ->hideOnIndex(),
         ];
     }
+
+//    public function createEntity(string $entityFqcn)
+//    {
+//        // modification déjà dans la BD
+//        $event = new $entityFqcn();
+//        $event->setCreationDate(new \DateTimeImmutable());
+//        $event->setLastEditDate(new \DateTimeImmutable());
+//        return $event;
+//    }
+
+//    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+//    {
+//        // modification déjà dans la BD
+//        $entityInstance->setLastEditDate(new \DateTimeImmutable());
+//
+//        if ($entityInstance->getQuotaStu()<0){
+//            $entityInstance->setQuotaStu($entityInstance->getQuotaStu()*-1);
+//        }
+//
+//        parent::updateEntity($entityManager, $entityInstance);
+//    }
 
 }

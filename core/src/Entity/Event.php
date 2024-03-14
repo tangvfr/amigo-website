@@ -38,9 +38,11 @@ class Event extends AbstractPublishableEntity
     private ?string $adhPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
     private ?int $quotaStu = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
     private ?int $quotaComp = null;
 
     #[ORM\Column]
