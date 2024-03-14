@@ -2,6 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
+use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
+use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -36,12 +43,39 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => 'detailEvent']
         ),
     ],
-    routePrefix: 'events'
+    routePrefix: 'events',
+    order: [
+        'bgedDate.endDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+        'publicationDate' => 'desc',
+    ]
 )]
-
+#[ApiFilter(
+    BooleanFilter::class,
+    properties: ['onlyMiagist', 'cancel']
+)]
+#[ApiFilter(
+    RangeFilter::class,
+    properties: ['adhPrice', 'nadhPrice', 'quotaStu']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'name' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'types.label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'situated.label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+    ]
+)]
+#[ApiFilter(
+    DateFilter::class,
+    properties: [
+        'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
+        'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
+    ]
+)]
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 /*
- * Seul la date de fin de l'event est obligatoire
+ * Seul la date de fin de l'event est "obligatoire" pour savoir si l'event est fini ou non
  */
 class Event extends AbstractPublishableEntity
 {

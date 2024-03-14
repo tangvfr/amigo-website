@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
     properties: [
         'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
         'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
-        'endProvidDate' => DateFilterInterface::PARAMETER_STRICTLY_BEFORE,
+        'endProvidDate' => DateFilterInterface::INCLUDE_NULL_BEFORE_AND_AFTER,
     ]
 )]
 #[ORM\Entity(repositoryClass: OfferRepository::class)]

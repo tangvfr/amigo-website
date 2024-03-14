@@ -25,7 +25,12 @@ use Symfony\Component\Validator\Constraints as Assert;
             name: Partner::DISCOUNT_PARTNER,
         ),
     ],
-    routePrefix: 'partner'
+    routePrefix: 'partner',
+    order: [
+        'publicationDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+        'bgedDate.endDate' => 'asc',
+    ]
 )]
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner extends AbstractPublishableEntity
