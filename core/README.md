@@ -10,6 +10,7 @@
 - `npm run dev`
 ## Commandes pour clear la db
 - `symfony console d:d:d --force` supprime la db
+- `symfony console cache:clear` enleve le cache
 - `symfony console d:d:c` crée la db
 - `symfony console d:m:m` crée les tables de la db
 ## Installation simple de Webpack Encore

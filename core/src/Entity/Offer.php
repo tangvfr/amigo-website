@@ -30,8 +30,8 @@ use Symfony\Component\Validator\Constraints\NotNull;
     properties: [
         'label' => SearchFilterInterface::STRATEGY_IPARTIAL,
         'keyWords' => SearchFilterInterface::STRATEGY_IPARTIAL,
-        'provide.name' => SearchFilterInterface::STRATEGY_IPARTIAL,
-        'provide.activities.label' => SearchFilterInterface::STRATEGY_IPARTIAL
+        'provider.name' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'provider.activities.label' => SearchFilterInterface::STRATEGY_IPARTIAL
     ]
 )]
 #[ApiFilter(
