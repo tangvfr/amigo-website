@@ -29,7 +29,7 @@ class OfferRepository extends ServiceEntityRepository
         //select
         $qb->addSelect('c');
         //joined
-        $qb->innerJoin('o.provide', 'c');
+        $qb->innerJoin('o.provider', 'c');
         //where
         $qb->where($qb->expr()->andX(
                 $qb->expr()->isNotNull('o.publicationDate'),
