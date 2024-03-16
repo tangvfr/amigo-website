@@ -17,24 +17,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    const SITE_NAME = 'Amigo Website';
+
+    #[Route(['/', '/admin'], name: 'admin')]
     public function index(): Response
     {
-        return $this->render('pages/admin/dashboard.html.twig');
+        return $this->render('pages/admin/dashboard.html.twig', [
+            'dashboardTitle' => 'Tableau de bord '.DashboardController::SITE_NAME
+        ]);
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Amigo Website');
+            ->setTitle('Admin '.DashboardController::SITE_NAME)
+            ->setFaviconPath('images/admin_amigo_logo.png');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class);
         yield MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class);
-        yield MenuItem::linkToCrud('Evenement', 'fas fa-calendar', Event::class);
+        yield MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class);
         yield MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class);
         yield MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class);
         yield MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class);

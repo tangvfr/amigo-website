@@ -1,9 +1,13 @@
 {% extends "@EasyAdmin/page/content.html.twig" %}
 
+{% block page_title %}
+    {{ dashboardTitle }}
+{% endblock %}
+
 {% block content_title %}
     {{ pageTitle|trans|raw }}
 {% endblock %}
 
 {% block content %}
-    <h1> Bienvenue *inserer pseudo* </h1>
+    <h1> Bienvenue *ton pseudo*, sur le panel administrateur du site de l'AMIGO !</h1>
 {% endblock %}

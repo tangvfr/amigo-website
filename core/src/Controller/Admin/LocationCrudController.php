@@ -23,7 +23,7 @@ class LocationCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Locations')
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', 'Amigo Website - Location');
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - Location');
     
     }
 

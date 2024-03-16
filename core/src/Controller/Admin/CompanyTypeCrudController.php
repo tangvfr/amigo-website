@@ -22,7 +22,7 @@ class CompanyTypeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Activités de l\'entreprise')
             ->setSearchFields(['labels'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', 'Amigo Website - Company Type')
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - Company Type')
             ->setPaginatorPageSize(10);
     }
 

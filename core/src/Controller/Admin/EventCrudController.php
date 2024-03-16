@@ -32,7 +32,7 @@ class EventCrudController extends AbstractImageCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
             ->setDateFormat('dd/MM/yyyy')
-            ->setPageTitle('index', 'Amigo Website - Event')
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - Event')
             ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 
@@ -84,7 +84,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR),
             ChoiceField::new('note')
-                ->hideOnIndex()
+                ->setHelp('Qualité de l\'affiche')
                 ->setChoices([
                     'Cacher / Inregardable' => 0,
                     'Très insatisfaits' => 1,
@@ -108,7 +108,7 @@ class EventCrudController extends AbstractImageCrudController
             FormField::addPanel('QUOTA'),
             IntegerField::new('quotaStu', 'Quota d\'éleve')
                 ->hideOnIndex(),
-            IntegerField::new('quotaComp', 'Quota complet')
+            IntegerField::new('quotaComp', 'Quota d\'entreprise')
                 ->hideOnIndex(),
 
             // Information sur l'evenement

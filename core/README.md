@@ -7,6 +7,7 @@
 - `symfony console doctrine:migrations:migrate`
 - `symfony console doctrine:fixture:load`
 - `npm install`
+- `npm update`
 - `npm run dev`
 ## Commandes pour clear la db
 - `symfony console d:d:d --force` supprime la db

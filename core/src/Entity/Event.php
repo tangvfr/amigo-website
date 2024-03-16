@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
@@ -72,6 +73,10 @@ use Symfony\Component\Validator\Constraints as Assert;
         'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
         'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
     ]
+)]
+#[ApiFilter(
+    OrderFilter::class,
+    properties: ['note']
 )]
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 /*
