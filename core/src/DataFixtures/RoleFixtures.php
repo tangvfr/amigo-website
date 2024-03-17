@@ -25,12 +25,12 @@ class RoleFixtures extends Fixture implements DependentFixtureInterface
 
         $hubs = $this->hubRepository->findAll();
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::ROLE_NB; $i++) {
             $role = new Role();
             $role->setHub($faker->randomElement($hubs))
                 ->setName($faker->word())
                 ->setHub($faker->randomElement($hubs))
-                ->setPriority($faker->numberBetween(-10,10))
+                ->setPriority($faker->numberBetween(ConstantesFixtures::PRIORITY_MIN,ConstantesFixtures::PRIORITY_MAX))
             ;
 
             $manager->persist($role);

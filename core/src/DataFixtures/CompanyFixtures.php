@@ -31,7 +31,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
         $locations = $this->locationRepository->findAll();
         $acitivities = $this->companyTypeRepository->findAll();
 
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::COMPANY_NB; $i++) {
             $company = new Company();
             $company->setName($faker->colorName(). ' ' .$faker->domainWord(). ' ' .$faker->firstName())
                 ->setDescription($faker->sentence());
@@ -41,7 +41,10 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
                 $company->addLocated($faker->randomElement($locations));
             }
 
-            $nbAct = $faker->numberBetween(1,3);
+            $nbAct = $faker->numberBetween(
+                ConstantesFixtures::ACTIVITY_MIN_NB,
+                ConstantesFixtures::ACTIVITY_MAX_NB
+            );
             for ($i = 0; $i < $nbAct; $i++) {
                 $company->addActivity($faker->randomElement($acitivities));
             }

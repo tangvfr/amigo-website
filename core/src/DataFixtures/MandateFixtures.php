@@ -25,7 +25,7 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         $roles = $this->roleRepository->findAll();
         $students = $this->studentRepository->findAll();
@@ -43,7 +43,7 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
                 ->setEndDate($date1);
         }
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::MANDATE_NB; $i++) {
             $mandate = new Mandate();
             $mandate->addRole($faker->randomElement($roles))
                 ->setStudent($faker->randomElement($students))

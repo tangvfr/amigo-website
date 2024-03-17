@@ -22,7 +22,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         $date1 = $faker->dateTime();
         $date2 = $faker->dateTime();
@@ -40,9 +40,9 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         $keyWords = $faker->words($faker->numberBetween(1,10));
         $companies = $this->companyRepository->findAll();
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::OFFER_NB; $i++) {
             $offer = new Offer();
-            $offer->setLabel($faker->sentence(3))
+            $offer->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence())
                 ->setEndProvidDate($faker->dateTime())
                 ->setKeyWords($keyWords)

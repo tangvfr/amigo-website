@@ -71,7 +71,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ))
                 ->addType($faker->randomElement($eventTypes));
 
-            if ($faker->boolean(ConstantesFixtures::PROBA_TWO_TYPES))
+            if ($faker->boolean(ConstantesFixtures::TWO_TYPES_PROBA))
             {
                 $event->addType($faker->randomElement($eventTypes));
             }
@@ -79,7 +79,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
             $event->addSituated($faker->randomElement($locations))
                 ->setBgedDate($date);
 
-            $event->setCancel($faker->boolean(ConstantesFixtures::PROBA_EVENT_CANCEL));
+            $event->setCancel($faker->boolean(ConstantesFixtures::EVENT_CANCEL_PROBA));
 
             $manager->persist($event);
             $manager->flush();
