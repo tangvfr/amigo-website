@@ -10,12 +10,12 @@ class LocationFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
-        for ($i = 0; $i < 10; $i++) {
+        $faker = \Faker\Factory::create('fr_FR');
+        for ($i = 0; $i < ConstantesFixtures::LOCATION_NB; $i++) {
             $location = new Location();
-            $location->setLabel($faker->sentence(3));
+            $location->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL));
 
-            if ($faker->boolean(50))
+            if ($faker->boolean(ConstantesFixtures::ADDRESS_COORD_PROBA))
             {
                 $location->setCountry($faker->country())
                     ->setCity($faker->city())

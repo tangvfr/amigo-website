@@ -12,7 +12,7 @@ class CompanyTypeFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::COMPANY_TYPE_NB; $i++) {
             $companyType = new CompanyType();
             $companyType->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL));
 

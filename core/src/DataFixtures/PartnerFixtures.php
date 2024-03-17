@@ -11,35 +11,28 @@ use Doctrine\Persistence\ObjectManager;
 
 class PartnerFixtures extends Fixture implements DependentFixtureInterface
 {
-    private const CHANCEOFCHALLENGE = 66;
-
     public function __construct(
         private readonly CompanyRepository $companyRepository
     ){}
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         $companies = $this->companyRepository->findAll();
 
-        $date1 = $faker->dateTime();
-        $date2 = $faker->dateTime();
-        $date = new BeginEndDateEmbeddable();
-        if ($date1 < $date2)
+        for ($i = 0; $i < ConstantesFixtures::PARTNER_NB; $i++)
         {
-            $date->setBeginDate($date1)
-                ->setEndDate($date2);
-        } else
-        {
-            $date->setBeginDate($date2)
-                ->setEndDate($date1);
-        }
+            $date = UtilFixtures::createDate(
+                $faker,
+                ConstantesFixtures::PARTNER_DATE_BETWEEN_MIN,
+                ConstantesFixtures::PARTNER_DATE_BETWEEN_MAX,
+                false
+            );
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
             $partner = new Partner();
             $partner->setCompany($faker->randomElement($companies))
-                ->setChallenge($faker->boolean(self::CHANCEOFCHALLENGE))
+                ->setChallenge($faker->boolean(ConstantesFixtures::CHALLENGE_PROBA))
                 ->setAdvantages($faker->sentence())
                 ->setBgedDate($date)
             ;

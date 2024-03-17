@@ -32,20 +32,15 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
         $eventTypes = $this->eventTypeRepository->findAll();
         $locations = $this->locationRepository->findAll();
 
-        $date1 = $faker->dateTime();
-        $date2 = $faker->dateTime();
-        $date = new BeginEndDateTimeEmbeddable();
-        if ($date1 < $date2)
+        for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++)
         {
-            $date->setBeginDate($date1)
-                ->setEndDate($date2);
-        } else
-        {
-            $date->setBeginDate($date2)
-                ->setEndDate($date1);
-        }
+            $date = UtilFixtures::createDate(
+                $faker,
+                ConstantesFixtures::EVENT_DATE_BETWEEN_MIN,
+                ConstantesFixtures::EVENT_DATE_BETWEEN_MAX,
+                true
+            );
 
-        for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++) {
             $event = new Event();
             $event->setName($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence());
@@ -71,7 +66,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ))
                 ->addType($faker->randomElement($eventTypes));
 
-            if ($faker->boolean(ConstantesFixtures::PROBA_TWO_TYPES))
+            if ($faker->boolean(ConstantesFixtures::TWO_TYPES_PROBA))
             {
                 $event->addType($faker->randomElement($eventTypes));
             }
@@ -79,7 +74,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
             $event->addSituated($faker->randomElement($locations))
                 ->setBgedDate($date);
 
-            $event->setCancel($faker->boolean(ConstantesFixtures::PROBA_EVENT_CANCEL));
+            $event->setCancel($faker->boolean(ConstantesFixtures::EVENT_CANCEL_PROBA));
 
             $manager->persist($event);
             $manager->flush();

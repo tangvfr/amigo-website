@@ -9,6 +9,7 @@ use App\Repository\StudentRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Monolog\Handler\Curl\Util;
 
 class MandateFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -25,29 +26,24 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         $roles = $this->roleRepository->findAll();
         $students = $this->studentRepository->findAll();
 
-        $date1 = $faker->dateTime();
-        $date2 = $faker->dateTime();
-        $date = new BeginEndDateEmbeddable();
-        if ($date1 < $date2)
-        {
-            $date->setBeginDate($date1)
-                ->setEndDate($date2);
-        } else
-        {
-            $date->setBeginDate($date2)
-                ->setEndDate($date1);
-        }
+        for ($i = 0; $i < ConstantesFixtures::MANDATE_NB; $i++) {
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+            $date = UtilFixtures::createDate(
+                $faker,
+                ConstantesFixtures::MANDATE_DATE_BETWEEN_MIN,
+                ConstantesFixtures::MANDATE_DATE_BETWEEN_MIN,
+                false
+            );
+
             $mandate = new Mandate();
             $mandate->addRole($faker->randomElement($roles))
                 ->setStudent($faker->randomElement($students))
-                ->setVisible($faker->boolean())
+                ->setVisible($faker->boolean(ConstantesFixtures::VISIBLE_PROBA))
                 ->setBgedDate($date)
             ;
 

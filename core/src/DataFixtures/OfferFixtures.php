@@ -22,29 +22,37 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
-        $date1 = $faker->dateTime();
-        $date2 = $faker->dateTime();
-        $date = new BeginEndDateEmbeddable();
-        if ($date1 < $date2)
-        {
-            $date->setBeginDate($date1)
-                ->setEndDate($date2);
-        } else
-        {
-            $date->setBeginDate($date2)
-                ->setEndDate($date1);
-        }
-
-        $keyWords = $faker->words($faker->numberBetween(1,10));
         $companies = $this->companyRepository->findAll();
 
-        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::OFFER_NB; $i++)
+        {
+            $keyWords = $faker->words($faker->numberBetween(
+                ConstantesFixtures::OFFER_KEY_WORDS_NB_MIN,
+                ConstantesFixtures::OFFER_KEY_WORDS_NB_MAX)
+            );
+
+            $date = UtilFixtures::createDate(
+                $faker,
+                ConstantesFixtures::OFFER_DATE_BETWEEN_MIX,
+                ConstantesFixtures::OFFER_DATE_BETWEEN_MAX,
+                false
+            );
+
+            $endProvidDate = new \DateTime();
+            $endProvidDate->setDate(
+                $date->getEndDate()->format('Y'),
+                $date->getEndDate()->format('m'),
+                $date->getEndDate()->format('d')
+            );
+            $endProvidDate->modify(ConstantesFixtures::OFFER_GAP_END_PROVIDE_DATE);
+
             $offer = new Offer();
-            $offer->setLabel($faker->sentence(3))
+            $offer->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence())
                 ->setEndProvidDate($faker->dateTime())
+                ->setEndProvidDate($endProvidDate)
                 ->setKeyWords($keyWords)
                 ->setProvider($faker->randomElement($companies))
                 ->setBgedDate($date)
