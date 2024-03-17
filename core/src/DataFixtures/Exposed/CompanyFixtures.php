@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Exposed;
 
+use App\DataFixtures\ConstantesFixtures;
 use App\Entity\Company;
 use App\Repository\CompanyTypeRepository;
 use App\Repository\LocationRepository;

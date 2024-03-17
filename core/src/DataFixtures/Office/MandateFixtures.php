@@ -1,15 +1,16 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Office;
 
-use App\Entity\Date\BeginEndDateEmbeddable;
+use App\DataFixtures\ConstantesFixtures;
+use App\DataFixtures\Exposed\StudentFixtures;
+use App\DataFixtures\UtilFixtures;
 use App\Entity\Mandate;
 use App\Repository\RoleRepository;
 use App\Repository\StudentRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Monolog\Handler\Curl\Util;
 
 class MandateFixtures extends Fixture implements DependentFixtureInterface
 {

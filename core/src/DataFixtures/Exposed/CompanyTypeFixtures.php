@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Exposed;
 
+use App\DataFixtures\ConstantesFixtures;
 use App\Entity\CompanyType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

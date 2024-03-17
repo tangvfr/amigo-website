@@ -1,8 +1,9 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Exposed;
 
-use App\Entity\Date\BeginEndDateTimeEmbeddable;
+use App\DataFixtures\ConstantesFixtures;
+use App\DataFixtures\UtilFixtures;
 use App\Entity\Event;
 use App\Repository\EventTypeRepository;
 use App\Repository\LocationRepository;

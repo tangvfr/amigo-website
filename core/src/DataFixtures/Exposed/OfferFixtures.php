@@ -1,8 +1,9 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Exposed;
 
-use App\Entity\Date\BeginEndDateEmbeddable;
+use App\DataFixtures\ConstantesFixtures;
+use App\DataFixtures\UtilFixtures;
 use App\Entity\Offer;
 use App\Repository\CompanyRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;

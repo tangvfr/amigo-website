@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Office;
 
+use App\DataFixtures\ConstantesFixtures;
 use App\Entity\Role;
 use App\Repository\HubRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
