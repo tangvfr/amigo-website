@@ -12,7 +12,7 @@ export class OfferSearch extends AbstractBgedDateWithTextSearch {
     //definition de critère de recherche
     params = this.applySearchingParam(params, 'keyWords');
     params = this.applyDateParams(params);
-    console.log(params);
+
     //retour les parametre
     return params;
   }

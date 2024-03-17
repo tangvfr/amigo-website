@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Exposed;
 
+use App\Controller\Admin\AbstractImageCrudController;
+use App\Controller\Admin\DashboardController;
 use App\Entity\Event;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;

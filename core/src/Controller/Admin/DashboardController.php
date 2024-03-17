@@ -17,9 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    const DASHBOARD_NAME = 'Tableau de bord';
-    const DASHBOARD_ICON = 'fas fa-home';
     const SITE_NAME = 'Amigo Website';
+    const DASHBOARD_NAME = 'Tableau de bord';
+    const DASHBOARD_ICON = 'fa fa-home';
+
+    const EXPOSED_NAME = 'Données exposés';
+    const EXPOSED_ICON = 'fa-solid fa-signs-post';
+
+    const OFFICE_NAME = 'Bureau';
+    const OFFICE_ICON = 'fa-solid fa-briefcase';
 
     #[Route(['/', '/admin'], name: 'admin')]
     public function index(): Response
@@ -39,12 +45,16 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard(self::DASHBOARD_NAME, self::DASHBOARD_ICON);
-        yield MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class);
-        yield MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class);
-        yield MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class);
-        yield MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class);
-        yield MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class);
-        yield MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class);
-        yield MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class);
+        yield MenuItem::subMenu(self::EXPOSED_NAME, self::EXPOSED_ICON)->setSubItems([
+            MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
+            MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class),
+            MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
+            MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
+            MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
+            MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
+        ]);
+        yield MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON)->setSubItems([
+            MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
+        ]);
     }
 }

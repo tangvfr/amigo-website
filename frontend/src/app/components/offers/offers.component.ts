@@ -37,13 +37,13 @@ export class OffersComponent implements OnInit {
 
   search(search: OfferSearch): void
   {
-    /*this.amigowsApiService.getOffers(search)//récupère la requet pret a etre executé
+    this.amigowsApiService.getOffers(search)//récupère la requet pret a etre executé
       .subscribe({//executé la requet
         //stock le resultat de la requet dans une varible
         next: data => console.log(data),
         //en cas d'erreur
         error: () => this.amigowsApiService.showErrorApiError()
-      });*/
+      });
   }
 
 }

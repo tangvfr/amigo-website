@@ -18,7 +18,7 @@ export class EventSearch extends AbstractBgedDateWithTextSearch {
     params = setBoolParam(params, 'onlyMiagist', this.onlyMiagist);
     params = this.applySearchingParam(params, 'name');
     params = this.applyDateParams(params);
-    console.log(params);
+
     //retour les parametre
     return params;
   }

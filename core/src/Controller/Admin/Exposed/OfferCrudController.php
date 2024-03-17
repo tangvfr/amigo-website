@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Exposed;
 
-use App\Entity\Mandate;
+use App\Entity\Offer;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class MandateCrudController extends AbstractCrudController
+class OfferCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Mandate::class;
+        return Offer::class;
     }
 
     /*
