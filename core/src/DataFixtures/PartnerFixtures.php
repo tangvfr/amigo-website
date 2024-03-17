@@ -21,20 +21,15 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
 
         $companies = $this->companyRepository->findAll();
 
-        $date1 = $faker->dateTime();
-        $date2 = $faker->dateTime();
-        $date = new BeginEndDateEmbeddable();
-        if ($date1 < $date2)
+        for ($i = 0; $i < ConstantesFixtures::PARTNER_NB; $i++)
         {
-            $date->setBeginDate($date1)
-                ->setEndDate($date2);
-        } else
-        {
-            $date->setBeginDate($date2)
-                ->setEndDate($date1);
-        }
+            $date = UtilFixtures::createDate(
+                $faker,
+                ConstantesFixtures::PARTNER_DATE_BETWEEN_MIN,
+                ConstantesFixtures::PARTNER_DATE_BETWEEN_MAX,
+                false
+            );
 
-        for ($i = 0; $i < ConstantesFixtures::PARTNER_NB; $i++) {
             $partner = new Partner();
             $partner->setCompany($faker->randomElement($companies))
                 ->setChallenge($faker->boolean(ConstantesFixtures::CHALLENGE_PROBA))

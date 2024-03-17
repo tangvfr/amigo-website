@@ -24,6 +24,8 @@ abstract class ConstantesFixtures {
     public const QUOTA_MAX = 50;
     public const NOTE_MAX = 5;
     public const EVENT_CANCEL_PROBA = 10;
+    public const EVENT_DATE_BETWEEN_MIN = '-8 months';
+    public const EVENT_DATE_BETWEEN_MAX = '+1 months';
 
 
     //constantes pour eventTypeFixtures
@@ -41,15 +43,23 @@ abstract class ConstantesFixtures {
 
     //constantes pour mandateFixtures
     public const MANDATE_NB = 10;
+    public const VISIBLE_PROBA = 95;
+
+    public const MANDATE_DATE_BETWEEN_MIN = '-18 months';
+    public const MANDATE_DATE_BETWEEN_MAX = '+18 months';
 
 
     //constantes pour offerFixtures
     public const OFFER_NB = 15;
+    public const OFFER_DATE_BETWEEN_MIX = '-8 months';
+    public const OFFER_DATE_BETWEEN_MAX = '+1 months';
 
 
     //constantes pour partnerFixtures
     public const PARTNER_NB = 20;
     public const CHALLENGE_PROBA = 66;
+    public const PARTNER_DATE_BETWEEN_MIN = '-12 months';
+    public const PARTNER_DATE_BETWEEN_MAX = '+12 months';
 
 
     //constantes pour roleFixtures
