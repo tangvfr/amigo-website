@@ -14,6 +14,8 @@
 - `symfony console cache:clear` enleve le cache
 - `symfony console d:d:c` crée la db
 - `symfony console d:m:m` crée les tables de la db
+- `symfony console d:d:l` load les fixtures
+- `php -d memory_limit=-1 bin/console d:d:l` load les fixtures sans contraintes de ram
 ## Installation simple de Webpack Encore
 - `symfony composer require symfony/webpack-encore-bundle`
 - `npm install`

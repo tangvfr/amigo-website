@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CompanyTypeCrudController extends AbstractCrudController
 {
+    public const CRUD_NAME = 'Activités d\'entreprise';
+
     public static function getEntityFqcn(): string
     {
         return CompanyType::class;
@@ -22,7 +24,7 @@ class CompanyTypeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Activités de l\'entreprise')
             ->setSearchFields(['labels'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Company Type')
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - '.self::CRUD_NAME)
             ->setPaginatorPageSize(10);
     }
 

@@ -17,13 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    const DASHBOARD_NAME = 'Tableau de bord';
+    const DASHBOARD_ICON = 'fas fa-home';
     const SITE_NAME = 'Amigo Website';
 
     #[Route(['/', '/admin'], name: 'admin')]
     public function index(): Response
     {
         return $this->render('pages/admin/dashboard.html.twig', [
-            'dashboardTitle' => 'Tableau de bord '.DashboardController::SITE_NAME
+            'dashboardTitle' => self::DASHBOARD_NAME.' '.self::SITE_NAME
         ]);
     }
 
@@ -36,7 +38,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Tableau de bord', 'fas fa-home');
+        yield MenuItem::linkToDashboard(self::DASHBOARD_NAME, self::DASHBOARD_ICON);
         yield MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class);
         yield MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class);
         yield MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class);
