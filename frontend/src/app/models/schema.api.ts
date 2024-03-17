@@ -156,10 +156,10 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
-      description?: string;
+      description: string;
       located?: components["schemas"]["Location.jsonld-challengerCompany"][];
       activities?: components["schemas"]["CompanyType.jsonld-challengerCompany"][];
     };
@@ -172,11 +172,11 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
       banner?: string | null;
-      description?: string;
+      description: string;
       located?: components["schemas"]["Location.jsonld-discountCompany"][];
       activities?: components["schemas"]["CompanyType.jsonld-discountCompany"][];
     };
@@ -189,10 +189,10 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
-      description?: string;
+      description: string;
       located?: components["schemas"]["Location.jsonld-infoCompany"][];
       activities?: components["schemas"]["CompanyType.jsonld-infoCompany"][];
     };
@@ -205,8 +205,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      name?: string;
+      id: number;
+      name: string;
       img?: string | null;
     };
     "CompanyType.jsonld-challengerCompany": {
@@ -219,7 +219,7 @@ export interface components {
       "@id"?: string;
       "@type"?: string;
       id?: number;
-      label?: string;
+      label: string;
     };
     "CompanyType.jsonld-discountCompany": {
       "@context"?: OneOf<[string, {
@@ -231,7 +231,7 @@ export interface components {
       "@id"?: string;
       "@type"?: string;
       id?: number;
-      label?: string;
+      label: string;
     };
     "CompanyType.jsonld-infoCompany": {
       "@context"?: OneOf<[string, {
@@ -243,7 +243,7 @@ export interface components {
       "@id"?: string;
       "@type"?: string;
       id?: number;
-      label?: string;
+      label: string;
     };
     "Event.jsonld-detailEvent": {
       "@context"?: OneOf<[string, {
@@ -286,8 +286,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
     };
     "EventType.jsonld-detailEventType": {
       "@context"?: OneOf<[string, {
@@ -298,9 +298,9 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
-      description?: string;
+      id: number;
+      label: string;
+      description: string;
     };
     "Hub.jsonld-office": {
       "@context"?: OneOf<[string, {
@@ -324,8 +324,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
       latitude?: number | null;
       longitude?: number | null;
       country?: string | null;
@@ -342,8 +342,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
       latitude?: number | null;
       longitude?: number | null;
       country?: string | null;
@@ -360,8 +360,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
       latitude?: number | null;
       longitude?: number | null;
       country?: string | null;
@@ -378,8 +378,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
       latitude?: number | null;
       longitude?: number | null;
       country?: string | null;
@@ -396,8 +396,8 @@ export interface components {
       }]>;
       "@id"?: string;
       "@type"?: string;
-      id?: number;
-      label?: string;
+      id: number;
+      label: string;
       latitude?: number | null;
       longitude?: number | null;
       country?: string | null;
@@ -408,7 +408,7 @@ export interface components {
     "Mandate.jsonld-office": {
       "@id"?: string;
       "@type"?: string;
-      id?: number;
+      id: number;
       roles?: components["schemas"]["Role.jsonld-office"][];
       student: components["schemas"]["Student.jsonld-office"];
     };
@@ -421,7 +421,7 @@ export interface components {
       /** Format: date-time */
       endProvidDate: string;
       keyWords?: string[];
-      provide: components["schemas"]["Company.jsonld-listOffer"];
+      provider: components["schemas"]["Company.jsonld-listOffer"];
       bgedDate?: components["schemas"]["BeginEndDateEmbeddable.jsonld-listOffer"];
     };
     "Partner.jsonld-challengerCompany": {
@@ -571,6 +571,7 @@ export interface operations {
         "bgedDate.endDate[strictly_before]"?: string;
         "bgedDate.endDate[after]"?: string;
         "bgedDate.endDate[strictly_after]"?: string;
+        "order[note]"?: "asc" | "desc";
       };
     };
     responses: {
@@ -656,6 +657,7 @@ export interface operations {
         "bgedDate.endDate[strictly_before]"?: string;
         "bgedDate.endDate[after]"?: string;
         "bgedDate.endDate[strictly_after]"?: string;
+        "order[note]"?: "asc" | "desc";
       };
     };
     responses: {
@@ -741,6 +743,7 @@ export interface operations {
         "bgedDate.endDate[strictly_before]"?: string;
         "bgedDate.endDate[after]"?: string;
         "bgedDate.endDate[strictly_after]"?: string;
+        "order[note]"?: "asc" | "desc";
       };
     };
     responses: {
@@ -848,8 +851,8 @@ export interface operations {
         page?: number;
         label?: string;
         keyWords?: string;
-        "provide.name"?: string;
-        "provide.activities.label"?: string;
+        "provider.name"?: string;
+        "provider.activities.label"?: string;
         "bgedDate.beginDate[before]"?: string;
         "bgedDate.beginDate[strictly_before]"?: string;
         "bgedDate.beginDate[after]"?: string;

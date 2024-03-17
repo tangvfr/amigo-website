@@ -13,7 +13,6 @@ export class EventSearch extends AbstractTextSearch {
   {
     let params = new HttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
     //definition de critère de recherche
-    params = setBoolParam(params, 'onlyMiagist', this.onlyMiagist);
     params = setSearchStringParam(params, 'name', this.searchText);
     params = setDateParam(params, 'bgedDate.beginDate', AFTER, this.beginAfter);
     params = setDateParam(params, 'bgedDate.endDate', BEFORE, this.endBefore);

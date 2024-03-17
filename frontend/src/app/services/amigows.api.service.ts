@@ -6,6 +6,7 @@ import {HydraList} from "../models/hydra-list";
 import {environment} from "../../environments/environment";
 import {Office} from "../models/office/office";
 import {DialogMessage, MessageService} from "./message.service";
+import {EventSearch} from "../models/search/event-search";
 
 export const API_ERROR_TITLE: string = 'Erreur API';
 export const API_ERROR_MSG: string = 'Une erreur est survenue lors de la communication avec le serveur ! Ressayer plus tard !';
@@ -57,30 +58,26 @@ export class AmigowsApiService {
     ).pipe(catchError(this.handleError), map(office => new Office(office)));
   }
 
-  getNowEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
+  getNowEvents(search?: EventSearch): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
-    return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
-    (`${this.baseApiUrl}/events/now`)
-      .pipe(catchError(this.handleError));
+    return this.getEvents(search, '/now');
   }
 
-  getPastEvents(): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
+  getPastEvents(search?: EventSearch): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
-    return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
-    (`${this.baseApiUrl}/events/past`)
-      .pipe(catchError(this.handleError));
+    return this.getEvents(search, '/past');
   }
 
-  getEvents(onlyMiagist? :boolean,  ): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
+  getEvents(search?: EventSearch, specified: string = ''): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
-      const params: HttpParams = new HttpParams();
-      //params.set()
-     // 'name', 'types.label', 'situated.label
+    type eventList = HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>;
+    const url = `${this.baseApiUrl}/events${specified}`;
 
+    const get = search !== undefined
+      ? this.http.get<eventList>(url, {params: search.toParams()})
+      : this.http.get<eventList>(url);
 
-    return this.http.get<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
-    (`${this.baseApiUrl}/events?`, {params: params})
-    .pipe(catchError(this.handleError));
+    return get.pipe(catchError(this.handleError));
   }
 
   getOffers(): Observable<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
