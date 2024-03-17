@@ -31,12 +31,20 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
                 false
             );
 
+            $datetime = UtilFixtures::bgeDateToDateTime($date);
+
+            $publicationDate1 = $datetime->modify(ConstantesFixtures::PARTNER_GAP_PUBLICATION_DATE);
+
             $partner = new Partner();
             $partner->setCompany($faker->randomElement($companies))
                 ->setChallenge($faker->boolean(ConstantesFixtures::CHALLENGE_PROBA))
                 ->setAdvantages($faker->sentence())
                 ->setBgedDate($date)
             ;
+
+            if ($faker->boolean(ConstantesFixtures::PUBLICATION_DATE_PROBA)) {
+                $partner->setPublicationDate(UtilFixtures::randomDateBetween($publicationDate1, $date->getEndDate()));
+            }
 
             $manager->persist($partner);
             $manager->flush();

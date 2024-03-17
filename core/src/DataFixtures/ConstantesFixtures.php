@@ -26,6 +26,9 @@ abstract class ConstantesFixtures {
     public const EVENT_CANCEL_PROBA = 10;
     public const EVENT_DATE_BETWEEN_MIN = '-8 months';
     public const EVENT_DATE_BETWEEN_MAX = '+1 months';
+    public const EVENT_GAP_PUBLICATION_DATE_MIN = '-2 weeks';
+    public const EVENT_GAP_PUBLICATION_DATE_MAX = '-1 weeks';
+    public const EVENT_MANY_LOCATION_PROBA = 10;
 
 
     //constantes pour eventTypeFixtures
@@ -56,6 +59,8 @@ abstract class ConstantesFixtures {
     public const OFFER_DATE_BETWEEN_MIX = '-8 months';
     public const OFFER_DATE_BETWEEN_MAX = '+1 months';
     public const OFFER_GAP_END_PROVIDE_DATE = '-2 weeks';
+    public const OFFER_GAP_PUBLICATION_DATE_MIN = '-2 months';
+    public const OFFER_GAP_PUBLICATION_DATE_MAX = '-10 months';
 
 
     //constantes pour partnerFixtures
@@ -63,6 +68,7 @@ abstract class ConstantesFixtures {
     public const CHALLENGE_PROBA = 66;
     public const PARTNER_DATE_BETWEEN_MIN = '-12 months';
     public const PARTNER_DATE_BETWEEN_MAX = '+12 months';
+    public const PARTNER_GAP_PUBLICATION_DATE = '-1 months';
 
 
     //constantes pour roleFixtures
@@ -79,5 +85,5 @@ abstract class ConstantesFixtures {
     public const NB_WORD_LABEL = 3;
     public const PRIORITY_MIN = -10;
     public const PRIORITY_MAX = 10;
-
+    public const PUBLICATION_DATE_PROBA = 90;
 }

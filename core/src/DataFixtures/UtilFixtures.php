@@ -34,5 +34,25 @@ class UtilFixtures {
         return $date;
     }
 
+    public static function randomDateBetween(\DateTime $date1, \DateTime $date2) : \DateTime
+    {
+        $randomTimestamp = mt_rand($date1->getTimestamp(), $date2->getTimestamp());
+        $randomDate = new \DateTime();
+        $randomDate->setTimestamp($randomTimestamp);
+
+        return $randomDate;
+    }
+
+    public static function bgeDateToDateTime($bgeDate) : \DateTime
+    {
+        $datetime = new \DateTime();
+        $datetime->setDate(
+            $bgeDate->getEndDate()->format('Y'),
+            $bgeDate->getEndDate()->format('m'),
+            $bgeDate->getEndDate()->format('d')
+        );
+
+        return $datetime;
+    }
 
 }

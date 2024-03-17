@@ -9,6 +9,7 @@ use App\Repository\CompanyRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Monolog\Handler\Curl\Util;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -41,23 +42,24 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 false
             );
 
-            $endProvidDate = new \DateTime();
-            $endProvidDate->setDate(
-                $date->getEndDate()->format('Y'),
-                $date->getEndDate()->format('m'),
-                $date->getEndDate()->format('d')
-            );
-            $endProvidDate->modify(ConstantesFixtures::OFFER_GAP_END_PROVIDE_DATE);
+            $datetime = UtilFixtures::bgeDateToDateTime($date);
+
+            $endProvidDate = $datetime->modify(ConstantesFixtures::OFFER_GAP_END_PROVIDE_DATE);
+            $publicationDate1 = $datetime->modify(ConstantesFixtures::OFFER_GAP_PUBLICATION_DATE_MIN);
+            $publicationDate2 = $datetime->modify(ConstantesFixtures::OFFER_GAP_PUBLICATION_DATE_MAX);
 
             $offer = new Offer();
             $offer->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence())
-                ->setEndProvidDate($faker->dateTime())
                 ->setEndProvidDate($endProvidDate)
                 ->setKeyWords($keyWords)
                 ->setProvider($faker->randomElement($companies))
                 ->setBgedDate($date)
             ;
+
+            if ($faker->boolean(ConstantesFixtures::PUBLICATION_DATE_PROBA)) {
+                $offer->setPublicationDate(UtilFixtures::randomDateBetween($publicationDate1, $publicationDate2));
+            }
 
             $manager->persist($offer);
             $manager->flush();

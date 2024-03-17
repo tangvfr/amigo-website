@@ -42,6 +42,11 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 true
             );
 
+            $datetime = UtilFixtures::bgeDateToDateTime($date);
+
+            $publicationDate1 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MIN);
+            $publicationDate2 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MAX);
+
             $event = new Event();
             $event->setName($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence());
@@ -74,6 +79,17 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
             $event->addSituated($faker->randomElement($locations))
                 ->setBgedDate($date);
+
+            if ($faker->boolean(ConstantesFixtures::EVENT_MANY_LOCATION_PROBA)) {
+                $event->addSituated($faker->randomElement($locations));
+            }
+
+
+            if ($faker->boolean(ConstantesFixtures::PUBLICATION_DATE_PROBA)) {
+                $event->setPublicationDate(UtilFixtures::randomDateBetween(
+                    $publicationDate1, $publicationDate2
+                ));
+            }
 
             $event->setCancel($faker->boolean(ConstantesFixtures::EVENT_CANCEL_PROBA));
 
