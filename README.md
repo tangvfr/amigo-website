@@ -8,7 +8,4 @@ BDE des MIAGISTs d'Orléans.
 ## Technologies utilisées
 - Angular
 - Symfony
-- Angular Material
 - Docker
-## Autheurs
-...
