@@ -4,21 +4,31 @@ namespace App\Entity;
 
 use App\Repository\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'roles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?Hub $hub = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Groups(['office'])]
     private ?string $name = null;
+
+    #[ORM\Column]
+    #[Assert\NotNull, Assert\Range(min: -100, max: 100)]
+    private ?int $priority = null;
 
     public function getId(): ?int
     {
@@ -45,6 +55,18 @@ class Role
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): static
+    {
+        $this->priority = $priority;
 
         return $this;
     }

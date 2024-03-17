@@ -27,7 +27,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         $eventTypes = $this->eventTypeRepository->findAll();
         $locations = $this->locationRepository->findAll();
@@ -45,35 +45,33 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ->setEndDate($date1);
         }
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++) {
             $event = new Event();
-            $event->setName($faker->sentence(2))
+            $event->setName($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence());
 
-            if ($faker->boolean(80)) {
-                $event->setOnlyMiagist(true);
-            }
+            $event->setOnlyMiagist($faker->boolean(ConstantesFixtures::PROBA_ONLY_MIAGIST));
 
             $event->setNadhPrice($faker->numberBetween(
-                    ConstantesFixtures::ZERO,
-                    ConstantesFixtures::PRICEEVENTNADHMAX
+                    0,
+                    ConstantesFixtures::PRICE_EVENT_NADH_MAX
                 ))
-                ->setAdhPrice($event->getNadhPrice()-ConstantesFixtures::DIFFPRICENADHADH)
+                ->setAdhPrice($event->getNadhPrice()-ConstantesFixtures::DIFF_PRICE_NADH_ADH)
                 ->setQuotaStu($faker->numberBetween(
-                    ConstantesFixtures::QUOTASTUMIN,
-                    ConstantesFixtures::QUOTAMAX
+                    ConstantesFixtures::QUOTA_STU_MIN,
+                    ConstantesFixtures::QUOTA_MAX
                 ))
                 ->setQuotaComp($faker->numberBetween(
-                    ConstantesFixtures::ZERO,
-                    ConstantesFixtures::QUOTAMAX
+                    0,
+                    ConstantesFixtures::QUOTA_MAX
                 ))
                 ->setNote($faker->numberBetween(
-                    ConstantesFixtures::ZERO,
-                    ConstantesFixtures::NOTEMAX
+                    0,
+                    ConstantesFixtures::NOTE_MAX
                 ))
                 ->addType($faker->randomElement($eventTypes));
 
-            if ($faker->boolean(30))
+            if ($faker->boolean(ConstantesFixtures::PROBA_TWO_TYPES))
             {
                 $event->addType($faker->randomElement($eventTypes));
             }
@@ -81,14 +79,11 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
             $event->addSituated($faker->randomElement($locations))
                 ->setBgedDate($date);
 
-            if ($faker->boolean(50)) //pour simuler les events finis
-            {
-                $event->setCancel(true);
-            }
+            $event->setCancel($faker->boolean(ConstantesFixtures::PROBA_EVENT_CANCEL));
 
             $manager->persist($event);
+            $manager->flush();
         }
-        $manager->flush();
     }
 
     public function getDependencies(): array

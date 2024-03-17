@@ -43,7 +43,7 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
                 ->setEndDate($date1);
         }
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
             $mandate = new Mandate();
             $mandate->addRole($faker->randomElement($roles))
                 ->setStudent($faker->randomElement($students))
@@ -52,8 +52,8 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
             ;
 
             $manager->persist($mandate);
+            $manager->flush();
         }
-        $manager->flush();
     }
 
 

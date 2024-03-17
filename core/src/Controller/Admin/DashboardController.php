@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Company;
+use App\Entity\CompanyType;
 use App\Entity\Event;
 use App\Entity\Location;
 use App\Entity\Mandate;
@@ -32,6 +33,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class);
+        yield MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class);
         yield MenuItem::linkToCrud('Evenement', 'fas fa-calendar', Event::class);
         yield MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class);
         yield MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class);

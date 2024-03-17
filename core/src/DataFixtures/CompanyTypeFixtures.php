@@ -10,11 +10,11 @@ class CompanyTypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
             $companyType = new CompanyType();
-            $companyType->setLabel($faker->name());
+            $companyType->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL));
 
             $manager->persist($companyType);
         }

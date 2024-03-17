@@ -2,36 +2,50 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[Get(
+    normalizationContext: ['groups' => 'infoCompany']
+)]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?string $img = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups('discountCompany')]
     private ?string $banner = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Groups(['challengerCompany', 'discountCompany', 'infoCompany'])]
     private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: Location::class)]
+    #[Groups(['challengerCompany', 'discountCompany', 'infoCompany'])]
     private Collection $located;
 
     #[ORM\ManyToMany(targetEntity: CompanyType::class)]
+    #[Groups(['challengerCompany', 'discountCompany', 'infoCompany'])]
     private Collection $activities;
 
     public function __construct()

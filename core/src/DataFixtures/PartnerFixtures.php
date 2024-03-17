@@ -36,17 +36,17 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
                 ->setEndDate($date1);
         }
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
             $partner = new Partner();
-            $partner->setCompany($faker->randomKey($companies))
+            $partner->setCompany($faker->randomElement($companies))
                 ->setChallenge($faker->boolean(self::CHANCEOFCHALLENGE))
                 ->setAdvantages($faker->sentence())
                 ->setBgedDate($date)
             ;
 
             $manager->persist($partner);
+            $manager->flush();
         }
-        $manager->flush();
     }
 
     public function getDependencies(): array

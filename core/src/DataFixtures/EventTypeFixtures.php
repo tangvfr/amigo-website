@@ -10,10 +10,10 @@ class EventTypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
-        for ($i = 0; $i < 10; $i++) {
+        $faker = \Faker\Factory::create('fr_FR');
+        for ($i = 0; $i < ConstantesFixtures::EVENT_TYPE_NB; $i++) {
             $eventType = new EventType();
-            $eventType->setLabel($faker->word())
+            $eventType->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))
                 ->setDescription($faker->sentence());
 
             $manager->persist($eventType);

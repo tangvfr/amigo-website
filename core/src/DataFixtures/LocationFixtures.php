@@ -13,7 +13,7 @@ class LocationFixtures extends Fixture
         $faker = \Faker\Factory::create("fr_FR");
         for ($i = 0; $i < 10; $i++) {
             $location = new Location();
-            $location->setLabel($faker->word());
+            $location->setLabel($faker->sentence(3));
 
             if ($faker->boolean(50))
             {
@@ -28,7 +28,7 @@ class LocationFixtures extends Fixture
             }
 
             $manager->persist($location);
+            $manager->flush();
         }
-        $manager->flush();
     }
 }

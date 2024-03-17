@@ -3,15 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Company;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-
-class CompanyCrudController extends AbstractCrudController
+class CompanyCrudController extends AbstractImageCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return Company::class;
@@ -24,15 +25,57 @@ class CompanyCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Entreprises')
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', 'Amigo Website - Company');
+            ->setPageTitle('index', 'Amigo Website - Company')
+            ->setPaginatorPageSize(10);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('name'),
-            TextField::new('img'),
-            TextEditorField::new('banner'),
+            TextField::new('name', 'Nom')
+                ->setSortable(true),
+            ImageField::new('img', 'Image')
+                ->setBasePath(self::BASE_PATH)
+                ->setUploadDir(self::UPLOAD_DIR)
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setSortable(false)
+                ->setHelp(self::HELP_IMAGE)
+                ->setFormTypeOptions([
+                    'attr' => [
+                        'accept' => self::TYPE_IMAGE,
+                    ],
+                ]),
+            ImageField::new('banner', 'Bannière')
+                ->setBasePath(self::BASE_PATH)
+                ->setUploadDir(self::UPLOAD_DIR)
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setSortable(false)
+                ->setHelp(self::HELP_IMAGE)
+                ->setFormTypeOptions([
+                    'attr' => [
+                        'accept' => self::TYPE_IMAGE,
+                    ],
+                ])
+                ,
+            TextEditorField::new('description', 'Description')
+                ->hideOnIndex(),
+            AssociationField::new('located', 'Emplacements'),
+            AssociationField::new('activities', 'Activités'),
         ];
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        // Vérifie si l'entité à supprimer est une instance de Company
+        if ($entityInstance instanceof Company) {
+            $this->supprImage([
+                $entityInstance->getImg(),
+                $entityInstance->getBanner()
+            ]);
+        }
+        // Appel de la méthode parente pour effectuer la suppression de l'entité
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

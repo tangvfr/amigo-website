@@ -2,29 +2,42 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractEditableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\MandateRepository;
+use App\State\OfficeProvider;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[GetCollection(
+    uriTemplate: '/office',
+    normalizationContext: ['groups' => 'office'],
+    provider: OfficeProvider::class,
+)]
 #[ORM\Entity(repositoryClass: MandateRepository::class)]
 class Mandate extends AbstractEditableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?int $id = null;
 
     #[ORM\ManyToMany(targetEntity: Role::class)]
+    #[Groups(['office'])]
     private Collection $roles;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?Student $student = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $visible = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
@@ -99,6 +112,16 @@ class Mandate extends AbstractEditableEntity
         $this->bgedDate = $bgedDate;
 
         return $this;
+    }
+
+    public function getBeginDate(): ?DateTimeInterface
+    {
+       return $this->bgedDate->getBeginDate();
+    }
+
+    public function getEndDate(): ?DateTimeInterface
+    {
+        return $this->bgedDate->getEndDate();
     }
 
 }

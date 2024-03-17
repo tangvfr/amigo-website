@@ -7,23 +7,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HubRepository::class)]
 class Hub
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['office'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Groups(['office'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Groups(['office'])]
     private ?string $description = null;
 
     #[ORM\OneToMany(targetEntity: Role::class, mappedBy: 'hub', orphanRemoval: true)]
     private Collection $roles;
+
+    #[ORM\Column]
+    #[Assert\NotNull, Assert\Range(min: -100, max: 100)]
+    private ?int $priority = null;
 
     public function __construct()
     {
@@ -88,4 +98,16 @@ class Hub
 
         return $this;
     }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(?int $priority): void
+    {
+        $this->priority = $priority;
+    }
+
+
 }

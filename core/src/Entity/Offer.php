@@ -2,37 +2,80 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
+use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateEmbeddable;
 use App\Repository\OfferRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
+#[GetCollection(
+    order: [
+        'publicationDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+    ],
+    normalizationContext: ['groups' => 'listOffer']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'keyWords' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'provider.name' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'provider.activities.label' => SearchFilterInterface::STRATEGY_IPARTIAL
+    ]
+)]
+#[ApiFilter(
+    DateFilter::class,
+    properties: [
+        'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
+        'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
+        'endProvidDate' => DateFilterInterface::INCLUDE_NULL_BEFORE_AND_AFTER,
+    ]
+)]
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Groups(['listOffer'])]
+    #[NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['listOffer'])]
+    #[NotBlank]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['listOffer'])]
+    #[NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $endProvidDate = null;
+    #[Groups(['listOffer'])]
+    #[NotNull]
+    private ?DateTimeInterface $endProvidDate = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
+    #[Groups(['listOffer'])]
     private array $keyWords = [];
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Company $provide = null;
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
+    #[Groups(['listOffer'])]
+    #[NotNull]
+    private ?Company $provider = null;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
+    #[Groups(['listOffer'])]
     private BeginEndDateEmbeddable $bgedDate;
 
     public function __construct()
@@ -93,14 +136,14 @@ class Offer extends AbstractPublishableEntity
         return $this;
     }
 
-    public function getProvide(): ?Company
+    public function getProvider(): ?Company
     {
-        return $this->provide;
+        return $this->provider;
     }
 
-    public function setProvide(?Company $provide): static
+    public function setProvider(?Company $provider): static
     {
-        $this->provide = $provide;
+        $this->provider = $provider;
 
         return $this;
     }

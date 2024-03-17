@@ -10,23 +10,18 @@ use Doctrine\Persistence\ObjectManager;
 
 class StudentFixtures extends Fixture
 {
-    private ConstantesFixtures $constantesF;
-    private const STUDENTNUMBERMIN = 10000000;
-    private const STUDENTNUMBERMAX = 99999999;
-
-
     public function load(ObjectManager $manager): void
     {
         $faker = \Faker\Factory::create("fr_FR");
-        $studentTypes = ["l3","m1","m2","wk","oth"];
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        $studentTypes = StudentType::cases();
+        for ($i = 0; $i < ConstantesFixtures::STUDENT_NB; $i++) {
             $student = new Student();
             $student->setName($faker->firstName())
                 ->setLastName($faker->lastName())
-                ->setStudentNumber($faker->numberBetween(self::STUDENTNUMBERMIN, self::STUDENTNUMBERMAX))
+                ->setStudentNumber($faker->numberBetween(ConstantesFixtures::STUDENT_NUMBER_MIN, ConstantesFixtures::STUDENT_NUMBER_MAX))
                 ->setEmail($faker->email())
-                ->setLevel(StudentType::M1)
-            //    ->setLevel($faker->randomElement($studentTypes))
+            //    ->setLevel(StudentType::M1)
+                ->setLevel($faker->randomElement($studentTypes))
             ;
 
             $manager->persist($student);

@@ -37,23 +37,22 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 ->setEndDate($date1);
         }
 
-        $keyWords = array($faker->words(3));
+        $keyWords = $faker->words($faker->numberBetween(1,10));
         $companies = $this->companyRepository->findAll();
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::NB_DATA_MAX; $i++) {
             $offer = new Offer();
-            $offer->setLabel($faker->word())
+            $offer->setLabel($faker->sentence(3))
                 ->setDescription($faker->sentence())
                 ->setEndProvidDate($faker->dateTime())
                 ->setKeyWords($keyWords)
-                ->setProvide($faker->randomElement($companies))
+                ->setProvider($faker->randomElement($companies))
                 ->setBgedDate($date)
             ;
 
             $manager->persist($offer);
+            $manager->flush();
         }
-
-        $manager->flush();
     }
 
 

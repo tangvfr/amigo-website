@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Mandate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
+use Monolog\DateTimeImmutable;
 
 /**
  * @extends ServiceEntityRepository<Mandate>
@@ -21,28 +23,37 @@ class MandateRepository extends ServiceEntityRepository
         parent::__construct($registry, Mandate::class);
     }
 
-    //    /**
-    //     * @return Mandate[] Returns an array of Mandate objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return Mandate[] Retourne la liste des mandats en cours
+     */
+    public function findCurrents(): array
+    {
+        //querry
+        $qb = $this->createQueryBuilder('m');
+        //select
+        $qb->addSelect('r', 'h', 's');
+        //joined
+        $qb->innerJoin('m.roles', 'r')
+            ->innerJoin('r.hub', 'h')
+            ->innerJoin('m.student', 's');
+        //where
+        $qb->where($qb->expr()->eq('m.visible', 'true'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('m.bgedDate.beginDate'),
+                $qb->expr()->lte('m.bgedDate.beginDate', ':now')
+            ))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('m.bgedDate.endDate'),
+                $qb->expr()->lte(':now', 'm.bgedDate.endDate')
+            ));
+        //order
+        $qb->orderBy( 'h.priority', 'DESC')
+            ->addOrderBy('r.priority', 'DESC')
+            ->addOrderBy('m.bgedDate.beginDate', 'ASC');
+        //parameters
+        $qb->setParameter('now', new DateTimeImmutable('now'), Types::DATETIME_IMMUTABLE);
+        //result
+        return $qb->getQuery()->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Mandate
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

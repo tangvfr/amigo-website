@@ -19,19 +19,23 @@ class HubFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $faker = \Faker\Factory::create('fr_FR');
 
         // $roles = $this->roleRepository->findAll();
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < ConstantesFixtures::HUB_NB; $i++) {
             $hub = new Hub();
             $hub->setName($faker->name())
-                ->setDescription($faker->sentence());
+                ->setDescription($faker->sentence())
+                ->setPriority($faker->numberBetween(
+                    ConstantesFixtures::PRIORITY_MIN,
+                    ConstantesFixtures::PRIORITY_MAX
+                ))
+            ;
                 // ->addRole($faker->randomElement($roles));
             $manager->persist($hub);
+            $manager->flush();
         }
-
-        $manager->flush();
     }
 //
 //    public function getDependencies(): array

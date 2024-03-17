@@ -2,6 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
+use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Date\AbstractPublishableEntity;
 use App\Entity\Date\BeginEndDateTimeEmbeddable;
 use App\Repository\EventRepository;
@@ -9,54 +19,131 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/',
+            normalizationContext: ['groups' => ['minimalEvent']],
+        ),
+        new GetCollection(
+            uriTemplate: '/now',
+            normalizationContext: ['groups' => ['minimalEvent']],
+            name: Event::NOW_EVENT_API_NAME,
+        ),
+        new GetCollection(
+            uriTemplate: '/past',
+            normalizationContext: ['groups' => ['minimalEvent']],
+            name: Event::PAST_EVENT_API_NAME,
+        ),
+        new Get(
+            uriTemplate: '/{id}',
+            normalizationContext: ['groups' => 'detailEvent']
+        ),
+    ],
+    routePrefix: 'events',
+    order: [
+        'bgedDate.endDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+        'publicationDate' => 'desc',
+    ]
+)]
+#[ApiFilter(
+    BooleanFilter::class,
+    properties: ['onlyMiagist', 'cancel']
+)]
+#[ApiFilter(
+    RangeFilter::class,
+    properties: ['adhPrice', 'nadhPrice', 'quotaStu']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'name' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'types.label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+        'situated.label' => SearchFilterInterface::STRATEGY_IPARTIAL,
+    ]
+)]
+#[ApiFilter(
+    DateFilter::class,
+    properties: [
+        'bgedDate.beginDate' => DateFilterInterface::INCLUDE_NULL_AFTER,
+        'bgedDate.endDate' => DateFilterInterface::INCLUDE_NULL_BEFORE,
+    ]
+)]
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+/*
+ * Seul la date de fin de l'event est "obligatoire" pour savoir si l'event est fini ou non
+ */
 class Event extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    const PAST_EVENT_API_NAME = 'past';
+    const NOW_EVENT_API_NAME = 'now';
+
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?string $img = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Groups('detailEvent')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Groups('detailEvent')]
     private ?bool $onlyMiagist = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\PositiveOrZero]
+    #[Groups('detailEvent')]
     private ?string $nadhPrice = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\PositiveOrZero]
+    #[Groups('detailEvent')]
     private ?string $adhPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
+    #[Groups('detailEvent')]
     private ?int $quotaStu = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero]
     private ?int $quotaComp = null;
 
     #[ORM\Column]
-    #[Assert\Range(min: 0, max: 5)]
+    #[Assert\NotNull, Assert\Range(min: 0, max: 5)]
     private ?int $note = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['detailEvent', 'minimalEvent'])]
     private ?bool $cancel = null;
 
     #[ORM\ManyToMany(targetEntity: EventType::class)]
+    #[Groups('detailEvent')]
     private Collection $types;
 
     #[ORM\ManyToMany(targetEntity: Location::class)]
+    #[Groups('detailEvent')]
     private Collection $situated;
 
     #[ORM\Embedded(class: BeginEndDateTimeEmbeddable::class, columnPrefix: false)]
+    #[Groups(['detailEvent'])]
     private BeginEndDateTimeEmbeddable $bgedDate;
 
     public function __construct()

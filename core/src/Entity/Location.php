@@ -2,18 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Tests\Fixtures\Metadata\Get;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[Get]
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
+#[Groups(['detailEvent', 'challengerCompany', 'discountCompany', 'infoCompany'])]
 class Location
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
     private ?string $label = null;
 
     #[ORM\Column(nullable: true)]
@@ -23,15 +28,19 @@ class Location
     private ?float $longitude = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     private ?string $country = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 5, nullable: true)]
+    #[ORM\Column(length: 6, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     private ?string $adresse = null;
 
     public function getId(): ?int
@@ -121,5 +130,10 @@ class Location
         $this->adresse = $adresse;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->label;
     }
 }

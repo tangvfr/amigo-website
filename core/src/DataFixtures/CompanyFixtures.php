@@ -24,27 +24,32 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+        $manager->getConnection()->getConfiguration()->setSQLLogger(null);
+
+        $faker = \Faker\Factory::create('fr_FR');
 
         $locations = $this->locationRepository->findAll();
         $acitivities = $this->companyTypeRepository->findAll();
 
-        for ($i = ConstantesFixtures::ZERO; $i < ConstantesFixtures::NBDATAMAX; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $company = new Company();
-            $company->setName($faker->name())
+            $company->setName($faker->colorName(). ' ' .$faker->domainWord(). ' ' .$faker->firstName())
                 ->setDescription($faker->sentence());
 
-            for ($i = ConstantesFixtures::ZERO;
-                 $i < $faker->numberBetween(ConstantesFixtures::ONE,ConstantesFixtures::TWO);
-                 $i++) {
-                $company->addLocated($faker->randomElement($locations))
-                    ->addActivity($faker->randomElement($acitivities));
+            $nbLoc = $faker->randomElement([1,1,1,1,2,2,3]);
+            for ($i = 0; $i < $nbLoc; $i++) {
+                $company->addLocated($faker->randomElement($locations));
+            }
+
+            $nbAct = $faker->numberBetween(1,3);
+            for ($i = 0; $i < $nbAct; $i++) {
+                $company->addActivity($faker->randomElement($acitivities));
             }
 
             $manager->persist($company);
+            $manager->flush();
+            //$manager->clear();
         }
-
-        $manager->flush();
     }
 
     public function getDependencies(): array
