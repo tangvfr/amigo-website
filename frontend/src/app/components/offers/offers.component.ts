@@ -5,7 +5,7 @@ import {AmigowsApiService} from "../../services/amigows.api.service";
 import {NgFor} from "@angular/common";
 import {MarkdownComponent} from "ngx-markdown";
 import {OfferSearchFieldsComponent} from "../offer-search-fields/offer-search-fields.component";
-import {EventSearch} from "../../models/search/event-search";
+import {OfferSearch} from "../../models/search/offer-search";
 
 //https://blog.markdowntools.com/posts/how-to-render-markdown-in-angular
 
@@ -35,15 +35,15 @@ export class OffersComponent implements OnInit {
       });
   }
 
-  search(search: EventSearch): void
+  search(search: OfferSearch): void
   {
-    this.amigowsApiService.getEvents(search)//récupère la requet pret a etre executé
+    /*this.amigowsApiService.getOffers(search)//récupère la requet pret a etre executé
       .subscribe({//executé la requet
         //stock le resultat de la requet dans une varible
         next: data => console.log(data),
         //en cas d'erreur
         error: () => this.amigowsApiService.showErrorApiError()
-      });
+      });*/
   }
 
 }

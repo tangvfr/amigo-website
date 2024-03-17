@@ -7,6 +7,8 @@ import {environment} from "../../environments/environment";
 import {Office} from "../models/office/office";
 import {DialogMessage, MessageService} from "./message.service";
 import {EventSearch} from "../models/search/event-search";
+import {OfferSearch} from "../models/search/offer-search";
+import {AbstractTextSearch} from "../models/search/abstract-text-search";
 
 export const API_ERROR_TITLE: string = 'Erreur API';
 export const API_ERROR_MSG: string = 'Une erreur est survenue lors de la communication avec le serveur ! Ressayer plus tard !';
@@ -70,21 +72,28 @@ export class AmigowsApiService {
 
   getEvents(search?: EventSearch, specified: string = ''): Observable<HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>>
   {
-    type eventList = HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>;
+    type list = HydraList<components["schemas"]["Event.jsonld-minimalEvent"]>;
     const url = `${this.baseApiUrl}/events${specified}`;
-
-    const get = search !== undefined
-      ? this.http.get<eventList>(url, {params: search.toParams()})
-      : this.http.get<eventList>(url);
-
-    return get.pipe(catchError(this.handleError));
+    return this.getAPISearch<list>(url, search);
   }
 
-  getOffers(): Observable<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
+  getOffers(search?: OfferSearch): Observable<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
   {
-    return this.http.get<HydraList<components["schemas"]["Offer.jsonld-listOffer"]>>
-    (`${this.baseApiUrl}/offers`)
-      .pipe(catchError(this.handleError));
+    type list = HydraList<components["schemas"]["Offer.jsonld-listOffer"]>;
+    const url = `${this.baseApiUrl}/offers`;
+    return this.getAPISearch<list>(url, search);
+  }
+
+  getAPISearch<T>(url: string, search?: AbstractTextSearch): Observable<T>
+  {
+    let get;
+    if (search === undefined || !search.hasCritera()) {
+      get = this.http.get<T>(url);
+    } else {
+      get = this.http.get<T>(url, {params: search.toParams()});
+    }
+
+    return get.pipe(catchError(this.handleError));
   }
 
   getChallengerPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>

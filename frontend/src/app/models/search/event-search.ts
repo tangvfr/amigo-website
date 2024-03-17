@@ -1,25 +1,31 @@
 import {HttpParams} from "@angular/common/http";
-import {AFTER, BEFORE, setDateParam, setBoolParam, setSearchStringParam} from "./search-http-params";
-import {AbstractTextSearch} from "./abstract-text-search";
+import {AFTER, BEFORE, setBoolParam, setDateParam, setSearchStringParam} from "./search-http-params";
+import {AbstractBgedDateWithTextSearch} from "./abstract-bged-date-with-text-search";
 
-export class EventSearch extends AbstractTextSearch {
+export class EventSearch extends AbstractBgedDateWithTextSearch {
 
   public onlyMiagist?: boolean;
-  public beginAfter?: Date;
-  public endBefore?: Date;
+
+  constructor() {
+    super();
+  }
 
   /*override*/
-  public toParams(): HttpParams
+  override toParams(): HttpParams
   {
     let params = new HttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
     //definition de critère de recherche
     params = setBoolParam(params, 'onlyMiagist', this.onlyMiagist);
-    params = setSearchStringParam(params, 'name', this.searchText);
-    params = setDateParam(params, 'bgedDate.beginDate', AFTER, this.beginAfter);
-    params = setDateParam(params, 'bgedDate.endDate', BEFORE, this.endBefore);
+    params = this.applySearchingParam(params, 'name');
+    params = this.applyDateParams(params);
     console.log(params);
     //retour les parametre
     return params;
+  }
+
+  override hasCritera(): boolean {
+    return super.hasCritera()
+      || this.onlyMiagist !== undefined;
   }
 
 }
