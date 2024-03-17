@@ -28,7 +28,10 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < ConstantesFixtures::OFFER_NB; $i++)
         {
-            $keyWords = $faker->words($faker->numberBetween(1,10));
+            $keyWords = $faker->words($faker->numberBetween(
+                ConstantesFixtures::OFFER_KEY_WORDS_NB_MIN,
+                ConstantesFixtures::OFFER_KEY_WORDS_NB_MAX)
+            );
 
             $date = UtilFixtures::createDate(
                 $faker,
@@ -43,7 +46,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 $date->getEndDate()->format('m'),
                 $date->getEndDate()->format('d')
             );
-            $endProvidDate->modify('-2 weeks');
+            $endProvidDate->modify(ConstantesFixtures::OFFER_GAP_END_PROVIDE_DATE);
 
             $offer = new Offer();
             $offer->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL))

@@ -51,8 +51,11 @@ abstract class ConstantesFixtures {
 
     //constantes pour offerFixtures
     public const OFFER_NB = 15;
+    public const OFFER_KEY_WORDS_NB_MIN = 1;
+    public const OFFER_KEY_WORDS_NB_MAX = 10;
     public const OFFER_DATE_BETWEEN_MIX = '-8 months';
     public const OFFER_DATE_BETWEEN_MAX = '+1 months';
+    public const OFFER_GAP_END_PROVIDE_DATE = '-2 weeks';
 
 
     //constantes pour partnerFixtures
