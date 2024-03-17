@@ -33,7 +33,7 @@ class Student extends AbstractEditableEntity
     private ?string $email = null;
 
     #[ORM\Column(enumType: StudentType::class)]
-    private ?string $level = null;
+    private ?StudentType $level = null;
 
     public function getId(): ?int
     {
@@ -100,12 +100,12 @@ class Student extends AbstractEditableEntity
         return $this;
     }
 
-    public function getLevel(): ?string
+    public function getLevel(): ?StudentType
     {
         return $this->level;
     }
 
-    public function setLevel(?string $level): static
+    public function setLevel(?StudentType $level): static
     {
         $this->level = $level;
 
