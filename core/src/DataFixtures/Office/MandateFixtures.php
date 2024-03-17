@@ -37,7 +37,7 @@ class MandateFixtures extends Fixture implements DependentFixtureInterface
             $date = UtilFixtures::createDate(
                 $faker,
                 ConstantesFixtures::MANDATE_DATE_BETWEEN_MIN,
-                ConstantesFixtures::MANDATE_DATE_BETWEEN_MIN,
+                ConstantesFixtures::MANDATE_DATE_BETWEEN_MAX,
                 false
             );
 
