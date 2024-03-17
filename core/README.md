@@ -3,16 +3,19 @@
 - Copier et renommer le fichier `.env` vers `.env.local` pour que ce dernier avec vos clefs ou mdp ne sois pas commit.
 ## Commandes qui peuvent dépanner
 - `symfony composer install`
-- `symfony composer update`
+- `symfony composer update` important quand on ajoute des bundles
 - `symfony console doctrine:migrations:migrate`
 - `symfony console doctrine:fixture:load`
 - `npm install`
+- `npm update`
 - `npm run dev`
 ## Commandes pour clear la db
 - `symfony console d:d:d --force` supprime la db
-- `symfony console cache:clear` enleve le cache
+- `symfony console c:c` vide le cache
 - `symfony console d:d:c` crée la db
 - `symfony console d:m:m` crée les tables de la db
+- `symfony console d:f:l` load les fixtures
+- `php -d memory_limit=-1 bin/console d:f:l` load les fixtures sans contraintes de ram
 ## Installation simple de Webpack Encore
 - `symfony composer require symfony/webpack-encore-bundle`
 - `npm install`

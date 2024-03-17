@@ -45,10 +45,10 @@ export class OfficeComponent implements OnInit {
 
   ngOnInit() {
     this.amigowsApiService.getOffice()
-      .pipe(delay(2000))//cette ligne met un temps de reponse articielement plus long
-      .subscribe({//executé la requet
+      .pipe(delay(2000))//cette ligne met un temps de réponse artificiellement plus long
+      .subscribe({//executé la requête
         next: office => {
-          //pour testé, attente artificiel
+          //pour tester, attente artificielle
           this.office = office;
           this.ready = true;
         },

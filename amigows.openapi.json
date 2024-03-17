@@ -613,6 +613,24 @@
                         "style": "form",
                         "explode": false,
                         "allowReserved": false
+                    },
+                    {
+                        "name": "order[note]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
                     }
                 ],
                 "deprecated": false
@@ -1130,6 +1148,24 @@
                         "allowEmptyValue": true,
                         "schema": {
                             "type": "string"
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "order[note]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
                         },
                         "style": "form",
                         "explode": false,
@@ -1655,6 +1691,24 @@
                         "style": "form",
                         "explode": false,
                         "allowReserved": false
+                    },
+                    {
+                        "name": "order[note]",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
                     }
                 ],
                 "deprecated": false
@@ -1900,7 +1954,7 @@
                         "allowReserved": false
                     },
                     {
-                        "name": "provide.name",
+                        "name": "provider.name",
                         "in": "query",
                         "description": "",
                         "required": false,
@@ -1914,7 +1968,7 @@
                         "allowReserved": false
                     },
                     {
-                        "name": "provide.activities.label",
+                        "name": "provider.activities.label",
                         "in": "query",
                         "description": "",
                         "required": false,
@@ -2732,6 +2786,11 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "name",
+                    "description"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -2802,6 +2861,11 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "name",
+                    "description"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -2878,6 +2942,11 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "name",
+                    "description"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -2948,6 +3017,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "name"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3046,7 +3119,10 @@
                     "label": {
                         "type": "string"
                     }
-                }
+                },
+                "required": [
+                    "label"
+                ]
             },
             "CompanyType.jsonld-discountCompany": {
                 "type": "object",
@@ -3095,7 +3171,10 @@
                     "label": {
                         "type": "string"
                     }
-                }
+                },
+                "required": [
+                    "label"
+                ]
             },
             "CompanyType.jsonld-infoCompany": {
                 "type": "object",
@@ -3144,7 +3223,10 @@
                     "label": {
                         "type": "string"
                     }
-                }
+                },
+                "required": [
+                    "label"
+                ]
             },
             "Event.jsonld-detailEvent": {
                 "type": "object",
@@ -3225,6 +3307,7 @@
                         ]
                     },
                     "quotaStu": {
+                        "minimum": 0,
                         "type": [
                             "integer",
                             "null"
@@ -3300,6 +3383,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3349,6 +3436,11 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label",
+                    "description"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3458,6 +3550,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3543,6 +3639,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3628,6 +3728,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3713,6 +3817,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3798,6 +3906,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "label"
+                ],
                 "properties": {
                     "@context": {
                         "readOnly": true,
@@ -3883,6 +3995,10 @@
                 "type": "object",
                 "description": "",
                 "deprecated": false,
+                "required": [
+                    "id",
+                    "student"
+                ],
                 "properties": {
                     "@id": {
                         "readOnly": true,
@@ -3905,10 +4021,7 @@
                     "student": {
                         "$ref": "#/components/schemas/Student.jsonld-office"
                     }
-                },
-                "required": [
-                    "student"
-                ]
+                }
             },
             "Offer.jsonld-listOffer": {
                 "type": "object",
@@ -3919,7 +4032,7 @@
                     "label",
                     "description",
                     "endProvidDate",
-                    "provide"
+                    "provider"
                 ],
                 "properties": {
                     "@id": {
@@ -3950,7 +4063,7 @@
                             "type": "string"
                         }
                     },
-                    "provide": {
+                    "provider": {
                         "$ref": "#/components/schemas/Company.jsonld-listOffer"
                     },
                     "bgedDate": {

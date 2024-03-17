@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Exposed;
 
+use App\Controller\Admin\AbstractImageCrudController;
+use App\Controller\Admin\DashboardController;
 use App\Entity\Event;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -30,9 +32,9 @@ class EventCrudController extends AbstractImageCrudController
             ->setEntityLabelInSingular('Evenement')
             ->setEntityLabelInPlural('Evenements')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
+            ->setDefaultSort(['creationDate' => 'DESC'])
             ->setDateFormat('dd/MM/yyyy')
-            ->setPageTitle('index', 'Amigo Website - Event')
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - Event')
             ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 
@@ -51,6 +53,16 @@ class EventCrudController extends AbstractImageCrudController
                 ->hideOnIndex(),
             BooleanField::new('cancel', 'Annuler')
                 ->hideOnIndex(),
+            // pas besoins de les afficher mais ils existent
+            DateTimeField::new('creationDate', 'Date de création')
+                ->hideOnIndex()
+                ->setRequired(false)
+                ->setDisabled()
+            ,
+            DateTimeField::new('lastEditDate', 'Dernière modification')
+                ->hideOnIndex()
+                ->setFormTypeOptions(['disabled' => 'disabled'])
+            ,
 
             // DATE * 5
             FormField::addColumn('col-lg-8 col-xl-6'),
@@ -58,23 +70,10 @@ class EventCrudController extends AbstractImageCrudController
             DateTimeField::new('bgedDate.beginDate', 'Début de l\'événement')
                 ->hideOnIndex(),
             DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
-                ->setRequired(true)
-                ->setHelp('Si Début de l\'événement non rempli, Fin de l\'événement = début de l\'evenement')
+                ->setHelp('Si Début de l\'événement non rempli, début de l\'evenement = fin de l\'événement')
             ,
             DateTimeField::new('publicationDate', 'Date de publication de l\'évenement')
                 ->hideOnIndex(),
-
-            // pas besoins de les afficher mais ils existent
-            DateTimeField::new('creationDate', 'Date de création')
-                ->hideOnIndex()
-                ->setRequired(false)
-                ->setDisabled()
-
-            ,
-            DateTimeField::new('lastEditDate', 'Dernière modification')
-                ->hideOnIndex()
-                ->setFormTypeOptions(['disabled' => 'disabled'])
-            ,
 
             // BANNIERE
             FormField::addColumn('col-lg-8 col-xl-6'),
@@ -84,7 +83,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR),
             ChoiceField::new('note')
-                ->hideOnIndex()
+                ->setHelp('Qualité de l\'affiche')
                 ->setChoices([
                     'Cacher / Inregardable' => 0,
                     'Très insatisfaits' => 1,
@@ -108,7 +107,7 @@ class EventCrudController extends AbstractImageCrudController
             FormField::addPanel('QUOTA'),
             IntegerField::new('quotaStu', 'Quota d\'éleve')
                 ->hideOnIndex(),
-            IntegerField::new('quotaComp', 'Quota complet')
+            IntegerField::new('quotaComp', 'Quota d\'entreprise')
                 ->hideOnIndex(),
 
             // Information sur l'evenement

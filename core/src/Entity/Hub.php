@@ -98,4 +98,16 @@ class Hub
 
         return $this;
     }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(?int $priority): void
+    {
+        $this->priority = $priority;
+    }
+
+
 }

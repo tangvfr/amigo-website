@@ -1,7 +1,33 @@
 <p>events works!</p>
-<ol>
-  <li *ngFor="let event of nowEvents['hydra:member']">
+<hr />
+<app-event-search-fields (search)="search($event)"/>
+<hr />
+<!-- le ! apres le nom de la variable eprmet de dire a typescript , tkt c pas undefined -->
+<ol *ngIf="beNormal()">
+  <li *ngFor="let event of events!['hydra:member']">
     {{ event.name }} img: {{ event.img }}
     <!--{{ event.name }} + {{ event.img }}-->
   </li>
+  <hr />
+  <h3>Event passé</h3>
+  <hr />
+  @for (event of pastEvents!['hydra:member']; track event.id) {
+    @if ($first) {
+      <li>\/\/\/&emsp;\/\/\/</li>
+    }
+    <li>{{ event.name }} img: {{ event.img }}</li>
+    @if ($last) {
+      <li>/\/\/\&emsp;---&ensp;/\/\/\</li>
+    }
+  }
 </ol>
+
+@if (beSearch()) {
+  @for (event of events!['hydra:member']; track event.id) {
+    <li>{{ event.name }} img: {{ event.img }}</li>
+  }
+}
+
+<div *ngIf="beLoading()" style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+  <mat-spinner />
+</div>

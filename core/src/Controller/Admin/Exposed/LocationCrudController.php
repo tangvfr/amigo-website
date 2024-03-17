@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Exposed;
 
+use App\Controller\Admin\DashboardController;
 use App\Entity\Location;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class LocationCrudController extends AbstractCrudController
 {
@@ -23,7 +21,7 @@ class LocationCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Locations')
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', 'Amigo Website - Location');
+            ->setPageTitle('index', DashboardController::SITE_NAME.' - Location');
     
     }
 
