@@ -26,21 +26,15 @@ export class OffersComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this.amigowsApiService.getOffers()//récupère la requet pret a etre executé
-      .subscribe({//executé la requet
-        //stock le resultat de la requet dans une varible
-        next: data => this.offers = data,
-        //en cas d'erreur
-        error: () => this.amigowsApiService.showErrorApiError()
-      });
+    this.search();
   }
 
-  search(search: OfferSearch): void
+  search(search?: OfferSearch): void
   {
     this.amigowsApiService.getOffers(search)//récupère la requet pret a etre executé
       .subscribe({//executé la requet
         //stock le resultat de la requet dans une varible
-        next: data => console.log(data),
+        next: data => this.offers = data,
         //en cas d'erreur
         error: () => this.amigowsApiService.showErrorApiError()
       });

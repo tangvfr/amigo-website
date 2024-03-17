@@ -56,7 +56,9 @@ export class EventsComponent implements OnInit {
   }*/
   ngOnInit(): void
   {
-    this.search(undefined);
+    //this.search(undefined);
+    //equivalent
+    this.search();
   }
 
   search(search?: EventSearch): void
