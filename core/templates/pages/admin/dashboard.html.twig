@@ -9,5 +9,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1> Bienvenue *ton pseudo*, sur le panel administrateur du site de l'AMIGO !</h1>
+    <main class="d-flex flex-column justify-content-start align-items-center gap-3 m-2">
+        <h1>{{ dashboardTitle }}</h1>
+        <img src="{{ asset('images/admin_amigo_logo.png') }}" alt="Logo blanc noir de l'AMIGO" height="256px" width="256px"/>
+        <h2>Bienvenue *ton pseudo*, sur le panel administrateur du site de l'AMIGO !</h2>
+    </main>
 {% endblock %}
