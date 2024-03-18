@@ -47,7 +47,6 @@ class Offer extends AbstractPublishableEntity
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Groups(['listOffer'])]
-    #[NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

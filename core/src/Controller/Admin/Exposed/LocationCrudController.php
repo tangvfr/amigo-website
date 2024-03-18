@@ -11,8 +11,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Faker\Core\Number;
-use Faker\Provider\Text;
 
 class LocationCrudController extends AbstractCrudController
 {
@@ -28,8 +26,8 @@ class LocationCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Locations')
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Location');
-    
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Location');
+
     }
 
     public function configureFields(string $pageName): iterable

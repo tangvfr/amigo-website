@@ -25,11 +25,11 @@ class CompanyTypeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Activités de l\'entreprise')
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - '.self::CRUD_NAME)
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::CRUD_NAME)
             ->setPaginatorPageSize(10);
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -38,5 +38,5 @@ class CompanyTypeCrudController extends AbstractCrudController
             TextField::new('label'),
         ];
     }
-    
+
 }

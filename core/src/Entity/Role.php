@@ -10,8 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
+    #[ORMId, ORMGeneratedValue, ORMColumn]
     #[Groups(['office'])]
     private ?int $id = null;
 

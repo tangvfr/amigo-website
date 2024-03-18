@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: EventTypeRepository::class)]
 class EventType
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
+    #[ORMId, ORMGeneratedValue, ORMColumn]
     #[Groups(['detailEventType', 'detailEvent'])]
     private ?int $id = null;
 

@@ -28,7 +28,7 @@ class OfferCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Offres')
             ->setSearchFields(['label'])
             ->setDefaultSort(['creationDate' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Offres')
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Offres')
             ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 

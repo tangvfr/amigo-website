@@ -34,7 +34,7 @@ class EventCrudController extends AbstractImageCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['creationDate' => 'DESC'])
             ->setDateFormat('dd/MM/yyyy')
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Event');
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Event');
     }
 
 

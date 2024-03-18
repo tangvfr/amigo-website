@@ -38,8 +38,7 @@ class Partner extends AbstractPublishableEntity
     const CHALLENGER_PARTNER = 'challenger';
     const DISCOUNT_PARTNER = 'discount';
 
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
+    #[ORMId, ORMGeneratedValue, ORMColumn]
     #[Groups(['challengerCompany', 'discountCompany'])]
     private ?int $id = null;
 

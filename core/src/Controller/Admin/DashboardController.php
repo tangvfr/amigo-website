@@ -32,14 +32,14 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         return $this->render('pages/admin/dashboard.html.twig', [
-            'dashboardTitle' => self::DASHBOARD_NAME.' '.self::SITE_NAME
+            'dashboardTitle' => self::DASHBOARD_NAME . ' ' . self::SITE_NAME
         ]);
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Admin '.DashboardController::SITE_NAME)
+            ->setTitle('Admin ' . DashboardController::SITE_NAME)
             ->setFaviconPath('images/admin_amigo_logo.png');
     }
 

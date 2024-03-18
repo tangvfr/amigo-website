@@ -8,6 +8,7 @@ use App\Entity\Company;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -27,13 +28,14 @@ class CompanyCrudController extends AbstractImageCrudController
             ->setEntityLabelInPlural('Entreprises')
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Company')
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Company')
             ->setPaginatorPageSize(10);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
+            IdField::new('id'),
             TextField::new('name', 'Nom')
                 ->setSortable(true),
             ImageField::new('img', 'Image')
@@ -60,7 +62,7 @@ class CompanyCrudController extends AbstractImageCrudController
                         'accept' => self::TYPE_IMAGE,
                     ],
                 ])
-                ,
+            ,
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
             AssociationField::new('located', 'Emplacements'),
