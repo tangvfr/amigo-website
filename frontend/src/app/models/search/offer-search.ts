@@ -8,9 +8,9 @@ export class OfferSearch extends AbstractBgedDateWithTextSearch {
   /*override*/
   override toParams(): HttpParams
   {
-    let params = new HttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
+    let params = this.createHttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
     //definition de critère de recherche
-    params = this.applySearchingParam(params, 'keyWords');
+    params = this.applySearchingParam(params, 'label');
     params = this.applyDateParams(params);
 
     //retour les parametre
