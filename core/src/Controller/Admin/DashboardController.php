@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Company;
 use App\Entity\CompanyType;
 use App\Entity\Event;
+use App\Entity\EventType;
 use App\Entity\Location;
 use App\Entity\Mandate;
 use App\Entity\Offer;
@@ -49,6 +50,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
             MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class),
             MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
+            MenuItem::linkToCrud('Évènement Type', 'fas fa-calendar', EventType::class),
             MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
             MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
             MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
