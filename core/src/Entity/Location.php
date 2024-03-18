@@ -21,10 +21,10 @@ class Location
     #[Assert\NotBlank]
     private ?string $label = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?float $latitude = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?float $longitude = null;
 
     #[ORM\Column(length: 255, nullable: true)]

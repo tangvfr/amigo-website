@@ -31,7 +31,7 @@ class Student extends AbstractEditableEntity
     private ?string $img = null;
 
     #[ORM\Column(length: 10)]
-    #[Assert\NotNull, Assert\Regex(pattern: '^o[0-9]{7,8}$')]
+    #[Assert\NotNull, Assert\Regex(pattern: '/^o[0-9]{7,8}$/')]
     private ?string $studentNumber = null;
 
     #[ORM\Column(length: 255)]
