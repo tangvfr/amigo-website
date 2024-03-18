@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgFor} from "@angular/common";
+import {NgFor} from '@angular/common';
 import {AmigowsApiService} from "../../services/amigows.api.service";
 import {EMPTY_HYDRA_LIST, HydraList} from "../../models/hydra-list";
 import {components} from "../../models/schema.api";
