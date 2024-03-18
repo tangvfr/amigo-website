@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student extends AbstractEditableEntity
 {
-    #[ORMId, ORMGeneratedValue, ORMColumn]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Groups(['office'])]
     private ?int $id = null;
 
