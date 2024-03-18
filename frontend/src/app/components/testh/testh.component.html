@@ -1,4 +1,11 @@
 <h2>testh works!</h2>
+<hr />
+<button type="button" mat-flat-button (click)="openTestDialog()">Test dialog</button>
+<!-- https://angular.io/guide/image-directive -->
+<!-- pensé a resize les images si petite car consomme bcp de conection pour rien, si c'est du 4k et qu'on la vois sur 128px*128px pensé aux optimiser load comme netflix etc... -->
+<!-- voir pour changer et mettre un service pour le simages sur symfony -->
+<img ngSrc="assets/images/amigo_logo.png" width="256" height="256" priority/>
+<hr />
 <ol>
   <li><a routerLink="/events">event now try</a></li>
   <li><a routerLink="/offers">offer ?</a></li>

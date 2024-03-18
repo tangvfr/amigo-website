@@ -1,0 +1,46 @@
+<mat-form-field >
+  <mat-label>Recherche</mat-label>
+  <input matInput [(ngModel)]="searchData.searching" placeholder="Votre recherche" />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<button mat-mini-fab color="basic" (click)="searchData.searching=undefined">
+  <mat-icon>close</mat-icon>
+</button>
+
+<mat-form-field ><!--appearance="outline"-->
+  <mat-label>Accessibilité</mat-label>
+  <mat-select [(ngModel)]="searchData.onlyMiagist">
+    <mat-option>Les deux</mat-option>
+    <mat-option value="true">Réservé au miagiste</mat-option>
+    <mat-option value="false">Ouvert à tous</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Après</mat-label>
+  <input matInput [matDatepicker]="dtbeg" [(ngModel)]="searchData.beginAfter" />
+  <mat-datepicker-toggle matIconSuffix [for]="dtbeg"></mat-datepicker-toggle>
+  <mat-datepicker #dtbeg />
+</mat-form-field>
+
+<button mat-mini-fab color="basic" (click)="searchData.beginAfter=undefined">
+  <mat-icon>close</mat-icon>
+</button>
+
+<mat-form-field>
+  <mat-label>Avant</mat-label>
+  <input matInput [matDatepicker]="dtend" [(ngModel)]="searchData.endBefore" />
+  <mat-datepicker-toggle matIconSuffix [for]="dtend"></mat-datepicker-toggle>
+  <mat-datepicker #dtend />
+</mat-form-field>
+
+<button mat-mini-fab color="basic"  (click)="searchData.endBefore=undefined">
+  <mat-icon>close</mat-icon>
+</button>
+
+<button mat-raised-button color="accent" (click)="onReset()">Réinitialiser</button>
+<button mat-raised-button color="primary" (click)="onSumbit()">Rechercher</button>
+
+<p>(je pense retire els bouton noir avec les croix a terme) value om: {{ searchData.onlyMiagist }}</p>
+

@@ -10,9 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
@@ -24,13 +22,12 @@ class Role
     private ?Hub $hub = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull]
     #[Assert\NotBlank]
     #[Groups(['office'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Assert\Range(min: -100, max: 100)]
+    #[Assert\NotNull, Assert\Range(min: -100, max: 100)]
     private ?int $priority = null;
 
     public function getId(): ?int

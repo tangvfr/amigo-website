@@ -1,0 +1,7 @@
+{# templates/admin/fields/bged_date.html.twig #}
+
+{% if value is not null %}
+    {{ value.begin|date('Y-m-d H:i') }} - {{ value.end|date('Y-m-d H:i') }}
+{% else %}
+    Pas de date définie
+{% endif %}

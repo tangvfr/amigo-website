@@ -10,38 +10,50 @@ use App\Repository\PartnerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
         new GetCollection(
             uriTemplate: '/challenger',
             normalizationContext: ['groups' => ['challengerCompany']],
+            name: Partner::CHALLENGER_PARTNER,
         ),
         new GetCollection(
             uriTemplate: '/discount',
             normalizationContext: ['groups' => ['discountCompany']],
+            name: Partner::DISCOUNT_PARTNER,
         ),
     ],
-    routePrefix: 'partner'
+    routePrefix: 'partner',
+    order: [
+        'publicationDate' => 'desc',
+        'bgedDate.beginDate' => 'desc',
+        'bgedDate.endDate' => 'asc',
+    ]
 )]
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner extends AbstractPublishableEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    const CHALLENGER_PARTNER = 'challenger';
+    const DISCOUNT_PARTNER = 'discount';
+
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany'])]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany'])]
     private ?Company $company = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $challenge = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank(allowNull: true)]
     #[Groups(['discountCompany'])]
     private ?string $advantages = null;
 
