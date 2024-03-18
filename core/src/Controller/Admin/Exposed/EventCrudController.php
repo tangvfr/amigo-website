@@ -29,8 +29,8 @@ class EventCrudController extends AbstractImageCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Evenement')
-            ->setEntityLabelInPlural('Evenements')
+            ->setEntityLabelInSingular('Évènement')
+            ->setEntityLabelInPlural('Évènements')
             ->setSearchFields(['name'])
             ->setDefaultSort(['creationDate' => 'DESC'])
             ->setDateFormat('dd/MM/yyyy')

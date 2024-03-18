@@ -23,7 +23,7 @@ class CompanyTypeCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Activité de l\'entreprise')
             ->setEntityLabelInPlural('Activités de l\'entreprise')
-            ->setSearchFields(['labels'])
+            ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - '.self::CRUD_NAME)
             ->setPaginatorPageSize(10);
