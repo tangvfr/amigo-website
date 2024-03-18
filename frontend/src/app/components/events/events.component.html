@@ -1,6 +1,6 @@
 <p>events works!</p>
 <hr />
-<app-event-search-fields (search)="search($event)"/>
+<app-event-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
 <hr />
 <!-- le ! apres le nom de la variable eprmet de dire a typescript , tkt c pas undefined -->
 <div *ngIf="beNormal()">
