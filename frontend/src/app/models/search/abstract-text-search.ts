@@ -30,4 +30,9 @@ export abstract class AbstractTextSearch {
     return this.searchText.length !== 0;
   }
 
+  public resetCritera(): void
+  {
+    this.searchText = [];
+  }
+
 }

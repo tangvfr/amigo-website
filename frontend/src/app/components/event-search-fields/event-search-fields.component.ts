@@ -33,9 +33,4 @@ export class EventSearchFieldsComponent extends AbstractBgedSearchFieldsComponen
     return new EventSearch();
   }
 
-  override onReset() {
-    super.onReset();
-    this.searchData.onlyMiagist = undefined;
-  }
-
 }
