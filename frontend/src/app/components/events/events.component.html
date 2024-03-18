@@ -8,9 +8,11 @@
     {{ event.name }} img: {{ event.img }}
     <!--{{ event.name }} + {{ event.img }}-->
   </li>
-  <hr />
-  <h3>Event passé</h3>
-  <hr />
+</ol>
+<hr />
+<h3>Event passé</h3>
+<hr />
+<ul>
   @for (event of pastEvents!['hydra:member']; track event.id) {
     @if ($first) {
       <li>\/\/\/&emsp;\/\/\/</li>
@@ -20,12 +22,14 @@
       <li>/\/\/\&emsp;---&ensp;/\/\/\</li>
     }
   }
-</ol>
+</ul>
 
 @if (beSearch()) {
-  @for (event of events!['hydra:member']; track event.id) {
-    <li>{{ event.name }} img: {{ event.img }}</li>
-  }
+  <ul>
+    @for (event of events!['hydra:member']; track event.id) {
+      <li>{{ event.name }} img: {{ event.img }}</li>
+    }
+  </ul>
 }
 
 <div *ngIf="beLoading()" style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
