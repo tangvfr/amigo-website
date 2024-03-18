@@ -42,7 +42,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 true
             );
 
-            $datetime = UtilFixtures::bgeDateToDateTime($date);
+            $datetime = UtilFixtures::bgeDateToDateTime($date->getEndDate());
 
             $publicationDate1 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MIN);
             $publicationDate2 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MAX);

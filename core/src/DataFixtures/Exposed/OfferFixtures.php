@@ -42,7 +42,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 false
             );
 
-            $datetime = UtilFixtures::bgeDateToDateTime($date);
+            $datetime = UtilFixtures::bgeDateToDateTime($date->getEndDate());
 
             $endProvidDate = $datetime->modify(ConstantesFixtures::OFFER_GAP_END_PROVIDE_DATE);
             $publicationDate1 = $datetime->modify(ConstantesFixtures::OFFER_GAP_PUBLICATION_DATE_MIN);
