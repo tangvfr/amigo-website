@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Intl\IntlFormatter;
 
 class OfferCrudController extends AbstractCrudController
 {
@@ -29,7 +30,8 @@ class OfferCrudController extends AbstractCrudController
             ->setSearchFields(['label'])
             ->setDefaultSort(['creationDate' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME . ' - Offres')
-            ->setDateFormat(DateTimeField::FORMAT_SHORT);
+            //->setDateFormat(DateTimeField::FORMAT_NONE)
+            ;
     }
 
 
@@ -52,8 +54,15 @@ class OfferCrudController extends AbstractCrudController
 
             FormField::addColumn('col-lg-8 col-xl-6'),
             FormField::addPanel('DATE'),
-            DateTimeField::new('bgedDate.beginDate', 'Début de l\'offre'),
-            DateTimeField::new('bgedDate.endDate', 'Fin de l\'offre'),
+
+            DateTimeField::new('bgedDate.beginDate', 'Début de l\'offre')
+                ->hideOnIndex()
+   ,
+            DateTimeField::new('bgedDate.endDate', 'Fin de l\'offre')
+                ->hideOnIndex()
+                ->setFormat(DateTimeField::FORMAT_SHORT),
+
+
             DateTimeField::new('publicationDate', 'Date de publication de l\'offre')
                 ->hideOnIndex(),
             DateTimeField::new('creationDate', 'Date de création')
