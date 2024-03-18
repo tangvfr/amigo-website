@@ -6,10 +6,6 @@ export class EventSearch extends AbstractBgedDateWithTextSearch {
 
   public onlyMiagist?: boolean;
 
-  constructor() {
-    super();
-  }
-
   /*override*/
   override toParams(): HttpParams
   {
@@ -26,6 +22,11 @@ export class EventSearch extends AbstractBgedDateWithTextSearch {
   override hasCritera(): boolean {
     return super.hasCritera()
       || this.onlyMiagist !== undefined;
+  }
+
+  override resetCritera() {
+    super.resetCritera();
+    this.onlyMiagist = true;
   }
 
 }

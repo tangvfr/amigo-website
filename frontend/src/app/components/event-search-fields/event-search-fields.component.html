@@ -1,10 +1,10 @@
 <mat-form-field >
   <mat-label>Recherche</mat-label>
-  <input matInput [(ngModel)]="searchData.searching" #searching placeholder="Votre recherche" />
+  <input matInput [(ngModel)]="searchData.searching" placeholder="Votre recherche" />
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
-<button mat-mini-fab color="basic" (click)="searching.value=''">
+<button mat-mini-fab color="basic" (click)="searchData.searching=undefined">
   <mat-icon>close</mat-icon>
 </button>
 
@@ -19,23 +19,23 @@
 
 <mat-form-field>
   <mat-label>Après</mat-label>
-  <input matInput [matDatepicker]="dtbeg" #indtbeg [(ngModel)]="searchData.beginAfter" />
+  <input matInput [matDatepicker]="dtbeg" [(ngModel)]="searchData.beginAfter" />
   <mat-datepicker-toggle matIconSuffix [for]="dtbeg"></mat-datepicker-toggle>
   <mat-datepicker #dtbeg />
 </mat-form-field>
 
-<button mat-mini-fab color="basic" (click)="dtbeg.select(undefined)">
+<button mat-mini-fab color="basic" (click)="searchData.beginAfter=undefined">
   <mat-icon>close</mat-icon>
 </button>
 
 <mat-form-field>
   <mat-label>Avant</mat-label>
-  <input matInput [matDatepicker]="dtend" #indtend [(ngModel)]="searchData.endBefore" />
+  <input matInput [matDatepicker]="dtend" [(ngModel)]="searchData.endBefore" />
   <mat-datepicker-toggle matIconSuffix [for]="dtend"></mat-datepicker-toggle>
   <mat-datepicker #dtend />
 </mat-form-field>
 
-<button mat-mini-fab color="basic" (click)="dtend.select(undefined)">
+<button mat-mini-fab color="basic"  (click)="searchData.endBefore=undefined">
   <mat-icon>close</mat-icon>
 </button>
 

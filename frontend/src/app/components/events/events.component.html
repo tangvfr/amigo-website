@@ -3,26 +3,28 @@
 <app-event-search-fields (search)="search($event)"/>
 <hr />
 <!-- le ! apres le nom de la variable eprmet de dire a typescript , tkt c pas undefined -->
-<ol *ngIf="beNormal()">
-  <li *ngFor="let event of events!['hydra:member']">
-    {{ event.name }} img: {{ event.img }}
-    <!--{{ event.name }} + {{ event.img }}-->
-  </li>
-</ol>
-<hr />
-<h3>Event passé</h3>
-<hr />
-<ul>
-  @for (event of pastEvents!['hydra:member']; track event.id) {
-    @if ($first) {
-      <li>\/\/\/&emsp;\/\/\/</li>
+<div *ngIf="beNormal()">
+  <ol>
+    <li *ngFor="let event of events!['hydra:member']">
+      {{ event.name }} img: {{ event.img }}
+      <!--{{ event.name }} + {{ event.img }}-->
+    </li>
+  </ol>
+  <hr />
+  <h3>Event passé</h3>
+  <hr />
+  <ul>
+    @for (event of pastEvents!['hydra:member']; track event.id) {
+      @if ($first) {
+        <li>\/\/\/&emsp;\/\/\/</li>
+      }
+      <li>{{ event.name }} img: {{ event.img }}</li>
+      @if ($last) {
+        <li>/\/\/\&emsp;---&ensp;/\/\/\</li>
+      }
     }
-    <li>{{ event.name }} img: {{ event.img }}</li>
-    @if ($last) {
-      <li>/\/\/\&emsp;---&ensp;/\/\/\</li>
-    }
-  }
-</ul>
+  </ul>
+</div>
 
 @if (beSearch()) {
   <ul>

@@ -30,9 +30,7 @@ export abstract class AbstractBgedSearchFieldsComponent<T extends AbstractBgedDa
   }
 
   onReset() {
-    this.searchData.searching = undefined;
-    this.searchData.beginAfter = undefined;
-    this.searchData.endBefore = undefined;
+    this.searchData.resetCritera();
   }
 
 }
