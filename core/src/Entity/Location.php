@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Groups(['detailEvent', 'challengerCompany', 'discountCompany', 'infoCompany'])]
 class Location
 {
-    #[ORMId, ORMGeneratedValue, ORMColumn]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
