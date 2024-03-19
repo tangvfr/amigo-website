@@ -17,6 +17,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Intl\IntlFormatter;
 
 class OfferCrudController extends AbstractCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Offre';
+    private const ENTITY_LABEL_IN_PLURAL = 'Offres';
+
     public static function getEntityFqcn(): string
     {
         return Offer::class;
@@ -25,12 +28,12 @@ class OfferCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Offre')
-            ->setEntityLabelInPlural('Offres')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['label'])
             ->setDefaultSort(['creationDate' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Offres')
-            //->setDateFormat(DateTimeField::FORMAT_NONE)
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setDateFormat(DateTimeField::FORMAT_SHORT)
             ;
     }
 
@@ -38,13 +41,8 @@ class OfferCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->hideOnIndex()
-                ->hideOnForm(),
-
-
-            FormField::addColumn('col-lg-8 col-xl-6'),
-            FormField::addPanel('INFORMATIONS IMPORTANTE'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
+            FormField::addPanel(DashboardController::PANEL_NAME_INFO_PRINCIPALE),
             TextField::new('label', 'Label'),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
@@ -52,7 +50,7 @@ class OfferCrudController extends AbstractCrudController
                 ->hideOnIndex(),
 
 
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('DATE'),
 
             DateTimeField::new('bgedDate.beginDate', 'Début de l\'offre')
@@ -74,7 +72,7 @@ class OfferCrudController extends AbstractCrudController
                 ->setDisabled(),
 
 
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('FOURNISSEUR'),
             AssociationField::new('provider', 'Entreprise fournissant l\'offre'),
             DateTimeField::new('endProvidDate', 'Fin du partage de l\'offre')
