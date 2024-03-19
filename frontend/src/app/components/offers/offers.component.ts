@@ -6,13 +6,14 @@ import {NgFor} from "@angular/common";
 import {MarkdownComponent} from "ngx-markdown";
 import {OfferSearchFieldsComponent} from "../offer-search-fields/offer-search-fields.component";
 import {OfferSearch} from "../../models/search/offer-search";
+import {EventSearchFieldsComponent} from "../event-search-fields/event-search-fields.component";
 
 //https://blog.markdowntools.com/posts/how-to-render-markdown-in-angular
 
 @Component({
   selector: 'app-offers',
   standalone: true,
-  imports: [NgFor, MarkdownComponent, OfferSearchFieldsComponent],
+    imports: [NgFor, MarkdownComponent, OfferSearchFieldsComponent, EventSearchFieldsComponent],
   templateUrl: './offers.component.html',
   //styleUrl: './offers.component.css'
 })
