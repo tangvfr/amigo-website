@@ -37,9 +37,6 @@ class LocationCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->hideOnIndex()
-                ->hideOnForm(),
             FormField::addColumn('1'),
             FormField::addPanel('NOM'),
             TextField::new('label'),

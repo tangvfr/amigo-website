@@ -41,11 +41,6 @@ class OfferCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->hideOnIndex()
-                ->hideOnForm(),
-
-
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel(DashboardController::PANEL_NAME_INFO_PRINCIPALE),
             TextField::new('label', 'Label'),
