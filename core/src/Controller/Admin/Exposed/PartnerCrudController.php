@@ -42,15 +42,33 @@ class PartnerCrudController extends AbstractCrudController
             FormField::addPanel('INFORMATIONS ENTREPRISE'),
             AssociationField::new('company', 'Entreprise'),
             BooleanField::new('challenge', 'Entreprise Challenge')
-                ->setSortable(true),
+                ->setSortable(true)
+            ,
             TextField::new('advantages'),
 
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('DATE'),
             DateTimeField::new('bgedDate.beginDate', 'Début du partenariat')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+            ,
             DateTimeField::new('bgedDate.endDate', 'Fin du partenariat')
                 ->setSortable(true)
+            ,
+
+            //champs d'informations
+            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addPanel('HISTORIQUE')
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('creationDate', 'Date de création')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('lastEditDate', 'Dernière modification')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
         ];
     }
 
