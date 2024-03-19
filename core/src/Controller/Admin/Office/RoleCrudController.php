@@ -28,7 +28,8 @@ class RoleCrudController extends AbstractCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['priority' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - Role')
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(10)
+        ;
     }
 
 

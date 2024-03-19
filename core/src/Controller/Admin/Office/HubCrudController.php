@@ -29,7 +29,8 @@ class HubCrudController extends AbstractCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['priority' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - Pole')
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(10)
+        ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -39,7 +40,6 @@ class HubCrudController extends AbstractCrudController
                 ->setSortable(true),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
-//            CollectionField::new('roles', 'Roles'),
             IntegerField::new('priority', 'Priorité')
                 ->hideOnIndex()
         ];

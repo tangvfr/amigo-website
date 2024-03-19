@@ -120,4 +120,11 @@ class Student extends AbstractEditableEntity
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->studentNumber. ' ' .$this->name. ' ' .$this->lastName;
+    }
+
+
 }

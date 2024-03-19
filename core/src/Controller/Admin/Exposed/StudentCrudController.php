@@ -30,8 +30,8 @@ class StudentCrudController extends AbstractImageCrudController
             ->setSearchFields(['name', 'studentNumber'])
             ->setDefaultSort(['id' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - Student')
-            ->setPaginatorPageSize(10);
-            ;
+            ->setPaginatorPageSize(10)
+        ;
     }
 
     public function configureFields(string $pageName): iterable
