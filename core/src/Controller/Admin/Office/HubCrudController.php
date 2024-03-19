@@ -39,14 +39,8 @@ class HubCrudController extends AbstractCrudController
                 ->setSortable(true),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
-//            CollectionField::new('roles', 'Roles'),
             IntegerField::new('priority', 'Priorité')
                 ->hideOnIndex()
         ];
-    }
-
-    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

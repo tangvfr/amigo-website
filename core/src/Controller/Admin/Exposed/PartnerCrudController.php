@@ -4,13 +4,14 @@ namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\DashboardController;
 use App\Entity\Partner;
-use Doctrine\ORM\Cache\AssociationCacheEntry;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class PartnerCrudController extends AbstractCrudController
@@ -40,16 +41,21 @@ class PartnerCrudController extends AbstractCrudController
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('INFORMATIONS ENTREPRISE'),
             AssociationField::new('company', 'Entreprise'),
-            BooleanField::new('challenge', 'Entreprise Challenge'),
+            BooleanField::new('challenge', 'Entreprise Challenge')
+                ->setSortable(true),
             TextField::new('advantages'),
-
 
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('DATE'),
             DateTimeField::new('bgedDate.beginDate', 'Début du partenariat')
                 ->hideOnIndex(),
-            DateTimeField::new('bgedDate.endDate', 'Fin du partenariat'),
+            DateTimeField::new('bgedDate.endDate', 'Fin du partenariat')
+                ->setSortable(true)
         ];
     }
 
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        parent::deleteEntity($entityManager, $entityInstance);
+    }
 }
