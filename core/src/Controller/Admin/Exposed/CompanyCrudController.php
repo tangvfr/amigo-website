@@ -28,7 +28,7 @@ class CompanyCrudController extends AbstractImageCrudController
             ->setEntityLabelInPlural('Entreprises')
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Company')
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Entreprises')
             ->setPaginatorPageSize(10);
     }
 

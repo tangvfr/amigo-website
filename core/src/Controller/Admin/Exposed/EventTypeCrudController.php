@@ -15,14 +15,26 @@ class EventTypeCrudController extends AbstractCrudController
         return EventType::class;
     }
 
-    /*
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Type d\'évènement')
+            ->setEntityLabelInPlural('Types d\'évènements')
+            ->setSearchFields(['label'])
+            ->setDefaultSort(['id' => 'DESC'])
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Types d\'évènement')
+            ->setPaginatorPageSize(20);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            FormField::addColumn('2'),
+            FormField::addPanel('INFORMATIONS PRINCIPALES'),
+            TextField::new('label', 'Nom')
+                ->setMaxLength(255),
+            TextEditorField::new('description', 'Description'),
         ];
     }
-    */
+    
 }
