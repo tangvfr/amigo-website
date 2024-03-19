@@ -18,7 +18,7 @@ class Location
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank, Assert\Unique]
     private ?string $label = null;
 
     #[ORM\Column]

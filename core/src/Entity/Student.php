@@ -30,11 +30,13 @@ class Student extends AbstractEditableEntity
     #[Groups(['office'])]
     private ?string $img = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, unique: true)]
+    #[Assert\Unique]
     #[Assert\NotNull, Assert\Regex(pattern: '/^o[0-9]{7,8}$/')]
     private ?string $studentNumber = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Unique]
     #[Assert\NotNull, Assert\Email]
     private ?string $email = null;
 
