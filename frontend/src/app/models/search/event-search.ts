@@ -6,14 +6,10 @@ export class EventSearch extends AbstractBgedDateWithTextSearch {
 
   public onlyMiagist?: boolean;
 
-  constructor() {
-    super();
-  }
-
   /*override*/
   override toParams(): HttpParams
   {
-    let params = new HttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
+    let params = this.createHttpParams();//attention HttpParams c'est immutable donc à chaque action ça crée un nouvel object
     //definition de critère de recherche
     params = setBoolParam(params, 'onlyMiagist', this.onlyMiagist);
     params = this.applySearchingParam(params, 'name');
@@ -26,6 +22,11 @@ export class EventSearch extends AbstractBgedDateWithTextSearch {
   override hasCritera(): boolean {
     return super.hasCritera()
       || this.onlyMiagist !== undefined;
+  }
+
+  override resetCritera() {
+    super.resetCritera();
+    this.onlyMiagist = true;
   }
 
 }

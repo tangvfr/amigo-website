@@ -20,4 +20,10 @@ export abstract class AbstractBgedDateWithTextSearch extends AbstractTextSearch 
       || this.endBefore !== undefined;
   }
 
+  override resetCritera() {
+    super.resetCritera();
+    this.beginAfter = undefined;
+    this.endBefore = undefined;
+  }
+
 }

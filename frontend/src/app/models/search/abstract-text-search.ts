@@ -20,6 +20,16 @@ export abstract class AbstractTextSearch {
     return setSearchStringParam(params, property, this.searchText);
   }
 
+  public createHttpParams(): HttpParams
+  {
+    return new HttpParams({encoder: {
+      encodeKey(key: string): string {return key},
+      encodeValue(value: string): string {return encodeURI(value)},
+      decodeKey(key: string): string {return key},
+      decodeValue(value: string): string {return decodeURI(value)},
+    }});
+  }
+
   public abstract toParams(): HttpParams;
 
   /**
@@ -28,6 +38,11 @@ export abstract class AbstractTextSearch {
   public hasCritera(): boolean
   {
     return this.searchText.length !== 0;
+  }
+
+  public resetCritera(): void
+  {
+    this.searchText = [];
   }
 
 }
