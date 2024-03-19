@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Hub
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 

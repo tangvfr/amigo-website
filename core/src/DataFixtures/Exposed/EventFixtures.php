@@ -35,6 +35,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++)
         {
+            //création de la date
             $date = UtilFixtures::createDate(
                 $faker,
                 ConstantesFixtures::EVENT_DATE_BETWEEN_MIN,
@@ -43,6 +44,14 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
             );
 
             $datetime = UtilFixtures::bgeDateToDateTime($date->getEndDate());
+
+            if ($faker->boolean(ConstantesFixtures::EVENT_LONG_PROBA)) { //event de 1 jour
+                $endDate = $datetime->modify(ConstantesFixtures::EVENT_END_DATE);
+                $date->setEndDate($endDate);
+            } else { //event de 1 mois
+                $endDate = $datetime->modify(ConstantesFixtures::EVENT_FAR_END_DATE);
+                $date->setEndDate($endDate);
+            }
 
             $publicationDate1 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MIN);
             $publicationDate2 = $datetime->modify(ConstantesFixtures::EVENT_GAP_PUBLICATION_DATE_MAX);

@@ -5,10 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Company;
 use App\Entity\CompanyType;
 use App\Entity\Event;
+use App\Entity\Hub;
 use App\Entity\Location;
 use App\Entity\Mandate;
 use App\Entity\Offer;
 use App\Entity\Partner;
+use App\Entity\Role;
+use App\Entity\Student;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,9 +55,12 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
             MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
             MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
+            MenuItem::linkToCrud('Étudiants', 'fas fa-user', Student::class),
         ]);
         yield MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON)->setSubItems([
             MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
+            MenuItem::linkToCrud('Pole', 'fas fa-flag', Hub::class),
+            MenuItem::linkToCrud('Role', 'fas fa-key', Role::class),
         ]);
     }
 }

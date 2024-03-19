@@ -2,16 +2,20 @@
 
 namespace App\Controller\Admin\Exposed;
 
+use App\Controller\Admin\AbstractImageCrudController;
 use App\Controller\Admin\DashboardController;
+use App\Entity\Company;
 use App\Entity\Student;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class StudentCrudController extends AbstractCrudController
+class StudentCrudController extends AbstractImageCrudController
 {
     public static function getEntityFqcn(): string
     {
@@ -33,9 +37,35 @@ class StudentCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name', 'Prénom')
+                ->setSortable(true),
+            TextField::new('lastname', 'Nom')
+                ->setSortable(true),
+            ImageField::new('img', 'Image')
+                ->setBasePath(self::BASE_PATH)
+                ->setUploadDir(self::UPLOAD_DIR)
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setSortable(false)
+                ->setHelp(self::HELP_IMAGE)
+                ->setFormTypeOptions([
+                    'attr' => [
+                        'accept' => self::TYPE_IMAGE,
+                    ],
+                ]),
+            TextField::new('studentNumber', 'Numéro étudiant')
+                ->setSortable(true)
+                ->hideOnIndex(),
+            TextField::new('email', 'Email')
+                ->setSortable(true)
+                ->hideOnIndex(),
+            ChoiceField::new('level', 'Niveau de formation')
         ];
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        // Appel de la méthode parente pour effectuer la suppression de l'entité
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

@@ -16,17 +16,15 @@ class LocationFixtures extends Fixture
             $location = new Location();
             $location->setLabel($faker->sentence(ConstantesFixtures::NB_WORD_LABEL));
 
-            if ($faker->boolean(ConstantesFixtures::ADDRESS_COORD_PROBA))
-            {
+            if ($faker->boolean(ConstantesFixtures::ADDRESS_COORD_PROBA)) {
                 $location->setCountry($faker->country())
                     ->setCity($faker->city())
                     ->setPostalCode($faker->postcode())
                     ->setAdresse($faker->address());
-            } else
-            {
-                $location->setLongitude($faker->longitude())
-                    ->setLatitude($faker->latitude());
             }
+
+            $location->setLongitude($faker->longitude())
+                ->setLatitude($faker->latitude());
 
             $manager->persist($location);
             $manager->flush();

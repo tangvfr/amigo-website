@@ -29,6 +29,9 @@ abstract class ConstantesFixtures {
     public const EVENT_GAP_PUBLICATION_DATE_MIN = '-2 weeks';
     public const EVENT_GAP_PUBLICATION_DATE_MAX = '-1 weeks';
     public const EVENT_MANY_LOCATION_PROBA = 10;
+    public const EVENT_END_DATE = '+1 day';
+    public const EVENT_FAR_END_DATE = '+1 month';
+    public const EVENT_LONG_PROBA = 75;
 
 
     //constantes pour eventTypeFixtures
