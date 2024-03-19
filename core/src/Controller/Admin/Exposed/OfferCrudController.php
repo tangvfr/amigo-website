@@ -33,8 +33,7 @@ class OfferCrudController extends AbstractCrudController
             ->setSearchFields(['label'])
             ->setDefaultSort(['creationDate' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
-            ->setDateFormat(DateTimeField::FORMAT_SHORT)
-            ;
+            ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 
 
@@ -57,8 +56,7 @@ class OfferCrudController extends AbstractCrudController
                 ->hideOnIndex()
    ,
             DateTimeField::new('bgedDate.endDate', 'Fin de l\'offre')
-                ->hideOnIndex()
-                ->setFormat(DateTimeField::FORMAT_SHORT),
+                ->hideOnIndex(),
 
 
             DateTimeField::new('publicationDate', 'Date de publication de l\'offre')
