@@ -17,10 +17,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[AsCommand(
-    name: 'user:tmp:create',
-    description: 'Permet d\'ajouter un utilisateur root temporaire',
+    name: 'user:create',
+    description: 'Permet de créer un utilisateur à un étudiant.',
 )]
-class UserTmpCreateCommand extends Command
+class UserAddCommand extends Command
 {
     public const TMP_USER_NAME = 'TempUser';
     /*public const TMP_LAST_USER_NAME = 'ElTemp';
