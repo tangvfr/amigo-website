@@ -11,6 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student extends AbstractEditableEntity
 {
+    public const START_STU_NUM_PATTERN = 'o';
+    public const STU_NUM_PATTERN = '/^'.self::START_STU_NUM_PATTERN.'[0-9]{7,8}$/';
+
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     #[Assert\NotNull]
     #[Groups(['office'])]
@@ -32,7 +35,7 @@ class Student extends AbstractEditableEntity
 
     #[ORM\Column(length: 10, unique: true)]
     #[Assert\Unique]
-    #[Assert\NotNull, Assert\Regex(pattern: '/^o[0-9]{7,8}$/')]
+    #[Assert\NotNull, Assert\Regex(pattern: self::STU_NUM_PATTERN)]
     private ?string $studentNumber = null;
 
     #[ORM\Column(length: 255, unique: true)]
@@ -121,4 +124,5 @@ class Student extends AbstractEditableEntity
 
         return $this;
     }
+
 }

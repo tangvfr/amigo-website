@@ -15,8 +15,7 @@ class Role
     #[Groups(['office'])]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'roles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'roles'), ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     #[Groups(['office'])]
     private ?Hub $hub = null;

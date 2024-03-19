@@ -27,7 +27,7 @@ class DashboardController extends AbstractDashboardController
     const OFFICE_NAME = 'Bureau';
     const OFFICE_ICON = 'fa-solid fa-briefcase';
 
-    #[Route(['/', '/admin'], name: 'admin')]
+    #[Route(['/admin'], name: 'admin_dashboard')]
     public function index(): Response
     {
         return $this->render('pages/admin/dashboard.html.twig', [
@@ -50,7 +50,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class),
             MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
             MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
-            MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
+            MenuItem::linkToCrud('Offre', 'fas fa-User-tie', Offer::class),
             MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
         ]);
         yield MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON)->setSubItems([
