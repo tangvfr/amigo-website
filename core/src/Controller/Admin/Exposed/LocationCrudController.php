@@ -14,6 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class LocationCrudController extends AbstractCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Localisation';
+    private const ENTITY_LABEL_IN_PLURAL = 'Localisations';
+
     public static function getEntityFqcn(): string
     {
         return Location::class;
@@ -22,11 +25,12 @@ class LocationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Location')
-            ->setEntityLabelInPlural('Locations')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Location');
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPaginatorPageSize(20);
 
     }
 
@@ -40,14 +44,14 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('NOM'),
             TextField::new('label'),
 
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('ADRESSE'),
             CountryField::new('country'),
             TextField::new('city'),
             NumberField::new('postalCode'),
             TextField::new('adresse'),
 
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('MAPS'),
             NumberField::new('latitude')
                 ->hideOnIndex()

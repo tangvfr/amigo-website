@@ -31,6 +31,11 @@ class DashboardController extends AbstractDashboardController
     const OFFICE_NAME = 'Bureau';
     const OFFICE_ICON = 'fa-solid fa-briefcase';
 
+    // Taille des panels
+    const PANEL_COLUMN_MOITIER_ECRAN = 'col-lg-8 col-xl-6';
+    // nom des panels
+    const PANEL_NAME_INFO_PRINCIPALE = 'Informations principales';
+
     #[Route(['/', '/admin'], name: 'admin')]
     public function index(): Response
     {
