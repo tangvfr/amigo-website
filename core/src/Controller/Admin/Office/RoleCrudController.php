@@ -52,9 +52,4 @@ class RoleCrudController extends AbstractCrudController
                 ->hideOnIndex()
         ];
     }
-
-    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        parent::deleteEntity($entityManager, $entityInstance);
-    }
 }

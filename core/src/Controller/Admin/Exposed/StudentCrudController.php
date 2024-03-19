@@ -99,10 +99,4 @@ class StudentCrudController extends AbstractImageCrudController
                 ->hideWhenCreating()
         ];
     }
-
-    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        // Appel de la méthode parente pour effectuer la suppression de l'entité
-        parent::deleteEntity($entityManager, $entityInstance);
-    }
 }
