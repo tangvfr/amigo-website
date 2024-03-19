@@ -66,13 +66,7 @@ class CompanyCrudController extends AbstractImageCrudController
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
             AssociationField::new('located', 'Emplacements')
-                ->setHelp('Sélectionnez les emplacements où l\'entreprise est présente')
-                
-                // permet de ne pas passer par une requête SQL pour récupérer les emplacements
-                ->setFormTypeOptions([
-                    'by_reference' => false,
-                ])
-                ->autocomplete(),
+                ->setHelp('Sélectionnez les emplacements où l\'entreprise est présente'),
             AssociationField::new('activities', 'Activités')
                 ->setHelp('Sélectionnez les activités de l\'entreprise')
                 ->setFormTypeOptions([

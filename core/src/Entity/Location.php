@@ -5,19 +5,22 @@ namespace App\Entity;
 use ApiPlatform\Metadata\Tests\Fixtures\Metadata\Get;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Unique;
 
 #[Get]
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 #[Groups(['detailEvent', 'challengerCompany', 'discountCompany', 'infoCompany'])]
+#[UniqueEntity('label')]
 class Location
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank, Assert\Unique]
+    #[Assert\NotBlank]
     private ?string $label = null;
 
     #[ORM\Column]
