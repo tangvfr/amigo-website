@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Date\AbstractEditableEntity;
+use App\Entity\User\AppUser;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -48,9 +49,18 @@ class Student extends AbstractEditableEntity
     #[Groups(['office'])]
     private ?StudentType $level = null;
 
+
+    #[ORM\OneToOne(targetEntity: AppUser::class, mappedBy: 'student')]
+    private ?AppUser $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->name.' '.$this->lastName;
     }
 
     public function getName(): ?string
@@ -96,8 +106,30 @@ class Student extends AbstractEditableEntity
 
     public function setStudentNumber(string $studentNumber): static
     {
-        $this->studentNumber = $studentNumber;
+        if (!isset($this->studentNumber) || $this->studentNumber !== $studentNumber) {
+            $this->studentNumber = $studentNumber;
 
+            if ($this->hasUser()) {
+                $this->user->forceLogin($studentNumber);
+            }
+        }
+        return $this;
+    }
+
+    public function getUser(): ?AppUser
+    {
+        return $this->user;
+    }
+
+    public function setUser(?AppUser $user): static
+    {
+        if ($this->user !== $user) {
+            $this->user = $user;
+
+            if ($this->hasUser()) {
+                $this->user->forceStudent($this);
+            }
+        }
         return $this;
     }
 
@@ -123,6 +155,11 @@ class Student extends AbstractEditableEntity
         $this->level = $level;
 
         return $this;
+    }
+
+    public function hasUser(): bool
+    {
+        return $this->user !== null;
     }
 
 }

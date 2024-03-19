@@ -8,7 +8,7 @@ security:
         # utilisateurs normaux
         app_user_provider:
             entity:
-                class: App\Entity\User\User
+                class: App\Entity\User\AppUser
                 property: login
     firewalls:
         dev:
@@ -46,6 +46,7 @@ security:
 
     role_hierarchy:
         ROLE_ROOT: [ROLE_CRUD, ROLE_GEOCODE_API]
+        ROLE_USER: [ROLE_ROOT]
         #ROLE_ADMIN:       ROLE_USER
         #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 

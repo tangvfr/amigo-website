@@ -43,8 +43,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->delete('App\Entity\User\AppUser', 'u')
-            ->andWhere($qb->expr()->isNull('u.student'))
+            ->where($qb->expr()->isNull('u.student'))
             ;
+        return $qb->getQuery()->execute();
+    }
+
+    public function deleteUserById(int $id): bool
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->delete('App\Entity\User\AppUser', 'u')
+            ->where($qb->expr()->eq('u.id', ':id'))
+            ->setParameter('id', $id)
+        ;
         return $qb->getQuery()->execute();
     }
 

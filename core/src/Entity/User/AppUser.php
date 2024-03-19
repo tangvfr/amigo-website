@@ -22,7 +22,7 @@ class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToOne, ORM\JoinColumn(unique: true)]
+    #[ORM\OneToOne(inversedBy: 'user'), ORM\JoinColumn(unique: true)]
     private ?Student $student = null;
 
     #[ORM\Column(length: 10, unique: true)]
@@ -54,9 +54,15 @@ class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function setStudent(Student $student): static
+    public function forceStudent(?Student $student): static
     {
-        $this->student = $student;
+        if ($this->student !== $student) {
+            $this->student = $student;
+
+            if (!$this->isTmpRoot()) {
+                $this->student->setUser($this);
+            }
+        }
         return $this;
     }
 
@@ -69,9 +75,16 @@ class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->login;
     }
 
-    public function setLogin(string $login): void
+    public function forceLogin(string $login): static
     {
-        $this->login = $login;
+        if (!isset($this->login) || $this->login !== $login) {
+            $this->login = $login;
+
+            if (!$this->isTmpRoot()) {
+                $this->student->setStudentNumber($login);
+            }
+        }
+        return $this;
     }
 
     /**
@@ -82,7 +95,7 @@ class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         $stu = $this->getStudent();
-        return $this->isTmpRoot() ? UserTmpCreateCommand::TMP_USER_NAME.' '.$this->login : $stu->getName().' '.$stu->getLastName();
+        return $this->isTmpRoot() ? UserTmpCreateCommand::TMP_USER_NAME.' '.$this->login : $stu->getDisplayName();
     }
 
     /**

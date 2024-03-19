@@ -54,7 +54,7 @@ class UserTmpCreateCommand extends Command
 
         //init user
         $tmpUser = new AppUser();
-        $tmpUser->setLogin($num);
+        $tmpUser->forceLogin($num);
         $tmpUser->setRoles(self::TMP_ROLES);
         $plaintextPassword = self::regeneratePassword($tmpUser, $this->passwordHasher);
 
@@ -64,7 +64,7 @@ class UserTmpCreateCommand extends Command
 
         //affichage
         $comment = [];
-        $comment[] = 'Utilisateur temporaire crée:';
+        $comment[] = 'Utilisateur temporaire créé:';
         $comment[] = 'id utilisateur: '.$tmpUser->getId();
         $comment[] = 'roles: '.implode(',', $tmpUser->getRoles());
         $comment[] = 'login: '.$tmpUser->getLogin();
