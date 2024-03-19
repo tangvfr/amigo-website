@@ -5,14 +5,15 @@ namespace App\Entity;
 use App\Entity\Date\AbstractEditableEntity;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
+#[UniqueEntity('studentNumber')]
 class Student extends AbstractEditableEntity
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
@@ -31,7 +32,6 @@ class Student extends AbstractEditableEntity
     private ?string $img = null;
 
     #[ORM\Column(length: 10, unique: true)]
-    #[Assert\Unique]
     #[Assert\NotNull, Assert\Regex(pattern: '/^o[0-9]{7,8}$/')]
     private ?string $studentNumber = null;
 

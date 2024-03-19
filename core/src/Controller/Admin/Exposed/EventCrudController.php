@@ -21,6 +21,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EventCrudController extends AbstractImageCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Évènement';
+    private const ENTITY_LABEL_IN_PLURAL = 'Évènements';
+
     public static function getEntityFqcn(): string
     {
         return Event::class;
@@ -29,12 +32,12 @@ class EventCrudController extends AbstractImageCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Evenement')
-            ->setEntityLabelInPlural('Evenements')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['name'])
             ->setDefaultSort(['creationDate' => 'DESC'])
-            ->setDateFormat('dd/MM/yyyy')
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Event')
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPaginatorPageSize(15)
             ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
 
@@ -42,41 +45,35 @@ class EventCrudController extends AbstractImageCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->hideOnIndex()
-                ->hideOnForm(),
-
-            FormField::addColumn('col-lg-8 col-xl-6'),
-            FormField::addPanel('INFORMATIONS PRINCIPALE'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
+            FormField::addPanel(DashboardController::PANEL_NAME_INFO_PRINCIPALE),
             TextField::new('name', 'Nom'),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
             BooleanField::new('cancel', 'Annuler')
                 ->hideOnIndex(),
+                
             // pas besoins de les afficher mais ils existent
             DateTimeField::new('creationDate', 'Date de création')
                 ->hideOnIndex()
                 ->setRequired(false)
-                ->setDisabled()
-            ,
+                ->setDisabled(),
             DateTimeField::new('lastEditDate', 'Dernière modification')
                 ->hideOnIndex()
-                ->setFormTypeOptions(['disabled' => 'disabled'])
-            ,
+                ->setDisabled(),
 
             // DATE * 5
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('DATE'),
             DateTimeField::new('bgedDate.beginDate', 'Début de l\'événement')
                 ->hideOnIndex(),
             DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
                 ->setHelp('Si Début de l\'événement non rempli, début de l\'evenement = fin de l\'événement')
             ,
-            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement')
-                ->hideOnIndex(),
+            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement'),
 
             // BANNIERE
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('BANNIERE'),
             ImageField::new('img', 'Image')
                 ->hideOnIndex()
@@ -94,7 +91,7 @@ class EventCrudController extends AbstractImageCrudController
                 ]),
 
             // ARGENT
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('ARGENT'),
             BooleanField::new('onlyMiagist', 'Réserver aux miagiste'),
             MoneyField::new('adhPrice', 'Prix Adhérant')
@@ -103,7 +100,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->setCurrency('EUR'),
 
             // QUOTA
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('QUOTA'),
             IntegerField::new('quotaStu', 'Quota d\'éleve')
                 ->hideOnIndex(),
@@ -111,7 +108,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->hideOnIndex(),
 
             // Information sur l'evenement
-            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('INFO'),
             AssociationField::new('types')
                 ->hideOnIndex(),

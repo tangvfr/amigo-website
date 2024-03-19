@@ -23,7 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Mandate extends AbstractEditableEntity
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
