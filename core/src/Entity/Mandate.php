@@ -12,7 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[GetCollection(
     uriTemplate: '/office',
@@ -31,13 +30,11 @@ class Mandate extends AbstractEditableEntity
     private Collection $roles;
 
     #[ORM\ManyToOne, ORM\JoinColumn(nullable: false)]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?Student $student = null;
 
     #[ORM\Column]
-    #[Assert\NotNull]
-    private ?bool $visible = null;
+    private ?bool $visible = true;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
     private BeginEndDateEmbeddable $bgedDate;
@@ -122,5 +119,4 @@ class Mandate extends AbstractEditableEntity
     {
         return $this->bgedDate->getEndDate();
     }
-
 }

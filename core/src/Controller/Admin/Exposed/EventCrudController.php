@@ -52,7 +52,7 @@ class EventCrudController extends AbstractImageCrudController
                 ->hideOnIndex(),
             BooleanField::new('cancel', 'Annuler')
                 ->hideOnIndex(),
-                
+
             // pas besoins de les afficher mais ils existent
             DateTimeField::new('creationDate', 'Date de création')
                 ->hideOnIndex()
@@ -60,7 +60,8 @@ class EventCrudController extends AbstractImageCrudController
                 ->setDisabled(),
             DateTimeField::new('lastEditDate', 'Dernière modification')
                 ->hideOnIndex()
-                ->setDisabled(),
+                ->setDisabled()
+            ,
 
             // DATE * 5
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
@@ -70,7 +71,8 @@ class EventCrudController extends AbstractImageCrudController
             DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
                 ->setHelp('Si Début de l\'événement non rempli, début de l\'evenement = fin de l\'événement')
             ,
-            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement'),
+            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement')
+                ->hideOnIndex(),
 
             // BANNIERE
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
@@ -82,7 +84,7 @@ class EventCrudController extends AbstractImageCrudController
             ChoiceField::new('note')
                 ->setHelp('Qualité de l\'affiche')
                 ->setChoices([
-                    'Cacher / Inregardable' => 0,
+                    'Cacher / Irregardable' => 0,
                     'Très insatisfaits' => 1,
                     'Insatisfaits' => 2,
                     'Neutre' => 3,

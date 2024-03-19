@@ -33,8 +33,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
         $eventTypes = $this->eventTypeRepository->findAll();
         $locations = $this->locationRepository->findAll();
 
-        for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++)
-        {
+        for ($i = 0; $i < ConstantesFixtures::EVENT_NB; $i++) {
             //création de la date
             $date = UtilFixtures::createDate(
                 $faker,
@@ -62,12 +61,22 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
             $event->setOnlyMiagist($faker->boolean(ConstantesFixtures::PROBA_ONLY_MIAGIST));
 
-            $event->setNadhPrice($faker->numberBetween(
+            if ($faker->boolean(ConstantesFixtures::BIG_PRICE_PROBA))
+            {
+                $event->setNadhPrice($faker->numberBetween(
                     0,
-                    ConstantesFixtures::PRICE_EVENT_NADH_MAX
+                    ConstantesFixtures::BIG_PRICE_EVENT_NADH_MAX
                 ))
-                ->setAdhPrice($event->getNadhPrice()-ConstantesFixtures::DIFF_PRICE_NADH_ADH)
-                ->setQuotaStu($faker->numberBetween(
+                    ->setAdhPrice($event->getNadhPrice() - ConstantesFixtures::DIFF_PRICE_NADH_ADH);
+            } else {
+                $event->setNadhPrice($faker->numberBetween(
+                    ConstantesFixtures::SMALL_PRICE_EVENT_NADH_MIN,
+                    ConstantesFixtures::SMALL_PRICE_EVENT_NADH_MAX
+                ))
+                    ->setAdhPrice($event->getNadhPrice() - ConstantesFixtures::DIFF_PRICE_NADH_ADH);
+            }
+
+            $event->setQuotaStu($faker->numberBetween(
                     ConstantesFixtures::QUOTA_STU_MIN,
                     ConstantesFixtures::QUOTA_MAX
                 ))

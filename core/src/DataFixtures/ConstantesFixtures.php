@@ -18,8 +18,11 @@ abstract class ConstantesFixtures {
     public const EVENT_NB = 30;
     public const PROBA_ONLY_MIAGIST = 80;
     public const TWO_TYPES_PROBA = 80;
-    public const PRICE_EVENT_NADH_MAX = 110;
-    public const DIFF_PRICE_NADH_ADH = 3;
+    public const BIG_PRICE_EVENT_NADH_MAX = 11000;
+    public const SMALL_PRICE_EVENT_NADH_MIN = 300;
+    public const SMALL_PRICE_EVENT_NADH_MAX = 500;
+    public const BIG_PRICE_PROBA = 15;
+    public const DIFF_PRICE_NADH_ADH = 300;
     public const QUOTA_STU_MIN = 20;
     public const QUOTA_MAX = 50;
     public const NOTE_MAX = 5;
