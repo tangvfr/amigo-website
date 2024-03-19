@@ -62,6 +62,7 @@ class EventCrudController extends AbstractImageCrudController
             DateTimeField::new('lastEditDate', 'Dernière modification')
                 ->hideOnIndex()
                 ->setFormTypeOptions(['disabled' => 'disabled'])
+                ->setDisabled()
             ,
 
             // DATE * 5
@@ -85,7 +86,7 @@ class EventCrudController extends AbstractImageCrudController
             ChoiceField::new('note')
                 ->setHelp('Qualité de l\'affiche')
                 ->setChoices([
-                    'Cacher / Inregardable' => 0,
+                    'Cacher / Irregardable' => 0,
                     'Très insatisfaits' => 1,
                     'Insatisfaits' => 2,
                     'Neutre' => 3,

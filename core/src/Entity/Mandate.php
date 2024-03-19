@@ -34,7 +34,7 @@ class Mandate extends AbstractEditableEntity
     private ?Student $student = null;
 
     #[ORM\Column]
-    private ?bool $visible = null;
+    private ?bool $visible = true;
 
     #[ORM\Embedded(class: BeginEndDateEmbeddable::class, columnPrefix: false)]
     private BeginEndDateEmbeddable $bgedDate;

@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
-#[UniqueEntity('studentNumber')]
+#[UniqueEntity(fields: ['studentNumber', 'email'])]
 class Student extends AbstractEditableEntity
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]

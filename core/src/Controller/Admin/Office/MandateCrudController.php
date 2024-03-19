@@ -33,16 +33,39 @@ class MandateCrudController extends AbstractCrudController
         ;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
+            IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,
+
+            //champs editable
+            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addPanel('INFORMATIONS PRINCIPALES'),
             AssociationField::new('student', 'Étudiant'),
-            AssociationField::new('roles', 'Roles'),
+            AssociationField::new('roles', 'Rôles'),
             DateTimeField::new('bgedDate.beginDate', 'Début du mandat'),
             DateTimeField::new('bgedDate.endDate', 'Fin du mandat'),
             BooleanField::new('visible', 'Visible')
                 ->hideOnIndex()
+            ,
+
+            //champs d'informations
+            FormField::addColumn('col-lg-8 col-xl-6'),
+            FormField::addPanel('HISTORIQUE')
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('creationDate', 'Date de création')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('lastEditDate', 'Dernière modification')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
         ];
     }
 
