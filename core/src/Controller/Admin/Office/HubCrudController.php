@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Office;
 
 use App\Controller\Admin\DashboardController;
 use App\Entity\Hub;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -26,7 +27,7 @@ class HubCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Pole')
             ->setEntityLabelInPlural('Pole')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
+            ->setDefaultSort(['priority' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - Pole')
             ->setPaginatorPageSize(10);
     }
@@ -38,9 +39,14 @@ class HubCrudController extends AbstractCrudController
                 ->setSortable(true),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
-            CollectionField::new('roles', 'Poles'),
+//            CollectionField::new('roles', 'Roles'),
             IntegerField::new('priority', 'Priorité')
-                ->setSortable(true)
+                ->hideOnIndex()
         ];
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

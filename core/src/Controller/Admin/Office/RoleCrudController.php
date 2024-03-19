@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Office;
 
 use App\Controller\Admin\DashboardController;
 use App\Entity\Role;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -25,7 +26,7 @@ class RoleCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Role')
             ->setEntityLabelInPlural('Roles')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
+            ->setDefaultSort(['priority' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME.' - Role')
             ->setPaginatorPageSize(10);
     }
@@ -34,11 +35,16 @@ class RoleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('hub', 'Pole'),
             TextField::new('name', 'Nom')
                 ->setSortable(true),
+            AssociationField::new('hub', 'Pole'),
             IntegerField::new('priority', 'Priorité')
-                ->setSortable(true)
+                ->hideOnIndex()
         ];
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

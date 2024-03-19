@@ -98,6 +98,11 @@ class Hub
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function getPriority(): ?int
     {
         return $this->priority;

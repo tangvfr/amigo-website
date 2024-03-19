@@ -37,10 +37,16 @@ class StudentCrudController extends AbstractImageCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            TextField::new('studentNumber', 'Numéro étudiant')
+                ->setSortable(true),
             TextField::new('name', 'Prénom')
                 ->setSortable(true),
-            TextField::new('lastname', 'Nom')
+            TextField::new('lastName', 'Nom')
                 ->setSortable(true),
+            TextField::new('email', 'Email')
+                ->setSortable(true)
+                ->hideOnIndex(),
+            ChoiceField::new('level', 'Niveau de formation'),
             ImageField::new('img', 'Image')
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
@@ -53,13 +59,6 @@ class StudentCrudController extends AbstractImageCrudController
                         'accept' => self::TYPE_IMAGE,
                     ],
                 ]),
-            TextField::new('studentNumber', 'Numéro étudiant')
-                ->setSortable(true)
-                ->hideOnIndex(),
-            TextField::new('email', 'Email')
-                ->setSortable(true)
-                ->hideOnIndex(),
-            ChoiceField::new('level', 'Niveau de formation')
         ];
     }
 

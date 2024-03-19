@@ -86,7 +86,7 @@ abstract class ConstantesFixtures {
 
     //utilisation dans plusieurs fixtures
     public const NB_WORD_LABEL = 3;
-    public const PRIORITY_MIN = -10;
-    public const PRIORITY_MAX = 10;
+    public const PRIORITY_MIN = -100;
+    public const PRIORITY_MAX = 100;
     public const PUBLICATION_DATE_PROBA = 90;
 }
