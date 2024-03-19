@@ -15,6 +15,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CompanyCrudController extends AbstractImageCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Entreprise';
+    private const ENTITY_LABEL_IN_PLURAL = 'Entreprises';
 
     public static function getEntityFqcn(): string
     {
@@ -24,18 +26,17 @@ class CompanyCrudController extends AbstractImageCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Entreprise')
-            ->setEntityLabelInPlural('Entreprises')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['name'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - Company')
-            ->setPaginatorPageSize(10);
+            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPaginatorPageSize(15);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
             TextField::new('name', 'Nom')
                 ->setSortable(true),
             ImageField::new('img', 'Image')
@@ -61,12 +62,23 @@ class CompanyCrudController extends AbstractImageCrudController
                     'attr' => [
                         'accept' => self::TYPE_IMAGE,
                     ],
-                ])
-            ,
+                ]),
             TextEditorField::new('description', 'Description')
                 ->hideOnIndex(),
-            AssociationField::new('located', 'Emplacements'),
-            AssociationField::new('activities', 'Activités'),
+            AssociationField::new('located', 'Emplacements')
+                ->setHelp('Sélectionnez les emplacements où l\'entreprise est présente')
+                
+                // permet de ne pas passer par une requête SQL pour récupérer les emplacements
+                ->setFormTypeOptions([
+                    'by_reference' => false,
+                ])
+                ->autocomplete(),
+            AssociationField::new('activities', 'Activités')
+                ->setHelp('Sélectionnez les activités de l\'entreprise')
+                ->setFormTypeOptions([
+                    'by_reference' => false,
+                ])
+                ->autocomplete(),
         ];
     }
 
