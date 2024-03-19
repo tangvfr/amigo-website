@@ -14,30 +14,42 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class GeocodeService
+class GeocodeService implements GeocodeServiceInterface
 {
 
     const GET_METHOD = 'GET';
     const GEOCODE_MAP_URL = 'https://geocode.maps.co/search';
     const API_KEY_PARAM = 'api_key';
     const QUERY_PARAM = 'q';
-    const HTTP_TOO_MANY_REQUESTS = Response::HTTP_TOO_MANY_REQUESTS;
-    const HTTP_UNAUTHORIZED = Response::HTTP_UNAUTHORIZED;
-    const HTTP_INTERNAL_SERVER_ERROR = Response::HTTP_INTERNAL_SERVER_ERROR;
 
     public function __construct(
-        private readonly HttpClientInterface $httpClient,
-        #[Autowire('%env(APP_GEOCODE_API_KEY)%')] private string $geocodeApiKey,
+        private readonly HttpClientInterface                              $httpClient,
+        #[Autowire('%env(APP_GEOCODE_API_KEY)%')] private readonly string $geocodeApiKey,
     ){}
 
-    public function geocodeLoc(Location $loc): Coord
+    /**
+     * @return string | Coord[] | int
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ServerExceptionInterface
+     */
+    public function geocodeLoc(Location $loc, bool $toCoord = false): string | array | int
     {
-        return $this->geocodeAddr(Addresse::createFromLocation($loc));
+        return $this->geocodeAddr(Addresse::createFromLocation($loc, $toCoord));
     }
 
-    public function geocodeAddr(Addresse $addr): Coord
+
+    /**
+     * @return string | Coord[] | int
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ServerExceptionInterface
+     */
+    public function geocodeAddr(Addresse $addr, bool $toCoord = false): string | array | int
     {
-        return $this->geocodeQuery($addr->toQuery());
+        return $this->geocodeQuery($addr->toQuery(), $toCoord);
     }
 
     /**

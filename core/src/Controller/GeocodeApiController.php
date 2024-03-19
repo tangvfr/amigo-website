@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\GeocodeService;
+use App\Service\GeocodeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,18 +13,18 @@ class GeocodeApiController extends AbstractController
 {
 
     public function __construct(
-        private readonly GeocodeService $geocodeService
+        private readonly GeocodeServiceInterface $geocodeService
     ){}
 
     #[Route('/geocode/api', name: 'app_geocode_api')]
     public function index(
         #[MapQueryParameter] ?string $query = null,
         #[MapQueryParameter(filter: FILTER_VALIDATE_BOOLEAN)] bool $detail = false,
-
     ): JsonResponse
     {
-        if ($query === null)
+        if ($query === null) {
             return new JsonResponse(['errorCode' => Response::HTTP_BAD_REQUEST], Response::HTTP_BAD_REQUEST);
+        }
 
         //$respCode;
         //$respContent
