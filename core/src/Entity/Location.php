@@ -17,13 +17,15 @@ class Location
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank, Assert\Unique]
     private ?string $label = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
+    #[Assert\NotNull]
     private ?float $latitude = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
+    #[Assert\NotNull]
     private ?float $longitude = null;
 
     #[ORM\Column(length: 255, nullable: true)]
