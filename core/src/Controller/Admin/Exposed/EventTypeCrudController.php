@@ -3,8 +3,12 @@
 namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\DashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use App\Entity\EventType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EventTypeCrudController extends AbstractCrudController
 {
