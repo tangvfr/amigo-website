@@ -36,10 +36,10 @@ class HubCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
+            /*IdField::new('id')
                 ->hideOnIndex()
                 ->hideOnForm()
-            ,
+            ,*/
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_ECRAN_8),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),

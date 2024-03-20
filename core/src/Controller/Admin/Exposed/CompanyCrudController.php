@@ -39,10 +39,10 @@ class CompanyCrudController extends AbstractImageCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
+            /*IdField::new('id')
                 ->hideOnIndex()
                 ->hideOnForm()
-            ,
+            ,*/
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),

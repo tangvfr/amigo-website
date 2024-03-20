@@ -6,7 +6,6 @@ use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Location;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -49,7 +48,7 @@ class LocationCrudController extends AbstractCrudController
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_ADRESSE),
-            CountryField::new('country', 'Pays'),
+            TextField::new('country', 'Pays'),
             TextField::new('city', 'Ville'),
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse'),

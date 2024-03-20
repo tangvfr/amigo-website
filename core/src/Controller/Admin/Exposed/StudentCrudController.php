@@ -10,7 +10,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -38,10 +37,10 @@ class StudentCrudController extends AbstractImageCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-            ->hideOnIndex()
-            ->hideOnForm()
-            ,
+            /*IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,*/
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
