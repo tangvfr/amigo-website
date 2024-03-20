@@ -18,8 +18,11 @@ abstract class ConstantesFixtures {
     public const EVENT_NB = 30;
     public const PROBA_ONLY_MIAGIST = 80;
     public const TWO_TYPES_PROBA = 80;
-    public const PRICE_EVENT_NADH_MAX = 110;
-    public const DIFF_PRICE_NADH_ADH = 3;
+    public const BIG_PRICE_EVENT_NADH_MAX = 11000;
+    public const SMALL_PRICE_EVENT_NADH_MIN = 300;
+    public const SMALL_PRICE_EVENT_NADH_MAX = 500;
+    public const BIG_PRICE_PROBA = 15;
+    public const DIFF_PRICE_NADH_ADH = 300;
     public const QUOTA_STU_MIN = 20;
     public const QUOTA_MAX = 50;
     public const NOTE_MAX = 5;
@@ -29,6 +32,9 @@ abstract class ConstantesFixtures {
     public const EVENT_GAP_PUBLICATION_DATE_MIN = '-2 weeks';
     public const EVENT_GAP_PUBLICATION_DATE_MAX = '-1 weeks';
     public const EVENT_MANY_LOCATION_PROBA = 10;
+    public const EVENT_END_DATE = '+1 day';
+    public const EVENT_FAR_END_DATE = '+1 month';
+    public const EVENT_LONG_PROBA = 75;
 
 
     //constantes pour eventTypeFixtures
@@ -83,7 +89,7 @@ abstract class ConstantesFixtures {
 
     //utilisation dans plusieurs fixtures
     public const NB_WORD_LABEL = 3;
-    public const PRIORITY_MIN = -10;
-    public const PRIORITY_MAX = 10;
+    public const PRIORITY_MIN = -100;
+    public const PRIORITY_MAX = 100;
     public const PUBLICATION_DATE_PROBA = 90;
 }

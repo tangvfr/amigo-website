@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Company
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['challengerCompany', 'discountCompany', 'listOffer', 'infoCompany'])]
     private ?int $id = null;
 
@@ -153,5 +152,10 @@ class Company
         $this->activities->removeElement($activity);
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

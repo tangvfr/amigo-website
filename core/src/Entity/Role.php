@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Role
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
@@ -69,5 +68,11 @@ class Role
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
 
 }
