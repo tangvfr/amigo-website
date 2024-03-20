@@ -96,7 +96,7 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
                 MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
                 MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
-            MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON),
+            MenuItem::section(self::OFFICE_NAME, self::OFFICE_ICON),
                 MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
         ];
     }
