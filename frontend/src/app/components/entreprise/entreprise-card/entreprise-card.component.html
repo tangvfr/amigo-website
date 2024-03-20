@@ -1,6 +1,6 @@
 <div class="entreprise">
   <div class="top">
-    <img ngSrc="assets/images/{{this.partner?.company?.img}}">
+    <img [src]="this.partner?.company?.img ? 'assets/images/' + this.partner?.company?.img : 'assets/images/amigo_logo.png '" alt="Image">
     <div class="title-container">
       <h2>{{this.partner?.company?.name}}</h2>
       <h3>{{this.partner?.company?.activities}}</h3>
@@ -11,9 +11,9 @@
   </div>
   <div class="bottom">
     <ul>
-      <li><a><img></a></li>
-      <li><a><img></a></li>
-      <li><a><img></a></li>
+      <li><a><img [src]="'assets/images/linkedIn.svg'"></a></li>
+      <li><a><img [src]="'assets/images/instagram.svg'"></a></li>
+      <li><a><img [src]="'assets/images/instagram.svg'"></a></li>
     </ul>
     <p>Partenaire de puis : {{this.partner?.bgedDate}}</p>
   </div>

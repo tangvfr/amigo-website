@@ -3,6 +3,7 @@
   background-color: #2A2C37;
   width: 100%;
   position: relative;
+
 }
 
 #form-event-page #form{
@@ -20,6 +21,7 @@
   /* Centrer verticalement */
   color: aliceblue;
   text-decoration: none;
+  border-radius: 5%;
 }
 
 #form-event-page #form .line{
@@ -29,7 +31,7 @@
   overflow: hidden;
   width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-family: kadwa, 'Courier New', Courier, monospace;
 
 
