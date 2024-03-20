@@ -30,10 +30,13 @@ class CompanyCrudController extends AbstractImageCrudController
         return $crud
             ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
-            ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL)
-            ->setPaginatorPageSize(15);
+            ->setSearchFields([ConstantesCrud::SEARCH_FIELD_NAME])
+            ->setDefaultSort([ConstantesCrud::ID => ConstantesCrud::DESC])
+            ->setPageTitle(
+                ConstantesCrud::PAGE_NAME,
+                ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL
+            )
+            ->setPaginatorPageSize(ConstantesCrud::RESULT_BY_PAGE);
     }
 
     public function configureFields(string $pageName): iterable
@@ -46,16 +49,16 @@ class CompanyCrudController extends AbstractImageCrudController
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
-            TextField::new('name', 'Nom')
+            TextField::new(ConstantesCrud::COMPANY_PROPERTY_NAME, ConstantesCrud::COMPANY_LABEL_NAME)
                 ->setSortable(true)
             ,
-            TextEditorField::new('description', 'Description')
+            TextEditorField::new(ConstantesCrud::COMPANY_PROPERTY_DESC, ConstantesCrud::COMPANY_LABEL_DESC)
                 ->hideOnIndex()
             ,
-            ImageField::new('img', 'Image')
+            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_IMG, ConstantesCrud::COMPANY_LABEL_IMG)
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
                 ->setRequired(false)
                 ->setSortable(false)
                 ->setHelp(self::HELP_IMAGE)
@@ -65,10 +68,10 @@ class CompanyCrudController extends AbstractImageCrudController
                     ],
                 ])
             ,
-            ImageField::new('banner', 'Bannière')
+            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_BANNER, ConstantesCrud::COMPANY_LABEL_BANNER)
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
                 ->setRequired(false)
                 ->setSortable(false)
                 ->setHelp(self::HELP_IMAGE)
@@ -81,8 +84,8 @@ class CompanyCrudController extends AbstractImageCrudController
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
-            AssociationField::new('located', 'Emplacements')
-                ->setHelp('Sélectionnez les emplacements où l\'entreprise est présente')
+            AssociationField::new(ConstantesCrud::COMPANY_PROPERTY_LOCALISATION, ConstantesCrud::COMPANY_LABEL_LOCALISATION)
+                ->setHelp(ConstantesCrud::COMPANY_HELP_LOCALISATION)
                 
                 // permet de ne pas passer par une requête SQL pour récupérer les emplacements
                 ->setFormTypeOptions([
@@ -90,8 +93,8 @@ class CompanyCrudController extends AbstractImageCrudController
                 ])
                 ->autocomplete()
             ,
-            AssociationField::new('activities', 'Activités')
-                ->setHelp('Sélectionnez les activités de l\'entreprise')
+            AssociationField::new(ConstantesCrud::COMPANY_PROPERTY_ACT, ConstantesCrud::COMPANY_LABEL_ACT)
+                ->setHelp(ConstantesCrud::COMPANY_HELP_ACT)
                 ->setFormTypeOptions([
                     'by_reference' => false,
                 ])
