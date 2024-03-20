@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Entity\Location;
 
-class Addresse
+class Address
 {
 
     const EMPTY_END = '';
@@ -12,7 +12,7 @@ class Addresse
     const SEPARATOR_QUERY = ' ';
 
     public function __construct(
-        public ?string $adresse = null,
+        public ?string $address = null,
         public ?string $postalCode = null,
         public ?string $city = null,
         public ?string $country = null,
@@ -22,7 +22,7 @@ class Addresse
     {
         $str = '';
 
-        $str = self::appendIfNotNull($str, $this->adresse, self::COMMA_END);
+        $str = self::appendIfNotNull($str, $this->address, self::COMMA_END);
         $str = self::appendIfNotNull($str, $this->postalCode);
         $str = self::appendIfNotNull($str, $this->city);
         $str = self::appendIfNotNull($str, $this->country);
@@ -35,10 +35,10 @@ class Addresse
         return $appened !== null ? $str.self::SEPARATOR_QUERY.$appened.$end : $str;
     }
 
-    public static function createFromLocation(Location $location): Addresse
+    public static function createFromLocation(Location $location): Address
     {
-        return new Addresse(
-            adresse: $location->getAdresse(),
+        return new Address(
+            address: $location->getAdresse(),
             postalCode: $location->getPostalCode(),
             city: $location->getCity(),
             country: $location->getCountry(),

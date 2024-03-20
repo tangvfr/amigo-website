@@ -3597,6 +3597,7 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
@@ -3682,6 +3683,7 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
@@ -3767,6 +3769,7 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
@@ -3852,6 +3855,7 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
@@ -3937,6 +3941,7 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
