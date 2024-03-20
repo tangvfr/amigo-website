@@ -51,10 +51,19 @@ abstract class ConstantesCrud {
     const COMPANY_PROPERTY_BANNER = 'banner';
     const COMPANY_LABEL_BANNER = 'Bannière';
     const COMPANY_PROPERTY_LOCALISATION = 'located';
+    const COMPANY_LABEL_LOCALISATION = 'Localisation';
     const COMPANY_HELP_LOCALISATION = 'Sélectionnez les emplacements où l\'entreprise est présente';
     const COMPANY_LABEL_ACT = 'activities';
     const COMPANY_PROPERTY_ACT = 'Activités';
     const COMPANY_HELP_ACT = 'Sélectionnez les activités de l\'entreprise';
+
+
+    //constantes configure crud
+    const SEARCH_FIELD = 'name';
+    const ID = 'id';
+    const DESC = 'DESC';
+    const PAGE_NAME = 'index';
+    const RESULT_BY_PAGE = 10;
 
 
     // Taille des panels

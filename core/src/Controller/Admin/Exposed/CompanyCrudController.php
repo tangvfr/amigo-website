@@ -30,10 +30,13 @@ class CompanyCrudController extends AbstractImageCrudController
         return $crud
             ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
-            ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL)
-            ->setPaginatorPageSize(15);
+            ->setSearchFields([ConstantesCrud::SEARCH_FIELD])
+            ->setDefaultSort([ConstantesCrud::ID => ConstantesCrud::DESC])
+            ->setPageTitle(
+                ConstantesCrud::PAGE_NAME,
+                ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL
+            )
+            ->setPaginatorPageSize(ConstantesCrud::RESULT_BY_PAGE);
     }
 
     public function configureFields(string $pageName): iterable
