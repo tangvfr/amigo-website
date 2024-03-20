@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Exposed;
 
+use App\Controller\Admin\ConstantesCrud;
 use App\Controller\Admin\DashboardController;
 use App\Entity\Location;
 use App\Service\GeocodeServiceInterface;
@@ -52,7 +53,7 @@ class LocationCrudController extends AbstractCrudController
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(20)
             ->overrideTemplate('crud/edit', 'pages/admin/Exposed/location_edit.html.twig');
     }
@@ -64,7 +65,7 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('NOM'),
             TextField::new('label'),
 
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel('ADRESSE'),
             CountryField::new('country', 'Pays')
                 ->setEmptyData("FR"),
@@ -72,7 +73,7 @@ class LocationCrudController extends AbstractCrudController
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse', 'Adresse'),
 
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel('MAPS'),
             NumberField::new('latitude')
                 ->hideOnIndex()
