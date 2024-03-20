@@ -40,6 +40,22 @@ abstract class ConstantesCrud {
     const ROLE_ICON = 'fas fa-key';
 
 
+    //propriétés et label des cruds
+    const COMPANY_PROPERTY_NAME = 'name';
+    const COMPANY_LABEL_NAME = 'Name';
+    const COMPANY_PROPERTY_DESC = 'description';
+    const COMPANY_LABEL_DESC = 'Description';
+    const COMPANY_PROPERTY_IMG = 'img';
+    const COMPANY_LABEL_IMG = 'Image';
+    const COMPANY_PATTERN_IMG = '[randomhash].[extension]';
+    const COMPANY_PROPERTY_BANNER = 'banner';
+    const COMPANY_LABEL_BANNER = 'Bannière';
+    const COMPANY_PROPERTY_LOCALISATION = 'located';
+    const COMPANY_HELP_LOCALISATION = 'Sélectionnez les emplacements où l\'entreprise est présente';
+    const COMPANY_LABEL_ACT = 'activities';
+    const COMPANY_PROPERTY_ACT = 'Activités';
+    const COMPANY_HELP_ACT = 'Sélectionnez les activités de l\'entreprise';
+
 
     // Taille des panels
     const PANEL_COLUMN_MOITIE_ECRAN = 'col-lg-8 col-xl-6';
