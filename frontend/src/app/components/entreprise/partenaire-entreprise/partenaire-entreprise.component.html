@@ -11,6 +11,7 @@
         {{partners?.["hydra:totalItems"]}}
         @for (partner of partners!['hydra:member']; track partner) {
           <app-entreprise-card [partner]="partner"></app-entreprise-card>
+          <app-entreprise-card [partner]="partner"></app-entreprise-card>
         }
 
       }

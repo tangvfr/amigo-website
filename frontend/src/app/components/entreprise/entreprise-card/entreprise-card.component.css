@@ -9,17 +9,15 @@
   box-shadow: 2vw 1vh 2vw black;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10%;
 
 
 }
 
 .top{
-
-
   display: flex;
   justify-content: space-around;
-
-  flex-grow: 2;
+  height: 20vh;
 
 
 }
@@ -33,35 +31,63 @@
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
+
 }
 
 .top .title-container h3 ,.top .title-container h2 {
   margin: 0;
+  font-size: 3rem;
 
 }
 .top .title-container h3{
   font-family: Kadwa,'Courier New', Courier, monospace;
+  font-size: 2rem;
+
 }
 
 .top .title-container h2 {
   font-family: ministro, 'Courier New', Courier, monospace;
+  font-size: xx-large;
+  margin-bottom: 2rem;
 }
 
-.top img{
-  height: 100%;
+.top .logo{
+  height: 20vh;
   width: 50%;
+  max-height: 100%;
+  max-width: 50%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
 
 }
+.top .logo img{
+
+  width: 80%;
+  height: 80%;
+}
+
+
+
+
+
 
 .middle{
-  flex-grow: 2;
+  height: 20vh;
   padding: 1rem;
 
 }
 
 .middle p{
   font-family: Kadwa, 'Courier New', Courier, monospace;
-  font-size: small;
+  font-size: 1.3rem;
+  height: 100%;
+  text-align: left;
+
 }
 
 .bottom {
@@ -69,6 +95,7 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: end;
 
 
 }
@@ -81,6 +108,7 @@
   padding: 0%;
   margin: 0%;
 
+
 }
 
 .bottom ul li{
@@ -92,6 +120,11 @@
   margin: 0%;
 }
 
+.bottom ul li img{
+  width: 2rem;
+  height: 2rem;
+}
+
 .bottom p{
   margin: 0%  ;
   font-family: Kadwa, 'Courier New', Courier, monospace;
@@ -101,6 +134,7 @@
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
+  margin-bottom: 2rem;
 }
 
 

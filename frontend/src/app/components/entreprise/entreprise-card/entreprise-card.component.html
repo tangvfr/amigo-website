@@ -1,6 +1,8 @@
 <div class="entreprise">
   <div class="top">
-    <img [src]="this.partner?.company?.img ? 'assets/images/' + this.partner?.company?.img : 'assets/images/amigo_logo.png '" alt="Image">
+    <div class="logo">
+      <img [src]="this.partner?.company?.img ? 'assets/images/' + this.partner?.company?.img : 'assets/images/Atos_logo.png '" alt="Image">
+    </div>
     <div class="title-container">
       <h2>{{this.partner?.company?.name}}</h2>
       <h3>{{this.partner?.company?.activities}}</h3>
