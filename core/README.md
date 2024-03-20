@@ -1,4 +1,13 @@
 # Projet AMIGOWS parties API & Admin
+## Commandes propres au projet
+```
+Available commands for the "user" namespace:
+    user:create      Permet de créer un utilisateur à un étudiant.
+    user:delete      Permet de supprimer l'utilisateur d'un étudiant.
+    user:list        Permet de voir la liste des utilisateurs.
+    user:tmp:clear   Permet de supprimer tous les utilisateurs root temporaire.
+    user:tmp:create  Permet d'ajouter un utilisateur root temporaire
+```
 ## Avant tout choses pour configurer votre bd ou environment
 - Copier et renommer le fichier `.env` vers `.env.local` pour que ce dernier avec vos clefs ou mdp ne sois pas commit.
 ## Commandes qui peuvent dépanner

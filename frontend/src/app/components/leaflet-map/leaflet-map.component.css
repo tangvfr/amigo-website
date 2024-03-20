@@ -1,0 +1,15 @@
+#amap {
+  height: 100%;
+}
+
+.map-container {
+  position: relative;
+  margin: 30px;
+  width: 500px;
+  height: 300px;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}

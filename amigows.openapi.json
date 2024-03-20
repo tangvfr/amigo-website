@@ -3552,7 +3552,9 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "label"
+                    "label",
+                    "latitude",
+                    "longitude"
                 ],
                 "properties": {
                     "@context": {
@@ -3595,19 +3597,14 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "country": {
                         "type": [
@@ -3641,7 +3638,9 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "label"
+                    "label",
+                    "latitude",
+                    "longitude"
                 ],
                 "properties": {
                     "@context": {
@@ -3684,19 +3683,14 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "country": {
                         "type": [
@@ -3730,7 +3724,9 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "label"
+                    "label",
+                    "latitude",
+                    "longitude"
                 ],
                 "properties": {
                     "@context": {
@@ -3773,19 +3769,14 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "country": {
                         "type": [
@@ -3819,7 +3810,9 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "label"
+                    "label",
+                    "latitude",
+                    "longitude"
                 ],
                 "properties": {
                     "@context": {
@@ -3862,19 +3855,14 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "country": {
                         "type": [
@@ -3908,7 +3896,9 @@
                 "deprecated": false,
                 "required": [
                     "id",
-                    "label"
+                    "label",
+                    "latitude",
+                    "longitude"
                 ],
                 "properties": {
                     "@context": {
@@ -3951,19 +3941,14 @@
                         "type": "integer"
                     },
                     "label": {
+                        "uniqueItems": true,
                         "type": "string"
                     },
                     "latitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "longitude": {
-                        "type": [
-                            "number",
-                            "null"
-                        ]
+                        "type": "number"
                     },
                     "country": {
                         "type": [

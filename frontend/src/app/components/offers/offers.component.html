@@ -1,5 +1,5 @@
 <h2>Formulaire test ?</h2>
-<app-offer-search-fields (search)="search($event)"/>
+<app-offer-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
 <p>Nous avons {{ offers["hydra:totalItems"] }} offre de stage !</p>
 <ul>
   <li *ngFor="let offer of offers['hydra:member']">

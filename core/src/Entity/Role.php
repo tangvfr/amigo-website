@@ -11,12 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Role
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'roles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'roles'), ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     #[Groups(['office'])]
     private ?Hub $hub = null;
@@ -70,5 +68,11 @@ class Role
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
 
 }

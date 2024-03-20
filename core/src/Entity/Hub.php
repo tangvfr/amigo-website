@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Hub
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['office'])]
     private ?int $id = null;
 
@@ -97,6 +96,11 @@ class Hub
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getPriority(): ?int

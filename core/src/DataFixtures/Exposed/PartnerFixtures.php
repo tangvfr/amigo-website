@@ -31,7 +31,7 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
                 false
             );
 
-            $datetime = UtilFixtures::bgeDateToDateTime($date);
+            $datetime = UtilFixtures::bgeDateToDateTime($date->getEndDate());
 
             $publicationDate1 = $datetime->modify(ConstantesFixtures::PARTNER_GAP_PUBLICATION_DATE);
 

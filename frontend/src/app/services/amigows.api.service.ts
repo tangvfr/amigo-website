@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
-import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpParameterCodec, HttpParams, HttpParamsOptions} from "@angular/common/http";
 import {components} from "../models/schema.api";
 import {HydraList} from "../models/hydra-list";
 import {environment} from "../../environments/environment";

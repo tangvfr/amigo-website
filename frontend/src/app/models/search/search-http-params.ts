@@ -1,4 +1,6 @@
 import {HttpParams} from "@angular/common/http";
+import {DateAdapter} from "@angular/material/core";
+import {LuxonDateAdapter} from "@angular/material-luxon-adapter";
 
 export const STRICTLY_AFTER: string = 'strictly_after';
 export const AFTER: string = 'after';
@@ -25,5 +27,9 @@ export function setSearchStringParam(params: HttpParams, property: string, words
 export function  setDateParam(params: HttpParams, property: string, dateCondition: string, date?: Date): HttpParams
 {
   if (date === undefined) return params;
-  return params.set(property+`[${dateCondition}]`, date.toJSON());
+
+  const adapter = new LuxonDateAdapter('default');
+  const formattedDate = adapter.format(date, 'yyyy-MM-dd');
+
+  return params.set(property+`[${dateCondition}]`, formattedDate);
 }
