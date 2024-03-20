@@ -72,8 +72,9 @@ abstract class ConstantesFixtures {
     //constantes pour partnerFixtures
     public const PARTNER_NB = 20;
     public const CHALLENGE_PROBA = 66;
-    public const PARTNER_DATE_BETWEEN_MIN = '-12 months';
-    public const PARTNER_DATE_BETWEEN_MAX = '+12 months';
+    public const PARTNER_DATE_BETWEEN_MIN = '-18 months';
+    public const PARTNER_DATE_BETWEEN_MAX = '+6 months';
+    public const PARTNER_GAP_BEGIN_END_DATE = '+12 months';
     public const PARTNER_GAP_PUBLICATION_DATE = '-1 months';
 
 
