@@ -1,51 +1,59 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
 import * as L from "leaflet";
+import {NamedPosition} from "../../models/map/named-position";
+import {Position} from "../../models/map/position";
+import {NgStyle} from "@angular/common";
+
+const eiffelPos = new Position(48.858370, 2.294481);
+const defaultZoom = 14;
+const maxZoom = 18;
+const minZoom = 3;
 
 @Component({
   selector: 'app-leaflet-map',
   standalone: true,
-  imports: [],
+  imports: [
+    NgStyle
+  ],
   templateUrl: './leaflet-map.component.html',
   styleUrl: './leaflet-map.component.css'
 })
 export class LeafletMapComponent implements AfterViewInit {
 
+  @Input() posistions?: NamedPosition[];
+  @Input() width?: string;
+  @Input() height?: string;
   private map?: L.Map;
 
-  private initMap(): void {
-    this.map = L.map('amap', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
-    });
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    const coord = L.latLng(47.4909252, 2.4481896);
-
-    this.map.setZoom(14);
-    this.map.panTo(coord);//permet de centré la map
-    //map.setView(new L.LatLng(40.737, -73.923), 8);
-
-    const tMaker = L.marker(coord, {
-      alt: 'Try',
-      title: 'A Title ?',
-    }).addTo(this.map);
-
-    //tMaker.bindPopup("<b>Hé ouais</b><br /> T bien la !").openPopup(); ouvrir par default le pop up
-    tMaker.bindPopup("<b>Hé ouais</b><br /> T bien la !");
-
-    tiles.addTo(this.map);
+  centerMap(position: Position) {
+    this.map!.panTo(position.convertToLatLon());
   }
 
-  constructor() { }
+  private initMaker() {
+    for (let pos of this.posistions!) {
+      pos.convertToMaker().addTo(this.map!);
+    }
+  }
+
+  private initMap(): void {
+    let first = this.posistions!.length === 0 ? eiffelPos : this.posistions![0];
+
+    this.map = L.map('map', {
+      center: first.convertToLatLon(),
+      zoom: defaultZoom
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: maxZoom,
+      minZoom: minZoom,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(this.map);
+  }
 
   ngAfterViewInit(): void
   {
     this.initMap();
+    this.initMaker();
   }
 
 }

@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+    <app-leaflet-map #map [posistions]="locs" [width]="'600px'" [height]="'400px'"/>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>
