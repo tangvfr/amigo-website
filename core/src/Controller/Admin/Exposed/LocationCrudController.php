@@ -24,22 +24,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
-use Exception;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class LocationCrudController extends AbstractCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Localisation';
+    private const ENTITY_LABEL_IN_PLURAL = 'Localisations';
 
     public function __construct(
         private readonly GeocodeServiceInterface $geocodeService
     )
     {
     }
-
-    private const ENTITY_LABEL_IN_SINGULAR = 'Localisation';
-    private const ENTITY_LABEL_IN_PLURAL = 'Localisations';
 
     public static function getEntityFqcn(): string
     {
@@ -55,7 +54,6 @@ class LocationCrudController extends AbstractCrudController
             ->setDefaultSort(['id' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(20);
-
     }
 
     public function configureFields(string $pageName): iterable
@@ -67,7 +65,8 @@ class LocationCrudController extends AbstractCrudController
 
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('ADRESSE'),
-            CountryField::new('country'),
+            CountryField::new('country')
+                ->setEmptyData("FR"),
             TextField::new('city'),
             NumberField::new('postalCode'),
             TextField::new('adresse'),
@@ -79,27 +78,23 @@ class LocationCrudController extends AbstractCrudController
                 ->setNumDecimals(12)
                 ->setRequired(false),
             NumberField::new('longitude')
-                ->hideOnIndex()
+
                 ->setNumDecimals(12)
                 ->setRequired(false),
         ];
     }
 
-    /**
-     * @throws Exception|GuzzleException
-     */
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         $this->modificationLatitudeLongitude($entityInstance);
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-
     /**
-     * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function new(AdminContext $context): \EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+    public function new(AdminContext $context): KeyValueStore|RedirectResponse|Response
     {
         $event = new BeforeCrudActionEvent($context);
         $this->container->get('event_dispatcher')->dispatch($event);
@@ -126,23 +121,15 @@ class LocationCrudController extends AbstractCrudController
         $entityInstance = $newForm->getData();
         $context->getEntity()->setInstance($entityInstance);
 
-        // RAJOUT de la latitude et longitude si elles ne sont pas vide
-        try{
-            $instance = $this->modificationLatitudeLongitude($context->getEntity()->getInstance());
-            $context->getEntity()->setInstance($instance);
-        } catch (GuzzleException $e){
-            // TODO mettre un pop up
-        } catch (Exception $e) {
-            // TODO mettre un pop up
-        }
-
-
         if ($newForm->isSubmitted() && $newForm->isValid()) {
             $this->processUploadedFiles($newForm);
 
             $event = new BeforeEntityPersistedEvent($entityInstance);
             $this->container->get('event_dispatcher')->dispatch($event);
             $entityInstance = $event->getEntityInstance();
+
+            // code ajouter
+            $entityInstance = $this->modificationLatitudeLongitude($entityInstance);
 
             $this->persistEntity($this->container->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entityInstance);
 
@@ -173,7 +160,6 @@ class LocationCrudController extends AbstractCrudController
         $city = $entityInstance->getCity();
         $country = $entityInstance->getCountry();
 
-
         if ($city != null && $country != null) {
             $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
 
@@ -189,7 +175,27 @@ class LocationCrudController extends AbstractCrudController
             $longitude = $data[0]['lon'];
             $entityInstance->setLatitude($latitude);
             $entityInstance->setLongitude($longitude);
+        }
+        elseif ($entityInstance->getLatitude() != null && $entityInstance->getLongitude() != null &&
+            $entityInstance->getAdresse() == null && $entityInstance->getCity()){
+            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
+
+            // Convertir la chaîne JSON en tableau PHP
+            $data = json_decode($jsonString, true);
+
+            // Vérifier si le décodage a réussi
+            if ($data === null) {
+                // Gestion de l'erreur de décodage JSON
+                die('Erreur lors du décodage JSON.');
             }
+            dump($data[0]);
+            exit();
+
+            $latitude = $data[0]['lat'];
+            $longitude = $data[0]['lon'];
+            $entityInstance->setLatitude($latitude);
+            $entityInstance->setLongitude($longitude);
+        }
 
         return $entityInstance;
     }
