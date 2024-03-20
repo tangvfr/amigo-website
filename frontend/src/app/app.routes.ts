@@ -5,6 +5,7 @@ import {OffersComponent} from "./components/offers/offers.component";
 import {OfficeComponent} from "./components/office/office.component";
 import {HomeComponent} from "./components/home/home/home.component";
 import {EventComponent} from "./components/event/event/event.component";
+import {TestLeafletMapComponent} from "./components/test-leaflet-map/test-leaflet-map.component";
 
 export const routes: Routes = [
   {path: '', component: TesthComponent},
@@ -14,4 +15,5 @@ export const routes: Routes = [
   {path: 'events', component: EventsComponent},
   {path: 'offers', component: OffersComponent},
   {path: 'office', component: OfficeComponent},
+  {path: 'tmap', component: TestLeafletMapComponent},
 ];

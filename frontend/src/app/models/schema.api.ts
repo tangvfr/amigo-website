@@ -326,8 +326,8 @@ export interface components {
       "@type"?: string;
       id: number;
       label: string;
-      latitude?: number | null;
-      longitude?: number | null;
+      latitude: number;
+      longitude: number;
       country?: string | null;
       city?: string | null;
       postalCode?: string | null;
@@ -344,8 +344,8 @@ export interface components {
       "@type"?: string;
       id: number;
       label: string;
-      latitude?: number | null;
-      longitude?: number | null;
+      latitude: number;
+      longitude: number;
       country?: string | null;
       city?: string | null;
       postalCode?: string | null;
@@ -362,8 +362,8 @@ export interface components {
       "@type"?: string;
       id: number;
       label: string;
-      latitude?: number | null;
-      longitude?: number | null;
+      latitude: number;
+      longitude: number;
       country?: string | null;
       city?: string | null;
       postalCode?: string | null;
@@ -380,8 +380,8 @@ export interface components {
       "@type"?: string;
       id: number;
       label: string;
-      latitude?: number | null;
-      longitude?: number | null;
+      latitude: number;
+      longitude: number;
       country?: string | null;
       city?: string | null;
       postalCode?: string | null;
@@ -398,8 +398,8 @@ export interface components {
       "@type"?: string;
       id: number;
       label: string;
-      latitude?: number | null;
-      longitude?: number | null;
+      latitude: number;
+      longitude: number;
       country?: string | null;
       city?: string | null;
       postalCode?: string | null;
