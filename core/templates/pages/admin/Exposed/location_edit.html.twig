@@ -6,15 +6,9 @@
     {{ parent() }}
 
     {# Ajoutez ici votre contenu supplémentaire #}
-    <div id="map" style="
-        width: 30vw;
-        height: 20vh;
-        position: absolute;
-        bottom: 0;
-        left: 69vw;
-    "></div>
-
-
+       
+    <div id="map" class="map"></div>
+     
     {# Inclure les fichiers JavaScript et CSS de Leaflet.js #}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -40,4 +34,33 @@
             map.setView([lat, lon], map.getZoom());
         }
     </script>
+
+    <style>
+        .map {
+            height: 30vh;
+            border: 1px solid #AAA;
+            border-radius: 5px;
+        }
+        .content-wrapper{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        /* Pour les écrans de taille large (lg), définissez la largeur sur 66.666% */
+        @media (min-width: 992px) {
+            .map {
+                width: 66.666%;
+            }
+        }
+
+        /* Pour les écrans extra-larges (xl), définissez la largeur sur 50% */
+        @media (min-width: 1200px) {
+            .map {
+                width: 49%;
+                margin-top: -10vh;
+                margin-left: 51%;
+            }
+        }
+    </style>
 {% endblock %}
