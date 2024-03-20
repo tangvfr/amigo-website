@@ -2,10 +2,11 @@
 
 namespace App\Controller\Admin\Exposed;
 
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\CompanyType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -26,7 +27,7 @@ class CompanyTypeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(20);
     }
 
@@ -34,8 +35,15 @@ class CompanyTypeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('label')
-                ->setMaxLength(255),
+            IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,
+
+            FormField::addColumn('1'),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFO_PRINCIPALE),
+            TextField::new('label', 'Nom')
+                ->setMaxLength(255)
         ];
     }
 

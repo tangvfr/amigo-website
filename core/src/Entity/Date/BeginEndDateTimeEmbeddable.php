@@ -14,12 +14,12 @@ class BeginEndDateTimeEmbeddable implements IBeginEndDateEmbeddable
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['detailEvent'])]
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $beginDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups('detailEvent')]
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $endDate = null;
 
     public function getBeginDate(): ?DateTimeInterface

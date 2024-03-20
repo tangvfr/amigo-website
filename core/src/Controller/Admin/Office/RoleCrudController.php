@@ -2,20 +2,20 @@
 
 namespace App\Controller\Admin\Office;
 
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Role;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class RoleCrudController extends AbstractCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Role';
+    private const ENTITY_LABEL_IN_PLURAL = 'Roles';
     public static function getEntityFqcn(): string
     {
         return Role::class;
@@ -24,11 +24,11 @@ class RoleCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Role')
-            ->setEntityLabelInPlural('Roles')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['name'])
             ->setDefaultSort(['priority' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Role')
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME.' - '.self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(10)
         ;
     }
@@ -42,8 +42,8 @@ class RoleCrudController extends AbstractCrudController
                 ->hideOnForm()
             ,
 
-            FormField::addColumn('col-lg-8 col-xl-8'),
-            FormField::addPanel('INFORMATIONS PRINCIPALES'),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_ECRAN_8),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
             TextField::new('name', 'Nom')
                 ->setSortable(true)
             ,

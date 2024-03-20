@@ -25,29 +25,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
 {
-    const SITE_NAME = 'Amigo Website';
-    const DASHBOARD_NAME = 'Tableau de bord';
-    const DASHBOARD_ICON = 'fa fa-home';
-
-    const EXPOSED_NAME = 'Données exposés';
-    const EXPOSED_ICON = 'fa-solid fa-signs-post';
-
-    const OFFICE_NAME = 'Bureau';
-    const OFFICE_ICON = 'fa-solid fa-briefcase';
-  
-    const PASSWORD_NAME = 'Changer le mot de passe';
-    const PASSWORD_ICON = 'fa-solid fa-key';
-
-    // Taille des panels
-    const PANEL_COLUMN_MOITIER_ECRAN = 'col-lg-8 col-xl-6';
-    // nom des panels
-    const PANEL_NAME_INFO_PRINCIPALE = 'Informations principales';
-
     #[Route(['/admin'], name: 'admin_dashboard')]
     public function index(): Response
     {
         return $this->render('pages/admin/dashboard.html.twig', [
-            'dashboardTitle' => self::DASHBOARD_NAME . ' ' . self::SITE_NAME
+            'dashboardTitle' => ConstantesCrud::DASHBOARD_NAME . ' ' . ConstantesCrud::SITE_NAME
         ]);
     }
 
@@ -76,8 +58,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Admin '.DashboardController::SITE_NAME)
-            ->setFaviconPath('images/admin_amigo_logo.png')
+            ->setTitle('Admin ' . ConstantesCrud::SITE_NAME)
+            ->setFaviconPath('images/admin_amigo_logo.png');
             /*->setLocales([
                 Locale::new('fr', 'Français', 'fa-solid fa-bread-slice'),
                 Locale::new('en', 'English', 'fa-solid fa-flag-usa'),
@@ -87,17 +69,21 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        return [
-            MenuItem::linkToDashboard(self::DASHBOARD_NAME, self::DASHBOARD_ICON),
-            MenuItem::section(self::EXPOSED_NAME, self::EXPOSED_ICON),
-                MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
-                MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class),
-                MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
-                MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
-                MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
-                MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
-            MenuItem::section(self::OFFICE_NAME, self::OFFICE_ICON),
-                MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
+      return [
+        MenuItem::linkToDashboard(ConstantesCrud::DASHBOARD_NAME, ConstantesCrud::DASHBOARD_ICON),
+        MenuItem::section(ConstantesCrud::EXPOSED_NAME, ConstantesCrud::EXPOSED_ICON),
+            MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
+            MenuItem::linkToCrud('Entreprise Type', 'fas fa-chart-line', CompanyType::class),
+            MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
+            MenuItem::linkToCrud('Évènement Type', 'fas fa-calendar', EventType::class),
+            MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
+            MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
+            MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
+            MenuItem::linkToCrud('Étudiant', 'fas fa-user', Student::class),
+        MenuItem::section(ConstantesCrud::OFFICE_NAME, ConstantesCrud::OFFICE_ICON),
+            MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
+            MenuItem::linkToCrud('Pole', 'fas fa-flag', Hub::class),
+            MenuItem::linkToCrud('Role', 'fas fa-key', Role::class),
         ];
     }
 }

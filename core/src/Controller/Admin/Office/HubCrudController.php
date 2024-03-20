@@ -2,13 +2,10 @@
 
 namespace App\Controller\Admin\Office;
 
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Hub;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -17,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class HubCrudController extends AbstractCrudController
 {
+    private const ENTITY_LABEL_IN_SINGULAR = 'Pole';
+    private const ENTITY_LABEL_IN_PLURAL = 'Poles';
     public static function getEntityFqcn(): string
     {
         return Hub::class;
@@ -25,11 +24,11 @@ class HubCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Pole')
-            ->setEntityLabelInPlural('Pole')
+            ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
+            ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['name'])
             ->setDefaultSort(['priority' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME.' - Pole')
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME.' - '.self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(10)
         ;
     }
@@ -37,13 +36,13 @@ class HubCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
+            /*IdField::new('id')
                 ->hideOnIndex()
                 ->hideOnForm()
-            ,
+            ,*/
 
-            FormField::addColumn('col-lg-8 col-xl-8'),
-            FormField::addPanel('INFORMATIONS PRINCIPALES'),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_ECRAN_8),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
             TextField::new('name', 'Nom')
                 ->setSortable(true)
             ,
