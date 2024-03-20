@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin\Exposed;
 
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Location;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -29,7 +29,7 @@ class LocationCrudController extends AbstractCrudController
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(20);
 
     }
@@ -37,25 +37,33 @@ class LocationCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            FormField::addColumn('1'),
-            FormField::addPanel('NOM'),
-            TextField::new('label'),
+            IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,
 
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('ADRESSE'),
-            CountryField::new('country'),
-            TextField::new('city'),
-            NumberField::new('postalCode'),
+            FormField::addColumn('1'),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_NOM),
+            TextField::new('label', 'Nom'),
+
+
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_ADRESSE),
+            CountryField::new('country', 'Pays'),
+            TextField::new('city', 'Ville'),
+            NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse'),
 
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('MAPS'),
+
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_COORDONNEES),
             NumberField::new('latitude')
                 ->hideOnIndex()
-                ->setNumDecimals(12),
+                ->setNumDecimals(12)
+            ,
             NumberField::new('longitude')
                 ->hideOnIndex()
-                ->setNumDecimals(12),
+                ->setNumDecimals(12)
         ];
     }
 
