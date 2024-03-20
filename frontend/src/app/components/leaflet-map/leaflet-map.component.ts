@@ -28,6 +28,7 @@ export class LeafletMapComponent implements AfterViewInit {
 
     this.map.setZoom(14);
     this.map.panTo(coord);//permet de centré la map
+    //map.setView(new L.LatLng(40.737, -73.923), 8);
 
     const tMaker = L.marker(coord, {
       alt: 'Try',
