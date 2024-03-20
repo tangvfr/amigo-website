@@ -6,9 +6,10 @@
     {{ parent() }}
 
     {# Ajoutez ici votre contenu supplémentaire #}
-    <div id="map" style="height: 400px; width: 400px; position: absolute; right: 0; bottom: 0">
+    <div id="map" style="
 
-    </div>
+    "></div>
+
 
     {# Inclure les fichiers JavaScript et CSS de Leaflet.js #}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -16,10 +17,10 @@
 
     <script>
         let latitude = {{ entity.instance.latitude }} ;
-        var longitude = {{ entity.instance.longitude }};
+        let longitude = {{ entity.instance.longitude }};
 
         // Créer une instance de la carte Leaflet
-        var map = L.map('map').setView([latitude, longitude], 13);
+        const map = L.map('map').setView([latitude, longitude], 13);
 
         // Ajouter une couche de tuiles OpenStreetMap à la carte
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,7 +28,7 @@
         }).addTo(map);
 
         // Ajouter un marqueur pour l'entité avec la latitude et la longitude actuelles
-        var marker = L.marker([latitude, longitude]).addTo(map);
+        const marker = L.marker([latitude, longitude]).addTo(map);
 
         // Mettre à jour la position du marqueur lorsque la latitude et la longitude de l'entité changent
         function updateMarker(lat, lon) {
