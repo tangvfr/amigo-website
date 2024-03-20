@@ -32,5 +32,7 @@ abstract class ConstantesCrud {
     const PANEL_NAME_PRIX = 'PRIX';
     const PANEL_NAME_QUOTAS = 'QUOTAS';
     const PANEL_NAME_INFOS = 'INFOS';
+    const PASSWORD_NAME = 'Changer de mot de passe';
+    const PASSWORD_ICON = 'fa-solid fa-key';
 
 }

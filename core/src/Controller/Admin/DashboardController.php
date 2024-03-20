@@ -49,7 +49,7 @@ class DashboardController extends AbstractDashboardController
 
             //ajout bouton pour changer de mdp
             $userMenu->addMenuItems([
-                MenuItem::linkToRoute(self::PASSWORD_NAME, self::PASSWORD_ICON, 'app_password')
+                MenuItem::linkToRoute(ConstantesCrud::PASSWORD_NAME, ConstantesCrud::PASSWORD_ICON, 'app_password')
             ]);
         }
         return $userMenu;
@@ -59,7 +59,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Admin ' . ConstantesCrud::SITE_NAME)
-            ->setFaviconPath('images/admin_amigo_logo.png');
+            ->setFaviconPath('images/admin_amigo_logo.png')
             /*->setLocales([
                 Locale::new('fr', 'Français', 'fa-solid fa-bread-slice'),
                 Locale::new('en', 'English', 'fa-solid fa-flag-usa'),
@@ -75,7 +75,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
             MenuItem::linkToCrud('Entreprise Type', 'fas fa-chart-line', CompanyType::class),
             MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
-            MenuItem::linkToCrud('Évènement Type', 'fas fa-calendar', EventType::class),
+            MenuItem::linkToCrud('Évènement Type', 'fas fa-champagne-glasses', EventType::class),
             MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
             MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
             MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
