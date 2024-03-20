@@ -99,14 +99,14 @@ export class AmigowsApiService {
   getChallengerPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
-    (`${this.baseApiUrl}/parther/challenger`)
+    (`${this.baseApiUrl}/partner/challenger`)
       .pipe(catchError(this.handleError));
   }
 
   getDiscountPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
-    (`${this.baseApiUrl}/parther/discount`)
+    (`${this.baseApiUrl}/partner/discount`)
       .pipe(catchError(this.handleError));
   }
 

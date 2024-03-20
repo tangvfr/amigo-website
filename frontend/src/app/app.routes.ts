@@ -9,7 +9,7 @@ import {
   PartenaireEntrepriseComponent
 } from "./components/entreprise/partenaire-entreprise/partenaire-entreprise.component";
 
-import {OfficeComponent} from "./components/office/office.component";
+
 import {TestLeafletMapComponent} from "./components/test-leaflet-map/test-leaflet-map.component";
 
 export const routes: Routes = [

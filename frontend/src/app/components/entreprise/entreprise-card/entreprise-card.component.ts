@@ -13,5 +13,5 @@ import {NgOptimizedImage} from "@angular/common";
   styleUrl: './entreprise-card.component.css'
 })
 export class EntrepriseCardComponent {
-  @Input() parther?: components["schemas"]["Partner.jsonld-challengerCompany"] ;
+  @Input() partner!: components["schemas"]["Partner.jsonld-challengerCompany"] ;
 }

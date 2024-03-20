@@ -8,6 +8,7 @@ import {OfferSearch} from "../../../models/search/offer-search";
 import {EventSearch} from "../../../models/search/event-search";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {Observable} from "rxjs";
+import {MatButton} from "@angular/material/button";
 
 export const enum Stat {
   LOADING,
@@ -19,7 +20,7 @@ export const enum Stat {
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [NgFor, EventSearchFieldsComponent, NgIf, MatProgressSpinner, NgOptimizedImage],
+  imports: [NgFor, EventSearchFieldsComponent, NgIf, MatProgressSpinner, NgOptimizedImage, MatButton],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
@@ -34,8 +35,7 @@ export class EventsComponent implements OnInit {
   ) {}
 
   showEventDetails(event: components["schemas"]["Event.jsonld-minimalEvent"]) {
-
-    var eventid: bigint = BigInt(event.id);
+    let eventid: bigint = BigInt(event.id);
     this.amigowsApiService.getEvent(eventid).subscribe((eventDetail: components["schemas"]["Event.jsonld-detailEvent"]) => {
       this.selectedEvent = eventDetail;
     });
@@ -126,6 +126,4 @@ export class EventsComponent implements OnInit {
   {
     this.stat = this.stat === Stat.PARTIAL ? Stat.NORMAL : Stat.PARTIAL;
   }
-
-  protected readonly nowEvents = EMPTY_HYDRA_LIST;
 }

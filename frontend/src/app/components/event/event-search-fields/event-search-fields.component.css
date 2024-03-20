@@ -5,7 +5,7 @@
   position: relative;
 }
 
-#form-event-page form{
+#form-event-page #form{
   position: absolute;
   top: 15%;
   height: 70%;
@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 
-#form-event-page form .line{
+#form-event-page #form .line{
   /* background-color: aqua; */
 
   max-height: 29%;
@@ -40,7 +40,7 @@
 }
 
 
-#form-event-page form .line mat-form-field{
+#form-event-page #form .line mat-form-field{
 
   vertical-align: middle;
   width: 30%;
@@ -48,7 +48,7 @@
 
 }
 
-#form-event-page form .line div {
+#form-event-page #form .line div {
   width: 20%;
   height: 100%;
   display: flex;

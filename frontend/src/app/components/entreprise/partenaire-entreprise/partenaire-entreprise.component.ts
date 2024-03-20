@@ -3,7 +3,7 @@ import {Office} from "../../../models/office/office";
 import {AmigowsApiService} from "../../../services/amigows.api.service";
 import {delay} from "rxjs";
 import {components} from "../../../models/schema.api";
-import {HydraList} from "../../../models/hydra-list";
+import {EMPTY_HYDRA_LIST, HydraList} from "../../../models/hydra-list";
 import {EntrepriseCardComponent} from "../entreprise-card/entreprise-card.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
@@ -19,7 +19,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 })
 export class PartenaireEntrepriseComponent {
 
-  parthers?: HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>;
+  partners?: HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>;
   ready: boolean;
 
   constructor(
@@ -31,14 +31,15 @@ export class PartenaireEntrepriseComponent {
   ngOnInit() {
     this.amigowsApiService.getChallengerPartner()
       .subscribe({//executé la requête
-        next: parthers => {
-          this.parthers = parthers;
+        next: partners => {
+          this.partners = partners;
           this.ready = true;
         },
         //en cas d'erreur
         error: () => this.amigowsApiService.showErrorApiError()
       });
   }
+
 
 
 }

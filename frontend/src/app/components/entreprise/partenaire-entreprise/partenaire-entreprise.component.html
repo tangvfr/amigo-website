@@ -7,9 +7,12 @@
     </div>
     <div id="entreprise-container">
       @if (ready) {
-        @for (parther of parthers!['hydra:member']; track parther) {
-          <app-entreprise-card [parther]="parther"></app-entreprise-card>
+          la bite
+        {{partners?.["hydra:totalItems"]}}
+        @for (partner of partners!['hydra:member']; track partner) {
+          <app-entreprise-card [partner]="partner"></app-entreprise-card>
         }
+
       }
       @if (!ready){
         <div class="poster-container">
