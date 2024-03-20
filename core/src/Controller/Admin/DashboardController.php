@@ -87,21 +87,17 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard(self::DASHBOARD_NAME, self::DASHBOARD_ICON);
-        yield MenuItem::subMenu(self::EXPOSED_NAME, self::EXPOSED_ICON)->setSubItems([
-            MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
-            MenuItem::linkToCrud('Entreprise Type', 'fas fa-chart-line', CompanyType::class),
-            MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
-            MenuItem::linkToCrud('Évènement Type', 'fas fa-calendar', EventType::class),
-            MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
-            MenuItem::linkToCrud('Offre', 'fas fa-User-tie', Offer::class),
-            MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
-            MenuItem::linkToCrud('Étudiants', 'fas fa-user', Student::class),
-        ]);
-        yield MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON)->setSubItems([
-            MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
-            MenuItem::linkToCrud('Pole', 'fas fa-flag', Hub::class),
-            MenuItem::linkToCrud('Role', 'fas fa-key', Role::class),
-        ]);
+        return [
+            MenuItem::linkToDashboard(self::DASHBOARD_NAME, self::DASHBOARD_ICON),
+            MenuItem::section(self::EXPOSED_NAME, self::EXPOSED_ICON),
+                MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class),
+                MenuItem::linkToCrud('Company Type', 'fas fa-chart-line', CompanyType::class),
+                MenuItem::linkToCrud('Évènement', 'fas fa-calendar', Event::class),
+                MenuItem::linkToCrud('Localisation', 'fas fa-map-location-dot', Location::class),
+                MenuItem::linkToCrud('Offre', 'fas fa-user-tie', Offer::class),
+                MenuItem::linkToCrud('Partenaire', 'fas fa-handshake', Partner::class),
+            MenuItem::subMenu(self::OFFICE_NAME, self::OFFICE_ICON),
+                MenuItem::linkToCrud('Mandate', 'fas fa-person', Mandate::class),
+        ];
     }
 }
