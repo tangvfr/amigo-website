@@ -1,0 +1,38 @@
+{# templates/pages/admin/Exposed/location_edit.html.twig #}
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+
+{% block content %}
+    {# Appel au bloc parent pour inclure le contenu par défaut du formulaire #}
+    {{ parent() }}
+
+    {# Ajoutez ici votre contenu supplémentaire #}
+    <div id="map" style="height: 400px; width: 400px; position: absolute; right: 0; bottom: 0">
+
+    </div>
+
+    {# Inclure les fichiers JavaScript et CSS de Leaflet.js #}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        let latitude = {{ entity.instance.latitude }} ;
+        var longitude = {{ entity.instance.longitude }};
+
+        // Créer une instance de la carte Leaflet
+        var map = L.map('map').setView([latitude, longitude], 13);
+
+        // Ajouter une couche de tuiles OpenStreetMap à la carte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajouter un marqueur pour l'entité avec la latitude et la longitude actuelles
+        var marker = L.marker([latitude, longitude]).addTo(map);
+
+        // Mettre à jour la position du marqueur lorsque la latitude et la longitude de l'entité changent
+        function updateMarker(lat, lon) {
+            marker.setLatLng([lat, lon]);
+            map.setView([lat, lon], map.getZoom());
+        }
+    </script>
+{% endblock %}

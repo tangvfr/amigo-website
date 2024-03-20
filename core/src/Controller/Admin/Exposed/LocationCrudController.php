@@ -8,6 +8,7 @@ use App\Service\GeocodeServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
@@ -53,7 +54,11 @@ class LocationCrudController extends AbstractCrudController
             ->setSearchFields(['label'])
             ->setDefaultSort(['id' => 'DESC'])
             ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
-            ->setPaginatorPageSize(20);
+            ->setPaginatorPageSize(20)
+            ->overrideTemplates([
+                'crud/new' => 'pages/admin/Exposed/location_new.html.twig',
+                'crud/edit' => 'pages/admin/Exposed/location_edit.html.twig'
+            ]);
     }
 
     public function configureFields(string $pageName): iterable
@@ -76,11 +81,11 @@ class LocationCrudController extends AbstractCrudController
             NumberField::new('latitude')
                 ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setHelp('Automatique remplis si le Pays et Ville ne sont pas vide'),
+                ->setHelp('Automatiquement remplis si Pays et Ville ne sont pas vide'),
             NumberField::new('longitude')
                 // ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setHelp('Automatique remplis si le Pays et Ville ne sont pas vide'),
+                ->setHelp('Automatiquement remplis si Pays et Ville ne sont pas vide'),
         ];
     }
 
@@ -176,26 +181,26 @@ class LocationCrudController extends AbstractCrudController
             $entityInstance->setLatitude($latitude);
             $entityInstance->setLongitude($longitude);
         }
-        elseif ($entityInstance->getLatitude() != null && $entityInstance->getLongitude() != null &&
-            $entityInstance->getAdresse() == null && $entityInstance->getCity()){
-            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
-
-            // Convertir la chaîne JSON en tableau PHP
-            $data = json_decode($jsonString, true);
-
-            // Vérifier si le décodage a réussi
-            if ($data === null) {
-                // Gestion de l'erreur de décodage JSON
-                die('Erreur lors du décodage JSON.');
-            }
-            dump($data[0]);
-            exit();
-
-            $latitude = $data[0]['lat'];
-            $longitude = $data[0]['lon'];
-            $entityInstance->setLatitude($latitude);
-            $entityInstance->setLongitude($longitude);
-        }
+//        elseif ($entityInstance->getLatitude() != null && $entityInstance->getLongitude() != null &&
+//            $entityInstance->getAdresse() == null && $entityInstance->getCity()){
+//            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
+//
+//            // Convertir la chaîne JSON en tableau PHP
+//            $data = json_decode($jsonString, true);
+//
+//            // Vérifier si le décodage a réussi
+//            if ($data === null) {
+//                // Gestion de l'erreur de décodage JSON
+//                die('Erreur lors du décodage JSON.');
+//            }
+//            dump($data[0]);
+//            exit();
+//
+//            $latitude = $data[0]['lat'];
+//            $longitude = $data[0]['lon'];
+//            $entityInstance->setLatitude($latitude);
+//            $entityInstance->setLongitude($longitude);
+//        }
 
         return $entityInstance;
     }
