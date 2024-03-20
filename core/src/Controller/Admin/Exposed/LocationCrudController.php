@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\DashboardController;
 use App\Entity\Location;
+use App\Service\GeocodeServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -24,14 +25,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 
 class LocationCrudController extends AbstractCrudController
 {
+
+    public function __construct(
+        private readonly GeocodeServiceInterface $geocodeService
+    )
+    {
+    }
+
     private const ENTITY_LABEL_IN_SINGULAR = 'Localisation';
     private const ENTITY_LABEL_IN_PLURAL = 'Localisations';
 
@@ -70,11 +76,11 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('MAPS'),
             NumberField::new('latitude')
                 ->hideOnIndex()
-                ->setNumDecimals(7)
+                ->setNumDecimals(12)
                 ->setRequired(false),
             NumberField::new('longitude')
                 ->hideOnIndex()
-                ->setNumDecimals(7)
+                ->setNumDecimals(12)
                 ->setRequired(false),
         ];
     }
@@ -162,47 +168,29 @@ class LocationCrudController extends AbstractCrudController
         return $responseParameters;
     }
 
-
-    /**
-     * @throws Exception|GuzzleException
-     */
     public function modificationLatitudeLongitude(Location $entityInstance): Location
     {
-        $adresse = $entityInstance->getAdresse();
         $city = $entityInstance->getCity();
         $country = $entityInstance->getCountry();
-        $postalCode = $entityInstance->getPostalCode();
 
 
-        if ($entityInstance->getLatitude() != null && $entityInstance->getLongitude() != null){
-            dump($city);
-            exit();
-            if ($postalCode != null){
-                $adresse_sans_espace = str_replace(' ', '+', $adresse);
-                $url = "http://localhost:8000/geocode/api?query={$adresse_sans_espace}+{$city}+{$postalCode}+{$country}";
+        if ($city != null && $country != null) {
+            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
 
-                $client = new Client();
-                $response = $client->request('GET', $url);
+            // Convertir la chaîne JSON en tableau PHP
+            $data = json_decode($jsonString, true);
 
-                if ($response->getStatusCode() == 200) {
-                    $body = $response->getBody();
-                    $data = json_decode($body, true);
-                    // Traitez les données de réponse...
-                    if (!empty($data)) {
-                        $latitude = $data[0]['latitude'];
-                        $longitude = $data[0]['longitude'];
-                        // Utilisez les coordonnées géographiques récupérées...
-                        $entityInstance->setLatitude($latitude);
-                        $entityInstance->setLongitude($longitude);
-                    } else {
-                        // Gestion de l'adresse non trouvée...
-                    }
-                } else {
-                    // Gestion des erreurs de requête HTTP...
-                    throw new Exception("Erreur lors de la requête HTTP : {$response->getStatusCode()} - {$response->getReasonPhrase()}");
-                }
+            // Vérifier si le décodage a réussi
+            if ($data === null) {
+                // Gestion de l'erreur de décodage JSON
+                die('Erreur lors du décodage JSON.');
             }
-        }
+            $latitude = $data[0]['lat'];
+            $longitude = $data[0]['lon'];
+            $entityInstance->setLatitude($latitude);
+            $entityInstance->setLongitude($longitude);
+            }
+
         return $entityInstance;
     }
 }
