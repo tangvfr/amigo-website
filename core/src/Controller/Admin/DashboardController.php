@@ -9,11 +9,15 @@ use App\Entity\Location;
 use App\Entity\Mandate;
 use App\Entity\Offer;
 use App\Entity\Partner;
+use App\Entity\User\AppUser;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Locale;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -26,6 +30,8 @@ class DashboardController extends AbstractDashboardController
 
     const OFFICE_NAME = 'Bureau';
     const OFFICE_ICON = 'fa-solid fa-briefcase';
+    const PASSWORD_NAME = 'Changer le mot de passe';
+    const PASSWORD_ICON = 'fa-solid fa-key';
 
     #[Route(['/admin'], name: 'admin_dashboard')]
     public function index(): Response
@@ -35,11 +41,37 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        $userMenu = parent::configureUserMenu($user);
+        if ($user instanceof AppUser) {
+            //définition de l'avatar
+            if (!$user->isTmpRoot()) {
+                $img = $user->getStudent()->getImg();
+                if ($img !== null) {
+                    $userMenu->setAvatarUrl($img);
+                }
+            }
+
+            //ajout bouton pour changer de mdp
+            $userMenu->addMenuItems([
+                MenuItem::linkToRoute(self::PASSWORD_NAME, self::PASSWORD_ICON, 'app_password')
+            ]);
+        }
+        return $userMenu;
+    }
+
+
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Admin '.DashboardController::SITE_NAME)
-            ->setFaviconPath('images/admin_amigo_logo.png');
+            ->setFaviconPath('images/admin_amigo_logo.png')
+            /*->setLocales([
+                Locale::new('fr', 'Français', 'fa-solid fa-bread-slice'),
+                Locale::new('en', 'English', 'fa-solid fa-flag-usa'),
+            ])*/
+        ;
     }
 
     public function configureMenuItems(): iterable

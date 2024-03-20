@@ -41,11 +41,12 @@ security:
     access_control:
          - { path: ^/geocode/api, roles: ROLE_GEOCODE_API }
          - { path: ^/admin, roles: ROLE_CRUD }
+         - { path: ^/password, roles: ROLE_PASSWORD }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
     role_hierarchy:
-        ROLE_ROOT: [ROLE_CRUD, ROLE_GEOCODE_API]
+        ROLE_ROOT: [ROLE_CRUD, ROLE_GEOCODE_API, ROLE_PASSWORD]
         ROLE_USER: [ROLE_ROOT]
         #ROLE_ADMIN:       ROLE_USER
         #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

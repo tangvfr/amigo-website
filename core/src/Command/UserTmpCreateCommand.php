@@ -2,8 +2,6 @@
 
 namespace App\Command;
 
-use App\Entity\Student;
-use App\Entity\StudentType;
 use App\Entity\User\AppUser;
 use App\Util\TmpRootIdGenerator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +12,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[AsCommand(
     name: 'user:tmp:create',
@@ -76,7 +73,7 @@ class UserTmpCreateCommand extends Command
         return Command::SUCCESS;
     }
 
-    public static function regeneratePassword(UserInterface $user, UserPasswordHasherInterface $passwordHasher): string
+    public static function regeneratePassword(AppUser $user, UserPasswordHasherInterface $passwordHasher): string
     {
         //generation password
         $plaintextPassword = '';
