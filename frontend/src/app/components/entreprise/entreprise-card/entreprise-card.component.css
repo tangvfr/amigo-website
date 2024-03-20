@@ -15,7 +15,7 @@
 
 .top{
 
-  background-color: #5A71FF;
+
   display: flex;
   justify-content: space-around;
 
@@ -25,7 +25,6 @@
 }
 
 .top .title-container{
-  background-color: aqua;
   height: 100%;
   width: 100%;
   display: flex;
@@ -51,12 +50,12 @@
 .top img{
   height: 100%;
   width: 50%;
-  background-color: #0026ff;
+
 }
 
 .middle{
   flex-grow: 2;
-  background-color: rgb(22, 28, 33);
+
   padding: 0.5rem;
 
 }
@@ -68,7 +67,7 @@
 
 .bottom {
   flex-grow: 1;
-  background-color: aquamarine;
+
   display: flex;
   flex-direction: column;
 
@@ -76,10 +75,10 @@
 }
 .bottom ul{
   list-style: none;
-  background-color: aquamarine;
+
   display: flex;
   justify-content: center;
-  background-color: blueviolet;
+
   padding: 0%;
   margin: 0%;
 
@@ -89,7 +88,7 @@
   margin: 0 1rem;
   width: 2rem;
   height: 2rem;
-  background-color: #28292f;
+
   padding: 0%;
   margin: 0%;
 }
