@@ -1,0 +1,115 @@
+/*:host {pour le component lui même
+  display: block;
+  padding: 2rem;
+  background-color: aquamarine;
+}
+
+mat-card {
+  /*ce que tu veux
+}
+
+h1, mat-card-title {/* on ne peu pas affecté des compoenent plus haut/parent eg: le h1
+  color: red;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+mat-card-content {
+  color: whitesmoke;
+}
+
+.members {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.members > mat-chip {
+  flex-grow: 1;
+}
+
+mat-divider {
+  margin-top: 1rem;
+}
+
+*/
+
+@font-face {
+  font-family: "ministro";
+  src: url("../../../../assets/font/ministro/Ministro.ttf");
+}
+
+
+#office-amigo-page{
+  background-color: #2A2C37;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+}
+
+#center {
+
+  background-color: brown;
+  height: 2px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+
+#office-amigo-page h1{
+  text-align: center;
+  width: 100%;
+  font-family: ministro, 'Courier New', Courier, monospace;
+  font-size: xxx-large;
+
+}
+
+
+#office-container{
+  /* background-color: #303b7b; */
+  width: 80%;
+  min-height: 90vh;
+
+  margin-bottom: 5vh;
+
+}
+
+.hub-title{
+  text-align: center;
+  width: 100%;
+  font-family: ministro,'Courier New', Courier, monospace;
+  font-size: x-large;
+  margin-top: 4vh;
+}
+
+.hub-desc {
+  text-align: center;
+  width: 100%;
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  font-size: medium;
+  margin-bottom: 4vh;
+
+}
+
+.hub-container{
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 5vh;
+}

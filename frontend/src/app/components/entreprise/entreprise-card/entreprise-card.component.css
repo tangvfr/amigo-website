@@ -1,0 +1,109 @@
+
+.entreprise{
+
+  height: 60vh;
+  width: 80%;
+  margin-left: 10%;
+  background-color:#28292f;
+  position: relative;
+  box-shadow: 2vw 1vh 2vw black;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.top{
+
+  background-color: #5A71FF;
+  display: flex;
+  justify-content: space-around;
+
+  flex-grow: 2;
+
+
+}
+
+.top .title-container{
+  background-color: aqua;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+}
+
+.top .title-container h3 ,.top .title-container h2 {
+  margin: 0;
+
+}
+.top .title-container h3{
+  font-family: Kadwa,'Courier New', Courier, monospace;
+}
+
+.top .title-container h2 {
+  font-family: ministro, 'Courier New', Courier, monospace;
+}
+
+.top img{
+  height: 100%;
+  width: 50%;
+  background-color: #0026ff;
+}
+
+.middle{
+  flex-grow: 2;
+  background-color: rgb(22, 28, 33);
+  padding: 0.5rem;
+
+}
+
+.middle p{
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  font-size: small;
+}
+
+.bottom {
+  flex-grow: 1;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+
+
+}
+.bottom ul{
+  list-style: none;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  background-color: blueviolet;
+  padding: 0%;
+  margin: 0%;
+
+}
+
+.bottom ul li{
+  margin: 0 1rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #28292f;
+  padding: 0%;
+  margin: 0%;
+}
+
+.bottom p{
+  margin: 0%  ;
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+}
+
+
+

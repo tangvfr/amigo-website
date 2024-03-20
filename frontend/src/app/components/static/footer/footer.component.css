@@ -4,32 +4,53 @@
 
 footer{
   background-color: rgb(28, 28, 32);
-  height: 40%;
-  max-height: 40%;
+  height: 40vh;
+  max-height: 40vh;
   width: 100%;
-  background-image: url("../../../../ressources/images/footer.jpg");
+  background-image: url("../../../../assets/images/footer.jpg");
   background-size:contain;
   background-repeat: no-repeat;
   box-shadow: inset rgb(28, 28, 32) -80vw 0 5vw;
 }
 
 footer #container-footer {
-  /* background-color: #5A71FF; */
-  width: 60%;
+
+
+  width: 70%;
   height: 100%;
   margin-left: 30%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
 
 }
 
 footer #container-footer div{
-  /* background-color: rgb(5, 104, 48); */
+
   height: 90%;
-  width: 30%;
+  width: 25%;
   text-align: center;
+  margin-top: 3vh;
 }
+
+#admin{
+  height: 9vh;
+  width: 9vh;
+  background-size: 90%;
+  background-image: url("../../../../assets/images/admin_amigo_logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 5vh;
+  transition: all 0.5s;
+}
+
+#admin:hover{
+  background-size: 100%;
+}
+
+
+
+
 
 footer li {
   list-style: none;
@@ -45,6 +66,7 @@ footer .ul-title{
 
 footer #reseaux{
   display: flex;
+  justify-content: space-around;
 
 }
 
@@ -53,6 +75,6 @@ footer ul{
 }
 
 footer img{
-  height: 70% ;
-  width: 50%;
+  height: 7vh;
+  width: 7vh;
 }
