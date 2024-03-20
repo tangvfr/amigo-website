@@ -115,3 +115,4 @@ class CompanyCrudController extends AbstractImageCrudController
         parent::deleteEntity($entityManager, $entityInstance);
     }
 }
+
