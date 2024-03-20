@@ -40,7 +40,16 @@ abstract class ConstantesCrud {
     const ROLE_ICON = 'fas fa-key';
 
 
-    //propriétés et label des cruds
+    //constantes configure crud
+    const SEARCH_FIELD_NAME = 'name';
+    const SEARCH_FIELD_LABEL = 'label';
+    const ID = 'id';
+    const DESC = 'DESC';
+    const PAGE_NAME = 'index';
+    const RESULT_BY_PAGE = 10;
+
+
+    //propriétés et label crud company
     const COMPANY_PROPERTY_NAME = 'name';
     const COMPANY_LABEL_NAME = 'Name';
     const COMPANY_PROPERTY_DESC = 'description';
@@ -58,17 +67,20 @@ abstract class ConstantesCrud {
     const COMPANY_HELP_ACT = 'Sélectionnez les activités de l\'entreprise';
 
 
-    //constantes configure crud
-    const SEARCH_FIELD = 'name';
-    const ID = 'id';
-    const DESC = 'DESC';
-    const PAGE_NAME = 'index';
-    const RESULT_BY_PAGE = 10;
+    //propriétés et label crud company
+    const COMPANY_TYPE_PROPERTY_NAME = 'label';
+    const COMPANY_TYPE_LABEL_NAME = 'Nom';
+
 
 
     // Taille des panels
     const PANEL_COLUMN_MOITIE_ECRAN = 'col-lg-8 col-xl-6';
     const PANEL_COLUMN_ECRAN_8 = 'col-lg-8 col-xl-8';
+    const PANEL_COLUMN_FULL_SCREEN = '1';
+    const MAX_LENGTH = 255;
+
+
+
     // nom des panels
     const PANEL_NAME_INFOS_PRINCIPALES = 'INFORMATIONS PRINCIPALES';
     const PANEL_NAME_INFO_PRINCIPALE = 'INFORMATION PRINCIPALE';

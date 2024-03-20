@@ -30,7 +30,7 @@ class CompanyCrudController extends AbstractImageCrudController
         return $crud
             ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
-            ->setSearchFields([ConstantesCrud::SEARCH_FIELD])
+            ->setSearchFields([ConstantesCrud::SEARCH_FIELD_NAME])
             ->setDefaultSort([ConstantesCrud::ID => ConstantesCrud::DESC])
             ->setPageTitle(
                 ConstantesCrud::PAGE_NAME,
@@ -55,7 +55,7 @@ class CompanyCrudController extends AbstractImageCrudController
             TextEditorField::new(ConstantesCrud::COMPANY_PROPERTY_DESC, ConstantesCrud::COMPANY_LABEL_DESC)
                 ->hideOnIndex()
             ,
-            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_IMG, ConstantesCrud::COMPANY_LABEL_DESC)
+            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_IMG, ConstantesCrud::COMPANY_LABEL_IMG)
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
                 ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
