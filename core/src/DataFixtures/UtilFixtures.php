@@ -23,7 +23,8 @@ class UtilFixtures {
         bool $datetime) : BeginEndDateEmbeddable | BeginEndDateTimeEmbeddable
     {
         $date1 = $faker->dateTimeBetween($dateBetweenMin, $dateBetweenMax);
-        $date2 = $faker->dateTimeBetween($dateBetweenMin, $dateBetweenMax);
+        $date1clone = $date1;
+        $date2 = $date1clone->modify(ConstantesFixtures::PARTNER_GAP_BEGIN_END_DATE);
 
         if ($datetime) {
             $date = new BeginEndDateTimeEmbeddable();

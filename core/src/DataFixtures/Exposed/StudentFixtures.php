@@ -20,12 +20,11 @@ class StudentFixtures extends Fixture
             $student = new Student();
             $student->setName($faker->firstName())
                 ->setLastName($faker->lastName())
-                ->setStudentNumber($faker->numberBetween(
+                ->setStudentNumber('o' . $faker->numberBetween(
                     ConstantesFixtures::STUDENT_NUMBER_MIN,
                     ConstantesFixtures::STUDENT_NUMBER_MAX
                 ))
                 ->setEmail($faker->email())
-            //    ->setLevel(StudentType::M1)
                 ->setLevel($faker->randomElement($studentTypes))
             ;
 

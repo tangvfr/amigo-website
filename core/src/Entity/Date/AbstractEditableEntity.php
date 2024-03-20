@@ -13,11 +13,11 @@ class AbstractEditableEntity
 {
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $lastEditDate = null;
 
     public function getCreationDate(): ?DateTimeInterface

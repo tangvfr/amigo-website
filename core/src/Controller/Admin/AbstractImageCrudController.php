@@ -6,10 +6,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 abstract class AbstractImageCrudController extends AbstractCrudController
 {
-    protected const TYPE_IMAGE = 'image/png,image/gif,image/jpeg,image/webp';
-    protected const HELP_IMAGE = 'jpeg, png, gif de 5Mo';
-    protected const BASE_PATH = 'uploads/';
-    protected const UPLOAD_DIR = 'public/uploads/';
+    public const TYPE_IMAGE = 'image/png,image/gif,image/jpeg,image/webp';
+    public const HELP_IMAGE = 'jpeg, png, gif de 5Mo';
+    public const BASE_PATH = 'uploads/';
+    public const UPLOAD_DIR = 'public/uploads/';
 
     public function supprImage(array $images): void
     {

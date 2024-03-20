@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\AbstractImageCrudController;
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Event;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -36,7 +36,7 @@ class EventCrudController extends AbstractImageCrudController
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
             ->setSearchFields(['name'])
             ->setDefaultSort(['creationDate' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
+            ->setPageTitle('index', ConstantesCrud::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
             ->setPaginatorPageSize(15)
             ->setDateFormat(DateTimeField::FORMAT_SHORT);
     }
@@ -45,75 +45,98 @@ class EventCrudController extends AbstractImageCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel(DashboardController::PANEL_NAME_INFO_PRINCIPALE),
+            IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,
+
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
             TextField::new('name', 'Nom'),
             TextEditorField::new('description', 'Description')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+            ,
             BooleanField::new('cancel', 'Annuler')
-                ->hideOnIndex(),
-                
-            // pas besoins de les afficher mais ils existent
-            DateTimeField::new('creationDate', 'Date de création')
                 ->hideOnIndex()
-                ->setRequired(false)
-                ->setDisabled(),
-            DateTimeField::new('lastEditDate', 'Dernière modification')
-                ->hideOnIndex()
-                ->setDisabled(),
+            ,
 
             // DATE * 5
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('DATE'),
-            DateTimeField::new('bgedDate.beginDate', 'Début de l\'événement')
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_DATES),
+            DateTimeField::new('bgedDate.beginDate', 'Début de l\'évènement')
                 ->hideOnIndex(),
-            DateTimeField::new('bgedDate.endDate', 'Fin de l\'événement')
-                ->setHelp('Si Début de l\'événement non rempli, début de l\'evenement = fin de l\'événement')
+            DateTimeField::new('bgedDate.endDate', 'Fin de l\'évènement')
+                ->setHelp('Si début de l\'évènement non rempli, début de l\'évènement = fin de l\'évènement')
             ,
-            DateTimeField::new('publicationDate', 'Date de publication de l\'évenement'),
+            DateTimeField::new('publicationDate', 'Date de publication de l\'évènement')
+                ->hideOnIndex()
+            ,
 
             // BANNIERE
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('BANNIERE'),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_BANNIERE),
             ImageField::new('img', 'Image')
                 ->hideOnIndex()
                 ->setBasePath(self::BASE_PATH)
-                ->setUploadDir(self::UPLOAD_DIR),
+                ->setUploadDir(self::UPLOAD_DIR)
+            ,
             ChoiceField::new('note')
                 ->setHelp('Qualité de l\'affiche')
                 ->setChoices([
-                    'Cacher / Inregardable' => 0,
-                    'Très insatisfaits' => 1,
-                    'Insatisfaits' => 2,
+                    'Cacher / Irregardable' => 0,
+                    'Très insatisfait' => 1,
+                    'Insatisfait' => 2,
                     'Neutre' => 3,
                     'Satisfait' => 4,
                     'Très satisfait' => 5,
-                ]),
+                ])
+            ,
 
             // ARGENT
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('ARGENT'),
-            BooleanField::new('onlyMiagist', 'Réserver aux miagiste'),
-            MoneyField::new('adhPrice', 'Prix Adhérant')
-                ->setCurrency('EUR'),
-            MoneyField::new('nadhPrice', 'Prix Non Adhérant')
-                ->setCurrency('EUR'),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_PRIX),
+            BooleanField::new('onlyMiagist', 'Réservé aux miagiste'),
+            MoneyField::new('adhPrice', 'Prix Adhérants')
+                ->setCurrency('EUR')
+            ,
+            MoneyField::new('nadhPrice', 'Prix Non Adhérants')
+                ->setCurrency('EUR')
+            ,
 
             // QUOTA
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('QUOTA'),
-            IntegerField::new('quotaStu', 'Quota d\'éleve')
-                ->hideOnIndex(),
-            IntegerField::new('quotaComp', 'Quota d\'entreprise')
-                ->hideOnIndex(),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_QUOTAS),
+            IntegerField::new('quotaStu', 'Quotas étudiants')
+                ->hideOnIndex()
+            ,
+            IntegerField::new('quotaComp', 'Quotas entreprises')
+                ->hideOnIndex()
+            ,
 
             // Information sur l'evenement
-            FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
-            FormField::addPanel('INFO'),
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_QUOTAS),
             AssociationField::new('types')
-                ->hideOnIndex(),
-            AssociationField::new('situated', 'Localisation de l\'event')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+            ,
+            AssociationField::new('situated', 'Localisation de l\'évènement')
+                ->hideOnIndex()
+            ,
+
+            //champs informatifs
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_HISTORIQUE)
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('creationDate', 'Date de création')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
+            ,
+            DateTimeField::new('lastEditDate', 'Dernière modification')
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating()
         ];
     }
 

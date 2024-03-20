@@ -1,0 +1,44 @@
+{% extends 'login/base.html.twig' %}
+
+{% block title %}Changement de mot de passe{% endblock %}
+
+{% block alerts %}
+    {% if error %}
+        <div class="alert alert-danger m-0">
+            {{ error }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block cardTitle %}Changement de mot de passe{% endblock %}
+
+{% block cardBody %}
+    <form method="post">
+        <input type="hidden" name="token"
+               value="{{ csrf_token('change-password') }}"
+        >
+        <div class="d-flex flex-column align-items-stretch align-content-stretch gap-3">
+            <div class="form-floating">
+                <input type="password" name="oldpass" id="oldpass" class="form-control"
+                       autocomplete="current-password" required>
+                <label for="oldpass">Ancien mot de passe</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="newpass1" id="newpass1" class="form-control" required>
+                <label for="newpass1">Nouveau mot de passe</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="newpass2" id="newpass2" class="form-control" required>
+                <label for="newpass2">Confirmation mot de passe</label>
+            </div>
+            <div class="d-flex flex-row justify-content-between gap-2">
+                <a class="btn btn-secondary flex-fill" role="button" href="{{ path('admin_dashboard') }}">
+                    Annuler
+                </a>
+                <button class="btn btn-light flex-fill" type="submit">
+                    Modifier
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

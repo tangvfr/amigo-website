@@ -18,8 +18,11 @@ abstract class ConstantesFixtures {
     public const EVENT_NB = 30;
     public const PROBA_ONLY_MIAGIST = 80;
     public const TWO_TYPES_PROBA = 80;
-    public const PRICE_EVENT_NADH_MAX = 110;
-    public const DIFF_PRICE_NADH_ADH = 3;
+    public const BIG_PRICE_EVENT_NADH_MAX = 11000;
+    public const SMALL_PRICE_EVENT_NADH_MIN = 300;
+    public const SMALL_PRICE_EVENT_NADH_MAX = 500;
+    public const BIG_PRICE_PROBA = 15;
+    public const DIFF_PRICE_NADH_ADH = 300;
     public const QUOTA_STU_MIN = 20;
     public const QUOTA_MAX = 50;
     public const NOTE_MAX = 5;
@@ -48,7 +51,7 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour mandateFixtures
-    public const MANDATE_NB = 10;
+    public const MANDATE_NB = 20;
     public const VISIBLE_PROBA = 95;
 
     public const MANDATE_DATE_BETWEEN_MIN = '-18 months';
@@ -67,10 +70,11 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour partnerFixtures
-    public const PARTNER_NB = 20;
+    public const PARTNER_NB = 40;
     public const CHALLENGE_PROBA = 66;
-    public const PARTNER_DATE_BETWEEN_MIN = '-12 months';
-    public const PARTNER_DATE_BETWEEN_MAX = '+12 months';
+    public const PARTNER_DATE_BETWEEN_MIN = '-18 months';
+    public const PARTNER_DATE_BETWEEN_MAX = '+6 months';
+    public const PARTNER_GAP_BEGIN_END_DATE = '+12 months';
     public const PARTNER_GAP_PUBLICATION_DATE = '-1 months';
 
 

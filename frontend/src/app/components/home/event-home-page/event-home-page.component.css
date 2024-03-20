@@ -1,0 +1,123 @@
+
+/*------------*/
+#event-home-page {
+  height: 100vh;
+  background-color: #2A2C37;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+#event-home-page .side {
+  /* margin-top: 5%; */
+  height: 80%;
+  /* background-color: #5A71FF; */
+  width: 40%;
+
+}
+
+#event-home-page p {
+
+  /* background-color: rgb(22, 93, 63); */
+  height: 50%;
+  width: 80%;
+  margin-top: 10%;
+  margin-left: 10%;
+  font-family: kadwa, 'Courier New', Courier, monospace;
+  text-align: center;
+  font-size: small;
+}
+
+#event-home-page h3 {
+
+  display: flex;
+  font-family: ministro, 'Courier New', Courier, monospace;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+  font-size: x-large;
+  text-shadow: black 1vw 1vh 0.3vh;
+  height: 10%;
+  width: 80%;
+  margin-top: 0%;
+  margin-left: 10%;
+  /* background-color: aqua; */
+}
+
+#event-home-page #event-container{
+  /* background-color: aqua; */
+  width: 100%;
+  height: 70%;
+  position: relative;
+}
+
+
+#event-home-page #event-container .socle{
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  /* background-color: brown; */
+  background-image: conic-gradient(#4d59a939 120deg,
+  rgba(255, 255, 255, 0) 0 235deg,
+  #4d59a939 0);
+  box-shadow: #171b3154 0vh 3vh 3vh inset, #0a0b1068 0vh 3vh 3vh;
+  z-index: 2;
+
+}
+
+#event-home-page #event-container .poster{
+  position: absolute;
+  height: 95%;
+  width: 40%;
+
+
+}
+
+
+
+#event-container .poster:nth-child(2) {
+  background-color: rgb(100, 50, 150);
+  /* Choisissez la couleur que vous préférez */
+  z-index: 3;
+  left: 30%;
+  top: -15%;
+
+
+}
+#event-container .poster:nth-child(3) {
+  background-color: rgb(150, 80, 50);
+  /* Choisissez la couleur que vous préférez */
+  left: 55%;
+  z-index: 2;
+  transform: rotateZ(15deg);
+}
+#event-container .poster:nth-child(4) {
+  background-color: rgb(150, 80, 50);
+  /* Choisissez la couleur que vous préférez */
+  left: 5%;
+  z-index: 2;
+  transform: rotateZ(-15deg);
+}
+
+#event-container .button{
+  height: 10%;
+  width: 60%;
+  display: flex;
+  font-family: ministro, 'Courier New', Courier, monospace;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+  background-color: #51535f;
+  position: absolute;
+  left: 20%;
+  top: 105%;
+  z-index: 5;
+
+}
+

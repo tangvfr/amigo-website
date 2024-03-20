@@ -3,11 +3,13 @@
 namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\AbstractImageCrudController;
-use App\Controller\Admin\DashboardController;
+use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Company;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -28,21 +30,35 @@ class CompanyCrudController extends AbstractImageCrudController
         return $crud
             ->setEntityLabelInSingular(self::ENTITY_LABEL_IN_SINGULAR)
             ->setEntityLabelInPlural(self::ENTITY_LABEL_IN_PLURAL)
-            ->setSearchFields(['name'])
-            ->setDefaultSort(['id' => 'DESC'])
-            ->setPageTitle('index', DashboardController::SITE_NAME . ' - ' . self::ENTITY_LABEL_IN_PLURAL)
-            ->setPaginatorPageSize(15);
+            ->setSearchFields([ConstantesCrud::SEARCH_FIELD_NAME])
+            ->setDefaultSort([ConstantesCrud::ID => ConstantesCrud::DESC])
+            ->setPageTitle(
+                ConstantesCrud::PAGE_NAME,
+                ConstantesCrud::SITE_NAME. ' - ' .self::ENTITY_LABEL_IN_PLURAL
+            )
+            ->setPaginatorPageSize(ConstantesCrud::RESULT_BY_PAGE);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Nom')
-                ->setSortable(true),
-            ImageField::new('img', 'Image')
+            /*IdField::new('id')
+                ->hideOnIndex()
+                ->hideOnForm()
+            ,*/
+
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
+            TextField::new(ConstantesCrud::COMPANY_PROPERTY_NAME, ConstantesCrud::COMPANY_LABEL_NAME)
+                ->setSortable(true)
+            ,
+            TextEditorField::new(ConstantesCrud::COMPANY_PROPERTY_DESC, ConstantesCrud::COMPANY_LABEL_DESC)
+                ->hideOnIndex()
+            ,
+            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_IMG, ConstantesCrud::COMPANY_LABEL_IMG)
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
                 ->setRequired(false)
                 ->setSortable(false)
                 ->setHelp(self::HELP_IMAGE)
@@ -50,11 +66,12 @@ class CompanyCrudController extends AbstractImageCrudController
                     'attr' => [
                         'accept' => self::TYPE_IMAGE,
                     ],
-                ]),
-            ImageField::new('banner', 'Bannière')
+                ])
+            ,
+            ImageField::new(ConstantesCrud::COMPANY_PROPERTY_BANNER, ConstantesCrud::COMPANY_LABEL_BANNER)
                 ->setBasePath(self::BASE_PATH)
                 ->setUploadDir(self::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
                 ->setRequired(false)
                 ->setSortable(false)
                 ->setHelp(self::HELP_IMAGE)
@@ -62,17 +79,26 @@ class CompanyCrudController extends AbstractImageCrudController
                     'attr' => [
                         'accept' => self::TYPE_IMAGE,
                     ],
-                ]),
-            TextEditorField::new('description', 'Description')
-                ->hideOnIndex(),
-            AssociationField::new('located', 'Emplacements')
-                ->setHelp('Sélectionnez les emplacements où l\'entreprise est présente'),
-            AssociationField::new('activities', 'Activités')
-                ->setHelp('Sélectionnez les activités de l\'entreprise')
+                ])
+            ,
+
+            FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_INFOS_PRINCIPALES),
+            AssociationField::new(ConstantesCrud::COMPANY_PROPERTY_LOCALISATION, ConstantesCrud::COMPANY_LABEL_LOCALISATION)
+                ->setHelp(ConstantesCrud::COMPANY_HELP_LOCALISATION)
+                
+                // permet de ne pas passer par une requête SQL pour récupérer les emplacements
                 ->setFormTypeOptions([
                     'by_reference' => false,
                 ])
-                ->autocomplete(),
+                ->autocomplete()
+            ,
+            AssociationField::new(ConstantesCrud::COMPANY_PROPERTY_ACT, ConstantesCrud::COMPANY_LABEL_ACT)
+                ->setHelp(ConstantesCrud::COMPANY_HELP_ACT)
+                ->setFormTypeOptions([
+                    'by_reference' => false,
+                ])
+                ->autocomplete()
         ];
     }
 
@@ -89,3 +115,4 @@ class CompanyCrudController extends AbstractImageCrudController
         parent::deleteEntity($entityManager, $entityInstance);
     }
 }
+

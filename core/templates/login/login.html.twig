@@ -1,0 +1,50 @@
+{% extends 'login/base.html.twig' %}
+
+{% block title %}Espace Admin{% endblock %}
+
+{% block alerts %}
+    {% if error %}
+        <div class="alert alert-danger m-0">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="alert alert-primary m-0">
+            Tu es connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
+    {% endif %}
+{% endblock alerts %}
+
+{% block cardTitle %}Espace Admin{% endblock %}
+
+{% block cardBody %}
+    <form method="post">
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <div class="d-flex flex-column align-items-stretch align-content-stretch gap-3">
+            <div class="form-floating">
+                <input type="text" value="{{ last_username }}" name="_username" id="login" class="form-control"
+                       placeholder="o22033405" autocomplete="username" required autofocus>
+                <label for="login">Identifiant</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="_password" id="password" class="form-control"
+                       placeholder="o22033405" autocomplete="current-password" required>
+                <label for="password">Mot de passe</label>
+            </div>
+            <div class="w-100 d-flex flex-row justify-content-start">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="remember" name="_remember_me">
+                    <label class="form-check-label" for="remember">Se souvenir de moi</label>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-end">
+                <button class="btn btn-secondary flex-fill" type="submit">
+                    Connecter
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

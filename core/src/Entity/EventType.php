@@ -6,10 +6,12 @@ use ApiPlatform\Metadata\Tests\Fixtures\Metadata\Get;
 use App\Repository\EventTypeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[Get(normalizationContext: ['groups' => 'detailEventType'])]
+#[UniqueEntity(fields: 'label')]
 #[ORM\Entity(repositoryClass: EventTypeRepository::class)]
 class EventType
 {
@@ -55,4 +57,11 @@ class EventType
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->label;
+    }
+
+
 }

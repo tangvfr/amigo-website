@@ -1,0 +1,13 @@
+
+#galerie-event-page {
+  min-height: 100vh;
+  background-color: #2A2C37;
+  width: 100%;
+
+}
+
+.poster-container{
+  background-color: #5A71FF;
+  height: 90%;
+  width: 80%;
+}

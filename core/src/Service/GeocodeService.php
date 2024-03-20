@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Location;
-use App\Model\Addresse;
+use App\Model\Address;
 use App\Model\Coord;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +36,7 @@ class GeocodeService implements GeocodeServiceInterface
      */
     public function geocodeLoc(Location $loc, bool $toCoord = false): string | array | int
     {
-        return $this->geocodeAddr(Addresse::createFromLocation($loc, $toCoord));
+        return $this->geocodeAddr(Address::createFromLocation($loc, $toCoord));
     }
 
 
@@ -47,7 +47,7 @@ class GeocodeService implements GeocodeServiceInterface
      * @throws DecodingExceptionInterface
      * @throws ServerExceptionInterface
      */
-    public function geocodeAddr(Addresse $addr, bool $toCoord = false): string | array | int
+    public function geocodeAddr(Address $addr, bool $toCoord = false): string | array | int
     {
         return $this->geocodeQuery($addr->toQuery(), $toCoord);
     }
@@ -93,7 +93,9 @@ class GeocodeService implements GeocodeServiceInterface
                 default:
                     break;
             }
-        } catch (TransportExceptionInterface $e) {}
+        } catch (TransportExceptionInterface $e) {
+            $result = self::HTTP_GATEWAY_TIMEOUT;
+        }
 
         return $result;
     }
