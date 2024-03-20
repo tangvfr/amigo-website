@@ -43,7 +43,7 @@ class DashboardController extends AbstractDashboardController
             if (!$user->isTmpRoot()) {
                 $img = $user->getStudent()->getImg();
                 if ($img !== null) {
-                    $userMenu->setAvatarUrl($img);
+                    $userMenu->setAvatarUrl(AbstractImageCrudController::BASE_PATH.$img);
                 }
             }
 

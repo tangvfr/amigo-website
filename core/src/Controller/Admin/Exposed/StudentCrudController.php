@@ -7,6 +7,8 @@ use App\Controller\Admin\ConstantesCrud;
 use App\Entity\Student;
 use App\Entity\StudentType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -61,6 +63,9 @@ class StudentCrudController extends AbstractImageCrudController
                     'Diplomés' => StudentType::WORKER,
                     'Autre' => StudentType::OTHER
                 ])
+            ,
+            AssociationField::new('user', 'Lié à un utilisateur')
+                ->setDisabled()
             ,
             TextField::new('email', 'Email')
                 ->setSortable(true)

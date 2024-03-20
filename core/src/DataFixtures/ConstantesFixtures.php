@@ -51,7 +51,7 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour mandateFixtures
-    public const MANDATE_NB = 10;
+    public const MANDATE_NB = 20;
     public const VISIBLE_PROBA = 95;
 
     public const MANDATE_DATE_BETWEEN_MIN = '-18 months';
@@ -70,7 +70,7 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour partnerFixtures
-    public const PARTNER_NB = 20;
+    public const PARTNER_NB = 40;
     public const CHALLENGE_PROBA = 66;
     public const PARTNER_DATE_BETWEEN_MIN = '-18 months';
     public const PARTNER_DATE_BETWEEN_MAX = '+6 months';

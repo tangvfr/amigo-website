@@ -135,4 +135,9 @@ class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->student === null;
     }
 
+    public function __toString(): string
+    {
+        return 'Oui';
+    }
+
 }
