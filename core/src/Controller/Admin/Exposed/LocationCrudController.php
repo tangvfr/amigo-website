@@ -65,22 +65,22 @@ class LocationCrudController extends AbstractCrudController
 
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('ADRESSE'),
-            CountryField::new('country')
+            CountryField::new('country', 'Pays')
                 ->setEmptyData("FR"),
-            TextField::new('city'),
-            NumberField::new('postalCode'),
-            TextField::new('adresse'),
+            TextField::new('city', 'Ville'),
+            NumberField::new('postalCode', 'Code postal'),
+            TextField::new('adresse', 'Adresse'),
 
             FormField::addColumn(DashboardController::PANEL_COLUMN_MOITIER_ECRAN),
             FormField::addPanel('MAPS'),
             NumberField::new('latitude')
                 ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setRequired(false),
+                ->setHelp('Automatique remplis si le Pays et Ville ne sont pas vide'),
             NumberField::new('longitude')
-
+                // ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setRequired(false),
+                ->setHelp('Automatique remplis si le Pays et Ville ne sont pas vide'),
         ];
     }
 
