@@ -45,6 +45,8 @@ class DashboardController extends AbstractDashboardController
     {
         $userMenu = parent::configureUserMenu($user);
         if ($user instanceof AppUser) {
+            //définition du nom affiché
+            $userMenu->setName($user->getUserIdentifier());
             //définition de l'avatar
             if (!$user->isTmpRoot()) {
                 $img = $user->getStudent()->getImg();
