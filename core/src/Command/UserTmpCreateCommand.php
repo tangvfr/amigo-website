@@ -64,7 +64,7 @@ class UserTmpCreateCommand extends Command
         $comment[] = 'Utilisateur temporaire créé:';
         $comment[] = 'id utilisateur: '.$tmpUser->getId();
         $comment[] = 'roles: '.implode(',', $tmpUser->getRoles());
-        $comment[] = 'login: '.$tmpUser->getLogin();
+        $comment[] = 'identifiant: '.$tmpUser->getLogin();
         $comment[] = 'mot de passe: '.$plaintextPassword;
 
         $io->info(join("\n", $comment));

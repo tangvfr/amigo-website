@@ -93,7 +93,7 @@ class UserCreateCommand extends Command
             $comment[] = 'id utilisateur: ' . $user->getId();
             $comment[] = 'étudiant: ' . $user->getUserIdentifier();
             $comment[] = 'roles: ' . implode(',', $user->getRoles());
-            $comment[] = 'login: ' . $user->getLogin();
+            $comment[] = 'identifiant: ' . $user->getLogin();
             $comment[] = 'mot de passe: ' . $plaintextPassword;
 
             $io->info(join("\n", $comment));
