@@ -88,7 +88,6 @@ class Event extends AbstractPublishableEntity
     const NOW_EVENT_API_NAME = 'now';
 
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     #[Groups(['detailEvent', 'minimalEvent'])]
     private ?int $id = null;
 

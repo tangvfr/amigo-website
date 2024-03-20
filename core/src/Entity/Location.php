@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Location
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    #[Assert\NotNull]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
