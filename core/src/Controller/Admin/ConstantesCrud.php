@@ -67,10 +67,20 @@ abstract class ConstantesCrud {
     const COMPANY_HELP_ACT = 'Sélectionnez les activités de l\'entreprise';
 
 
-    //propriétés et label crud company
+    //propriétés et label crud company type
     const COMPANY_TYPE_PROPERTY_NAME = 'label';
     const COMPANY_TYPE_LABEL_NAME = 'Nom';
 
+
+    //propriétés et label crud event
+
+
+
+    //propriétés et label crud event type
+    const EVENT_TYPE_PROPERTY_NAME = 'label';
+    const EVENT_TYPE_LABEL_NAME = 'Nom';
+    const EVENT_TYPE_PROPERTY_DESC = 'description';
+    const EVENT_TYPE_LABEL_DESC = 'Description';
 
 
     // Taille des panels
