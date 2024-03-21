@@ -32,6 +32,7 @@ nav {
   font-size: 1.2rem;
   font-family: ministro,'Courier New', Courier, monospace;
 
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,6 +42,11 @@ nav {
 
 
 }
+
+.nav-ul-side a {
+  text-decoration: none;
+}
+
 .nav-li:hover .underline{
   top: 0;
   opacity: 1;
