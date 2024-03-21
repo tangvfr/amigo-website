@@ -79,7 +79,6 @@ class LocationCrudController extends AbstractCrudController
             NumberField::new('latitude')
                 ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setFormTypeOption('attr', ['id' => 'latitude']) // Ajouter une classe CSS personnalisée
                 ->setHelp('La latitude et la longitude seront automatiquement mises à jour en fonction de l\'adresse, de la ville et du pays.'),
 
             NumberField::new('longitude')
