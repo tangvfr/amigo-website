@@ -3,7 +3,6 @@
 namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\ConstantesCrud;
-use App\Controller\Admin\DashboardController;
 use App\Entity\Location;
 use App\Service\GeocodeServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,7 +68,8 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('ADRESSE'),
             CountryField::new('country', 'Pays')
                 ->setEmptyData("FR"),
-            TextField::new('city', 'Ville'),
+            TextField::new('city', 'Ville')
+                ->setRequired(true),
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse', 'Adresse'),
 
@@ -175,10 +175,12 @@ class LocationCrudController extends AbstractCrudController
                 // Gestion de l'erreur de décodage JSON
                 die('Erreur lors du décodage JSON.');
             }
-            $latitude = $data[0]['lat'];
-            $longitude = $data[0]['lon'];
-            $entityInstance->setLatitude($latitude);
-            $entityInstance->setLongitude($longitude);
+            if (!empty($data)){
+                $latitude = $data[0]['lat'];
+                $longitude = $data[0]['lon'];
+                $entityInstance->setLatitude($latitude);
+                $entityInstance->setLongitude($longitude);
+            }
         }
         return $entityInstance;
     }
