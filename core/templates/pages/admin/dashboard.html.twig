@@ -15,62 +15,38 @@
             <img src="{{ asset('images/admin_amigo_logo.png') }}" alt="Logo blanc noir de l'AMIGO" height="80px" width="80px"/>
         </div>
         <div class="d-flex w-100 flex-column text-center gap-3">
-            <div class="d-flex flex-row gap-3">
-                {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Évènements',
-                    'icon': 'fa-calendar'})
-                }}
-                {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Offres de stage',
-                    'icon': 'fa-user-tie'})
-                }}
+            <div>
+                <p class="fs-4">
+                    Panel les plus souvent visités
+                </p>
             </div>
-            <div class="d-flex flex-row gap-3">
-                {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Partenaires',
-                    'icon': 'fa-handshake'})
-                }}
-                {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Mandats',
-                    'icon': 'fa-person'})
-                }}
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Évènements',
+                            'icon': 'fa-calendar', 'url': 'Exposed\\EventCrudController'})
+                        }}
+                    </div>
+                    <div class="col">
+                        {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Offres de stage',
+                            'icon': 'fa-user-tie', 'url': 'Exposed\\OfferCrudController'})
+                        }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Partenaires',
+                            'icon': 'fa-handshake', 'url': 'Exposed\\PartnerCrudController'})
+                        }}
+                    </div>
+                    <div class="col">
+                        {{ include('pages/admin/_buttonCard.html.twig', {'entity': 'Mandats',
+                            'icon': 'fa-person', 'url': 'Office\\MandateCrudController'})
+                        }}
+                    </div>
+                </div>
             </div>
         </div>
-
-{#        <div class="d-flex w-100 flex-column align-items-stretch gap-3">#}
-{#            <div class="d-flex flex-row flex-fill gap-3">#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        {{ event }}#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        re test#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        {{ offer }}#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        re test#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="d-flex flex-row gap-3">#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        {{ partner }}#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        re test#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        {{ mandate }}#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        re test#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
         <h6>Bienvenue sur le panel administrateur du site de l'AMIGO !</h6>
     </main>
 {% endblock %}

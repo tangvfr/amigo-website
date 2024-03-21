@@ -1,5 +1,9 @@
-<div class="card flex-fill text-white">
-    <a href="dashboard.html.twig">
+{% set url = ea_url()
+    .setController('App\\Controller\\Admin\\' ~ url)
+    .setAction('index')
+%}
+<div class="card flex-fill">
+    <a href="{{ url }}" class="text-white">
         <div class="card-header">
             {{ entity }}
         </div>
