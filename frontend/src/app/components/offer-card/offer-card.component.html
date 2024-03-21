@@ -1,0 +1,39 @@
+<div class="mainOfferCard">
+  <figure>
+    <img [src]="offer.provider.img ? environment.imageURL + offer.provider.img! : 'assets/images/Atos_logo.png '" alt="Image" height="150px">
+    <legend style="font-size: 1.5rem;">
+      {{ offer.provider.name }}
+    </legend>
+    <button mat-raised-button color="primary" (click)="detail(offer.provider.id)">Detail</button>
+  </figure>
+  <article>
+    <div>
+      <h1><b>Offre:&ensp;</b>{{ offer.label }}</h1>
+      <p>
+        <markdown [data]="offer.description" />
+      </p>
+    </div>
+    <h2>
+      @for (key of offer.keyWords; track key) {
+        <span>{{ key }}</span>
+        @if(!$last) {
+          <span>, </span>
+        }
+      }
+    </h2>
+  </article>
+</div>
+
+<!--  <p>Nous avons {{ offers["hydra:totalItems"] }} offre de stage !</p>-->
+<!--  <ul>-->
+<!--    <li *ngFor="let offer of offers['hydra:member']">-->
+<!--      <h2>{{ offer.label}}</h2>-->
+<!--      <p>-->
+<!--        By: {{ offer.provider.name }}-->
+<!--      </p>-->
+<!--      <p>-->
+<!--        &lt;!&ndash; Voir pour peu etre mettre un css spécial pour le h1 h2 h... p li ol dans les balises mardown&ndash;&gt;-->
+<!--        <markdown [data]="offer.description" />-->
+<!--      </p>-->
+<!--    </li>-->
+<!--  </ul>-->

@@ -1,0 +1,36 @@
+.mainOfferCard {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.mainOfferCard > figure, .mainOfferCard > article {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mainOfferCard > figure {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.mainOfferCard > article {
+  justify-content: space-between;
+  align-content: start;
+  align-items: start;
+}
+
+.mainOfferCard h1 > b {
+  color: darkgrey;
+}
+
+.mainOfferCard p {
+  margin: 0;
+}
+
+.mainOfferCard h2 {
+  font-size: 1.1rem;
+}
+

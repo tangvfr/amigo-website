@@ -1,0 +1,203 @@
+
+#galerie-event-page {
+  min-height: 100vh;
+  background-color: #2A2C37;
+  width: 100%;
+
+
+}
+
+.poster-container{
+
+  height: 90%;
+  width: 70%;
+  min-height: 50vh;
+  margin-left: 15%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+
+}
+
+h3{
+  width: 80%;
+  height: 10%;
+  display: flex;
+  margin-top: 5vh;
+  margin-left: 10%;
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  margin-bottom: 5vh;
+  font-size: x-large;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+
+
+
+}
+
+.poster{
+  background-color: aqua;
+  height: 50vh;
+  width: 35vh;
+  position: relative;
+  margin-bottom: 5%;
+
+
+
+}
+
+.poster:hover .overlay {
+  height: 100%;
+  transition: all 1s;
+}
+
+.poster img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+
+}
+
+.poster .overlay{
+  position: absolute;
+  background-color: #2a2c37aa;
+  height: 0%;
+  width: 100%;
+  overflow: hidden;
+
+
+}
+
+.poster p{
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  top: 10%;
+  left: 10%;
+  font-family: Kadwa,'Courier New', Courier, monospace;
+
+}
+
+.poster button{
+  position: absolute;
+  width: 80%;
+  height: 20%;
+  top: 70%;
+  left: 10%;
+  font-family: Kadwa,'Courier New', Courier, monospace;
+  background-color: #3b82f6;
+  border: none;
+
+}
+
+
+.details-poster{
+
+  height: 60vh;
+  width: 70%;
+  margin-bottom: 10%;
+  margin-left: 15%;
+  position: relative;
+  font-family: kadwa ,'Courier New', Courier, monospace;
+  background-color:#212329;
+}
+
+.details-poster p{
+  font-size: small;
+}
+
+.details-poster #top-left{
+  position: absolute;
+  width: 45%;
+  height: 60%;
+
+  top: 5%;
+  left: 2.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+
+}
+
+.details-poster #top-left h2 , .details-poster #top-left h3 {
+  font-family: ministro, 'Courier New', Courier, monospace;
+  margin-bottom: 2%;
+}
+
+
+.details-poster #top-right {
+  position: absolute;
+  width: 45%;
+  height: 60%;
+
+  top: 5%;
+  left: 52.5%;
+
+
+}
+
+.details-poster #top-right img {
+  height: 100%;
+  width: 100%;
+
+}
+.details-poster #bottom {
+  position: absolute;
+  width: 80%;
+  height: 10%;
+
+  top: 85%;
+  left: 10%;
+}
+
+.details-poster #bottom ul {
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin: 0;
+
+
+  padding: 0;
+}
+
+.details-poster #bottom li {
+
+  width: 25%;
+  height: 100%;
+  margin-left: 0;
+
+  display: flex;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+
+}
+
+.notFound{
+  height: 100%;
+  width: 100%;
+  margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+
+}
+
+.notFound p{
+  font-size: large;
+  font-family: kadwa ,'Courier New', Courier, monospace;
+}
+

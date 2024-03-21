@@ -23,7 +23,7 @@ class PartherFilterQueryExtension extends AbstractFilterQueryExtension
             //condition
             $challenge = (Partner::CHALLENGER_PARTNER === $operationName) ? 'true' : 'false';
             $qb->andWhere(
-                $qb->expr()->eq($alias.'.challenge', $challenge),
+                ($alias.'.challenge = '.$challenge),
                 $qb->expr()->orX(
                     $qb->expr()->isNull($alias.'.bgedDate.beginDate'),
                     $qb->expr()->lte($alias.'.bgedDate.beginDate', ':now')

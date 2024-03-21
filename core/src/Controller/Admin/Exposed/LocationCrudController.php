@@ -164,27 +164,14 @@ class LocationCrudController extends AbstractCrudController
 
     public function modificationLatitudeLongitude(Location $entityInstance): Location
     {
-        $city = $entityInstance->getCity();
-        $country = $entityInstance->getCountry();
+        if (empty($latitude) || empty($longitude)) {
+            $coords = $this->geocodeService->geocodeLoc($entityInstance, true);
 
-        if ($city != null && $country != null) {
-            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
-
-            // Convertir la chaîne JSON en tableau PHP
-            $data = json_decode($jsonString, true);
-
-            // Vérifier si le décodage a réussi
-            if ($data === null) {
-                // Gestion de l'erreur de décodage JSON
-                die('Erreur lors du décodage JSON.');
-            }
-            if (!empty($data)){
-                $latitude = $data[0]['lat'];
-                $longitude = $data[0]['lon'];
-                $entityInstance->setLatitude($latitude);
-                $entityInstance->setLongitude($longitude);
-            }
-            else {
+            if (count($coords) >= 1) {
+                $coord = $coords[0];
+                $entityInstance->setLatitude($coord->latitude);
+                $entityInstance->setLongitude($coord->longitude);
+            } else {
                 $this->addFlashError('Les latitudes, longitude n\'ont pas pu être trouvé pour votre adresse');
             }
         }

@@ -15,7 +15,7 @@ export class NamedPosition extends Position {
 
   convertToMaker(): L.Marker
   {
-    const lab = new HTMLSpanElement();
+    const lab = document.createElement('span');
     lab.style.fontWeight = 'bold';
     lab.innerText = this.label;
 

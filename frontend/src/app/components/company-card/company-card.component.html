@@ -1,0 +1,31 @@
+<div class="entreprise">
+  <div class="top">
+    <div class="logo">
+      <img [src]="this.partner!.company!.img ? environment.imageURL + this.partner!.company!.img! : 'assets/images/Atos_logo.png '" alt="Image">
+    </div>
+    <div class="title-container">
+      <h2>{{this.partner!.company!.name}}</h2>
+
+      <h3>
+        <span *ngFor="let ac of this.partner!.company!.activities">
+          {{ ac.label }}
+        </span>
+      </h3>
+    </div>
+  </div>
+  <div class="middle">
+    <p>{{this.partner!.company!.description}}</p>
+  </div>
+  <div class="bottom">
+    <ul>
+      <li><a><img [src]="'assets/images/linkedIn.svg'"></a></li>
+      <li><a><img [src]="'assets/images/instagram.svg'"></a></li>
+      <li><a><img [src]="'assets/images/instagram.svg'"></a></li>
+    </ul>
+    <div style="display:flex; flex-direction: row; justify-content: center;">
+      <button mat-flat-button (click)="mapService.showMapTruc(this.partner!.company!.name, this.partner!.company!.located)">Localiser</button>
+    </div>
+    <p>Partenaire de puis : {{this.partner!.bgedDate!.beginDate}}</p>
+  </div>
+
+</div>
