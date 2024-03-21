@@ -125,6 +125,7 @@ nav {
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
+  border-radius: 1rem;
 }
 
 .trigger-deroulant:hover .deroulant li{

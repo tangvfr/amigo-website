@@ -36,7 +36,7 @@
   background-image: url("../../../../assets/images/about.jpeg");
   background-size: 100%;
 
-
+  border-radius: 2rem;
 
   width: 60%;
   height: 40%;
@@ -66,7 +66,7 @@
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
-
+  border-radius: 0.3rem;
 
 }
 
@@ -113,5 +113,6 @@
   align-items: center;
   /* Centrer verticalement */
   background-color: #51535F;
+  border-radius: 0.3rem;
 
 }

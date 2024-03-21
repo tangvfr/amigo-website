@@ -1,9 +1,9 @@
 <section id="about-home-page">
   <div class="side">
-    <img ngSrc="assets/images/about.jpeg">
+    <img [src]="'assets/images/about.jpeg'">
     <div class="button-container">
-      <div class="button  cursor">MIAGE</div>
-      <div  class="button  cursor">Amigo</div>
+      <a routerLink="/aboutM" class="button  cursor">MIAGE</a>
+      <a routerLink="/office"  class="button  cursor">Amigo</a>
     </div>
   </div>
   <div class="side">

@@ -30,6 +30,7 @@
   height: 60%;
   margin-top: 5%;
   margin-left: 10%;
+  border-radius: 0.5rem;
 }
 
 #partenaire-promo-home-page .button-container {
@@ -54,6 +55,7 @@
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
+  border-radius: 0.3rem;
 
 }
 

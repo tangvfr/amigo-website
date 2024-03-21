@@ -24,6 +24,7 @@
   height: 50%;
   margin-top: 15%;
   margin-left: 10%;
+  border-radius: 0.5rem;
 }
 
 #about-home-page .button-container{
@@ -48,6 +49,7 @@
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
+  border-radius: 0.3rem;
 
 }
 
