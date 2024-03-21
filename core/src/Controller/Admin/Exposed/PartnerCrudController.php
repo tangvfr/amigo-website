@@ -48,7 +48,8 @@ class PartnerCrudController extends AbstractCrudController
             BooleanField::new('challenge', 'Entreprise Challenge')
                 ->setSortable(true)
             ,
-            TextField::new('advantages'),
+            TextField::new('advantages')
+                ->setHelp('Ne concerne que les partenariats commercials'),
 
             // dates
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),

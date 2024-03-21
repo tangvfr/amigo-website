@@ -1,19 +1,29 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {TesthComponent} from "./components/testh/testh.component";
-import {EventsComponent} from "./components/events/events.component";
+import {EventsComponent} from "./components/event/events/events.component";
 import {OffersComponent} from "./components/offers/offers.component";
-import {OfficeComponent} from "./components/office/office.component";
+import {OfficeComponent} from "./components/amigo-office/office/office.component";
 import {HomeComponent} from "./components/home/home/home.component";
-import {EventComponent} from "./components/event/event/event.component";
+import {MiagePageComponent} from "./components/miage-page/miage-page.component";
+import {
+  PartenaireEntrepriseComponent
+} from "./components/entreprise/partenaire-entreprise/partenaire-entreprise.component";
+
+
 import {TestLeafletMapComponent} from "./components/test-leaflet-map/test-leaflet-map.component";
+import {
+  PartenairePromotionnelComponent
+} from "./components/promotionnel/partenaire-promotionnel/partenaire-promotionnel.component";
 
 export const routes: Routes = [
   {path: '', component: TesthComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'event', component: EventComponent},
-  {path: 'testh', component: TesthComponent},
   {path: 'events', component: EventsComponent},
+  {path: 'testh', component: TesthComponent},
+  {path: 'challenger', component: PartenaireEntrepriseComponent},
   {path: 'offers', component: OffersComponent},
   {path: 'office', component: OfficeComponent},
+  {path: 'aboutM', component: MiagePageComponent},
   {path: 'tmap', component: TestLeafletMapComponent},
+  {path: 'promo', component: PartenairePromotionnelComponent  },
 ];

@@ -1,0 +1,39 @@
+<!-- example d'utilisation de material, mais on vas use que pour les field et quelque truc je pense, genre les load (spiner)-->
+<!-- https://material.angular.io/components/categories -->
+<!-- https://fonts.google.com/icons -->
+
+<app-about-amigo-page></app-about-amigo-page>
+<div id="center"></div>
+
+<section id="office-amigo-page">
+  <div id="office-container">
+    <h1>Bureau des Etudiants</h1>
+
+
+
+    @if (ready){
+
+      @for (hub of office!.getHubs(); track hub){
+
+        <h2 class="hub-title">{{hub?.name}}</h2>
+        <p class="hub-desc">{{hub?.description}}</p>
+        <div class="hub-container">
+          @for( post of hub.composition.values(); track post){
+            <app-office-card [member]="post"></app-office-card>
+          }
+        </div>
+        @if (!$last) {
+          <mat-divider [inset]="true"></mat-divider>
+        }
+      }
+
+    }
+    @if (!ready) {
+      <div class="poster-container">
+        <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+          <mat-spinner />
+        </div>
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<main>
+  <section id="promo-page">
+
+    <div class="text-container">
+      <h1>Nos Partenaires promotionnels</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod molestias error culpa a iste nostrum autem nobis, cupiditate ipsum. Quasi perferendis laudantium, velit tempore delectus corrupti accusamus voluptate dolor officia!</p>
+    </div>
+    <div id="entreprise-container">
+      @if (ready){
+        {{partners?.["hydra:totalItems"]}}
+        @for (partner of partners!['hydra:member']; track partner){
+          <app-promotionnel-card [partner]="partner"/>
+
+        }
+
+      }
+      @if (!ready){
+        <div class="poster-container">
+          <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+            <mat-spinner />
+          </div>
+        </div>
+      }
+    </div>
+
+
+  </section>
+
+
+
+</main>

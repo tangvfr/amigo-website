@@ -1,0 +1,155 @@
+
+.entreprise{
+
+  height: 60vh;
+  width: 80%;
+  margin-left: 10%;
+  background-color:#28292f;
+  position: relative;
+  box-shadow: 2vw 1vh 2vw black;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10%;
+
+
+}
+
+.top{
+  display: flex;
+  justify-content: space-around;
+  height: 20vh;
+
+
+}
+
+.top .title-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+
+}
+
+.top .title-container h3 ,.top .title-container h2 {
+  margin: 0;
+  font-size: 3rem;
+
+}
+.top .title-container h3{
+  font-family: Kadwa,'Courier New', Courier, monospace;
+  font-size: 2rem;
+
+}
+
+.top .title-container h2 {
+  font-family: ministro, 'Courier New', Courier, monospace;
+  font-size: xx-large;
+  margin-bottom: 2rem;
+}
+
+.top .logo{
+  height: 20vh;
+  width: 50%;
+  max-height: 100%;
+  max-width: 50%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+
+}
+.top .logo img{
+
+  width: 80%;
+  height: 80%;
+}
+
+
+
+
+
+
+.middle{
+  height: 20vh;
+  padding: 1rem;
+
+}
+
+.middle p{
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  height: 100%;
+  text-align: left;
+
+}
+
+.bottom {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+
+}
+.bottom ul{
+  list-style: none;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 0%;
+  margin: 0%;
+
+
+}
+
+.bottom ul li{
+  margin: 0 1rem;
+  width: 2rem;
+  height: 2rem;
+
+  padding: 0%;
+  margin: 0%;
+}
+
+.bottom ul li img{
+  width: 2rem;
+  height: 2rem;
+}
+
+.bottom p{
+  margin: 0%  ;
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  /* Centrer horizontalement */
+  align-items: center;
+  /* Centrer verticalement */
+  margin-bottom: 2rem;
+}
+
+.bottom button{
+  width: 5vw;
+  height: 4vh;
+  background-color: rgb(28, 28, 32);
+  border: rgb(28, 28, 32);
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  margin-bottom: 1%;
+
+
+
+
+
+}
+
+
+

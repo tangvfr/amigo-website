@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
-import {HttpClient, HttpErrorResponse, HttpParameterCodec, HttpParams, HttpParamsOptions} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {components} from "../models/schema.api";
 import {HydraList} from "../models/hydra-list";
 import {environment} from "../../environments/environment";
@@ -99,39 +99,39 @@ export class AmigowsApiService {
   getChallengerPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-challengerCompany"]>>
-    (`${this.baseApiUrl}/parther/challenger`)
+    (`${this.baseApiUrl}/partner/challenger`)
       .pipe(catchError(this.handleError));
   }
 
   getDiscountPartner(): Observable<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
   {
     return this.http.get<HydraList<components["schemas"]["Partner.jsonld-discountCompany"]>>
-    (`${this.baseApiUrl}/parther/discount`)
+    (`${this.baseApiUrl}/partner/discount`)
       .pipe(catchError(this.handleError));
   }
 
-  getCompany(id: bigint): Observable<components["schemas"]["Company.jsonld-infoCompany"]>
+  getCompany(id: number): Observable<components["schemas"]["Company.jsonld-infoCompany"]>
   {
     return this.http.get<components["schemas"]["Company.jsonld-infoCompany"]>
     (`${this.baseApiUrl}/companies/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getEvent(id: bigint): Observable<components["schemas"]["Event.jsonld-detailEvent"]>
+  getEvent(id: number): Observable<components["schemas"]["Event.jsonld-detailEvent"]>
   {
     return this.http.get<components["schemas"]["Event.jsonld-detailEvent"]>
     (`${this.baseApiUrl}/events/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getEventType(id: bigint): Observable<components["schemas"]["EventType.jsonld-detailEventType"]>
+  getEventType(id: number): Observable<components["schemas"]["EventType.jsonld-detailEventType"]>
   {
     return this.http.get<components["schemas"]["EventType.jsonld-detailEventType"]>
     (`${this.baseApiUrl}/event_types/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getLocations(id: bigint): Observable<components["schemas"]["Location.jsonld"]>
+  getLocations(id: number): Observable<components["schemas"]["Location.jsonld"]>
   {
     return this.http.get<components["schemas"]["Location.jsonld"]>
     (`${this.baseApiUrl}/locations/${id}`)

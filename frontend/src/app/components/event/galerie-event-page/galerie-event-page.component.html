@@ -1,9 +1,0 @@
-<section id="galerie-event-page">
-  <div class="poster-container">
-    @for (event of nowEvents['hydra:member']; track event) {
-      <app-poster></app-poster>
-      {{ event.name }} img: {{ event.img }}
-      <!--{{ event.name }} + {{ event.img }}-->
-    }
-  </div>
-</section>

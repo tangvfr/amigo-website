@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@media screen and (max-width: 1300px) {
+  /* Insérez vos propriétés CSS ici, avec vos sélecteurs*/
+  html{
+    font-size: 10px;
+  }
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@media screen and (max-width: 1920px) {
+  /* Insérez vos propriétés CSS ici, avec vos sélecteurs*/
+  html{
+    font-size: 17px;
+  }
+}
+html, body { min-height: 100%; }
+body { margin: 0;
+  background-color: rgb(28, 28, 32);
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+*{
+  color:aliceblue;
+}
+
+
+@font-face {
+  font-family: "ministro";
+  src: url("assets/font/ministro/Ministro.ttf");
+}
+
+@font-face {
+  font-family: "kadwa";
+  src: url("assets/font/Kadwa/Kadwa-Regular.ttf");
+}
+
+.cursor {
+  cursor: pointer;
+}

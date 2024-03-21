@@ -74,7 +74,7 @@ class EventCrudController extends AbstractImageCrudController
 
             // BANNIERE
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
-            FormField::addPanel(ConstantesCrud::PANEL_NAME_BANNIERE),
+            FormField::addPanel(ConstantesCrud::PANEL_NAME_POSTER),
             ImageField::new('img', 'Image')
                 ->hideOnIndex()
                 ->setBasePath(self::BASE_PATH)
