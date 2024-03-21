@@ -69,8 +69,8 @@ class LocationCrudController extends AbstractCrudController
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel('ADRESSE'),
-            CountryField::new('country', 'Pays')
-                ->setEmptyData("FR"),
+            TextField::new('country', 'Pays')
+                ->setRequired(true),
             TextField::new('city', 'Ville')
                 ->setRequired(true),
             NumberField::new('postalCode', 'Code postal'),
@@ -164,14 +164,27 @@ class LocationCrudController extends AbstractCrudController
 
     public function modificationLatitudeLongitude(Location $entityInstance): Location
     {
-        if (empty($latitude) || empty($longitude)) {
-            $coords = $this->geocodeService->geocodeLoc($entityInstance, true);
+        $city = $entityInstance->getCity();
+        $country = $entityInstance->getCountry();
 
-            if (count($coords) >= 1) {
-                $coord = $coords[0];
-                $entityInstance->setLatitude($coord->latitude);
-                $entityInstance->setLongitude($coord->longitude);
-            } else {
+        if ($city != null && $country != null) {
+            $jsonString = $this->geocodeService->geocodeLoc($entityInstance);
+
+            // Convertir la chaîne JSON en tableau PHP
+            $data = json_decode($jsonString, true);
+
+            // Vérifier si le décodage a réussi
+            if ($data === null) {
+                // Gestion de l'erreur de décodage JSON
+                die('Erreur lors du décodage JSON.');
+            }
+            if (!empty($data)){
+                $latitude = $data[0]['lat'];
+                $longitude = $data[0]['lon'];
+                $entityInstance->setLatitude($latitude);
+                $entityInstance->setLongitude($longitude);
+            }
+            else {
                 $this->addFlashError('Les latitudes, longitude n\'ont pas pu être trouvé pour votre adresse');
             }
         }
