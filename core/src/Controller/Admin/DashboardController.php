@@ -79,11 +79,11 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud(ConstantesCrud::LOCATION_NAME, ConstantesCrud::LOCATION_ICON, Location::class),
             MenuItem::linkToCrud(ConstantesCrud::OFFER_NAME, ConstantesCrud::OFFER_ICON, Offer::class),
             MenuItem::linkToCrud(ConstantesCrud::PARTNER_NAME, ConstantesCrud::PARTNER_ICON, Partner::class),
-            MenuItem::linkToCrud(ConstantesCrud::STUDENT_NAME, ConstantesCrud::STUDENT_ICON, Student::class),
         MenuItem::section(ConstantesCrud::OFFICE_NAME, ConstantesCrud::OFFICE_ICON),
             MenuItem::linkToCrud(ConstantesCrud::MANDATE_NAME, ConstantesCrud::MANDATE_ICON, Mandate::class),
             MenuItem::linkToCrud(ConstantesCrud::HUB_NAME, ConstantesCrud::HUB_ICON, Hub::class),
             MenuItem::linkToCrud(ConstantesCrud::ROLE_NAME, ConstantesCrud::ROLE_ICON, Role::class),
+            MenuItem::linkToCrud(ConstantesCrud::STUDENT_NAME, ConstantesCrud::STUDENT_ICON, Student::class),
         ];
     }
 }
