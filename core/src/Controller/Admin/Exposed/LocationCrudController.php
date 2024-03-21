@@ -69,10 +69,8 @@ class LocationCrudController extends AbstractCrudController
 
             FormField::addColumn(ConstantesCrud::PANEL_COLUMN_MOITIE_ECRAN),
             FormField::addPanel('ADRESSE'),
-            TextField::new('country', 'Pays')
-                ->setRequired(true),
-            TextField::new('city', 'Ville')
-                ->setRequired(true),
+            TextField::new('country', 'Pays'),
+            TextField::new('city', 'Ville'),
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse', 'Adresse'),
 
@@ -81,12 +79,11 @@ class LocationCrudController extends AbstractCrudController
             NumberField::new('latitude')
                 ->hideOnIndex()
                 ->setNumDecimals(12)
-                ->setRequired(false)
-                ->setHelp('Automatiquement remplis si Pays et Ville ne sont pas vide'),
+                ->setFormTypeOption('attr', ['id' => 'latitude']) // Ajouter une classe CSS personnalisée
+                ->setHelp('La latitude et la longitude seront automatiquement mises à jour en fonction de l\'adresse, de la ville et du pays.'),
+
             NumberField::new('longitude')
                 ->hideOnIndex()
-                ->setNumDecimals(12)
-                ->setRequired(false)
                 ->setHelp('Automatiquement remplis si Pays et Ville ne sont pas vide'),
         ];
     }
@@ -176,7 +173,7 @@ class LocationCrudController extends AbstractCrudController
             // Vérifier si le décodage a réussi
             if ($data === null) {
                 // Gestion de l'erreur de décodage JSON
-                die('Erreur lors du décodage JSON.');
+                $this->addFlashError('Erreur Seveur : Erreur lors du décodage JSON.');
             }
             if (!empty($data)){
                 $latitude = $data[0]['lat'];

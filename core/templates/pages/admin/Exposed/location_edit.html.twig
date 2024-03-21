@@ -46,6 +46,45 @@
         }
     </style>
     <script>
+
+        function modificationLatitudeLongitude(pays) {
+
+            let url = "localhost:8000/geocode/api?query="+pays;
+            console.log(url);
+            fetch('localhost:8000/geocode/api?query=Orleans')
+                .then(response => {
+                    // Vérification de la réussite de la requête
+                    if (!response.ok) {
+                        throw new Error('La requête a échoué');
+                    }
+                    console.log("bite")
+                    return response.json();
+                })
+                .then(data => {
+                    // Utilisation des données JSON récupérées
+                    console.log(data);
+                    if (data !== []){
+
+                        var latitudeField = document.querySelector('#Location_latitude');
+                        var longitudeField = document.querySelector('#Location_longitude');
+                        latitudeField.value = data[0]['lat'];
+                        longitudeField.value = data[0]['lon'];
+                    }
+                })
+                .catch(error => {
+                    // Gestion des erreurs
+                    console.error('Erreur lors de la récupération des données:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var villeField = document.querySelector('#Location_city');
+            villeField.addEventListener('change', function() {
+                // Appeler la fonction de mise à jour des coordonnées définie dans votre contrôleur CRUD
+                modificationLatitudeLongitude(villeField.value);
+            });
+        });
+
         let latitude = {{ entity.instance.latitude }} ;
         let longitude = {{ entity.instance.longitude }};
 
