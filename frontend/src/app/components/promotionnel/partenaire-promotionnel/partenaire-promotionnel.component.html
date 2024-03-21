@@ -6,11 +6,11 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod molestias error culpa a iste nostrum autem nobis, cupiditate ipsum. Quasi perferendis laudantium, velit tempore delectus corrupti accusamus voluptate dolor officia!</p>
     </div>
     <div id="entreprise-container">
-      @if (ready) {
+      @if (ready){
         {{partners?.["hydra:totalItems"]}}
-        @for (partner of partners!['hydra:member']; track partner) {
-          <app-entreprise-card [partner]="partner"></app-entreprise-card>
-          <app-entreprise-card [partner]="partner"></app-entreprise-card>
+        @for (partner of partners!['hydra:member']; track partner){
+          <app-promotionnel-card [partner]="partner"/>
+
         }
 
       }

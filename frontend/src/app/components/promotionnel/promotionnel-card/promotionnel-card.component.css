@@ -9,11 +9,11 @@
   box-shadow: 2vw 1vh 2vw black;
   display: flex;
   flex-direction: column;
-  background-image: url("ressources/images/Olivet-terasse.jpg");
+
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left;
-
+  margin-bottom: 10%;
 
 
 }
@@ -55,7 +55,6 @@
   /* background-color: #28292f; */
   width: 80%;
   height: 80%;
-  background-image: url("ressources/images/L\'art\ en\ Burger.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -74,7 +73,7 @@
   height: 100%;
   /* background-color: #5aff8e; */
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
@@ -90,8 +89,8 @@
 
 .right p {
   width: 90%;
-  height: 80%;
-  /* background-color: #0026ff; */
+  height: 60%;
+  font-family: Kadwa, 'Courier New', Courier, monospace;
 }
 
 
@@ -101,7 +100,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
@@ -146,7 +145,6 @@
 
 .bottom {
   flex-grow: 1;
-  background-color:#5A71FF;
 
   display: flex;
   flex-direction: column;
@@ -155,24 +153,19 @@
 
 
 }
-.bottom ul{
-  list-style: none;
-  /* background-color: aquamarine; */
-  display: flex;
-  justify-content: center;
-  /* background-color: blueviolet; */
-  padding: 0%;
-  margin: 0%;
 
-}
+.bottom button{
+  width: 5vw;
+  height: 4vh;
+  background-color: rgb(28, 28, 32);
+  border: rgb(28, 28, 32);
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  margin-bottom: 1%;
 
-.bottom ul li{
-  margin: 0 1rem;
-  width: 2rem;
-  height: 2rem;
-  /* background-color: #28292f; */
-  padding: 0%;
-  margin: 0%;
+
+
+
+
 }
 
 .bottom p{

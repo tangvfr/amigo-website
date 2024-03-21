@@ -4,14 +4,16 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {HydraList} from "../../../models/hydra-list";
 import {components} from "../../../models/schema.api";
 import {AmigowsApiService} from "../../../services/amigows.api.service";
+import {PromotionnelCardComponent} from "../promotionnel-card/promotionnel-card.component";
 
 @Component({
   selector: 'app-partenaire-promotionnel',
   standalone: true,
-    imports: [
-        EntrepriseCardComponent,
-        MatProgressSpinner
-    ],
+  imports: [
+    EntrepriseCardComponent,
+    MatProgressSpinner,
+    PromotionnelCardComponent
+  ],
   templateUrl: './partenaire-promotionnel.component.html',
   styleUrl: './partenaire-promotionnel.component.css'
 })

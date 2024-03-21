@@ -11,6 +11,9 @@ import {
 
 
 import {TestLeafletMapComponent} from "./components/test-leaflet-map/test-leaflet-map.component";
+import {
+  PartenairePromotionnelComponent
+} from "./components/promotionnel/partenaire-promotionnel/partenaire-promotionnel.component";
 
 export const routes: Routes = [
   {path: '', component: TesthComponent},
@@ -22,4 +25,5 @@ export const routes: Routes = [
   {path: 'office', component: OfficeComponent},
   {path: 'aboutM', component: MiagePageComponent},
   {path: 'tmap', component: TestLeafletMapComponent},
+  {path: 'promo', component: PartenairePromotionnelComponent  },
 ];
