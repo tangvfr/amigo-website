@@ -14,7 +14,7 @@ class AbstractPublishableEntity extends AbstractEditableEntity
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups('detailEvent')]
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $publicationDate = null;
 
     public function getPublicationDate(): ?DateTimeInterface
