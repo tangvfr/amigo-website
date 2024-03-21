@@ -12,7 +12,9 @@
 
 
     @if (ready){
+
       @for (hub of office!.getHubs(); track hub){
+
         <h2 class="hub-title">{{hub?.name}}</h2>
         <p class="hub-desc">{{hub?.description}}</p>
         <div class="hub-container">

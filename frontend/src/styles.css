@@ -5,6 +5,13 @@
     font-size: 10px;
   }
 }
+
+@media screen and (max-width: 1920px) {
+  /* Insérez vos propriétés CSS ici, avec vos sélecteurs*/
+  html{
+    font-size: 17px;
+  }
+}
 html, body { min-height: 100%; }
 body { margin: 0;
   background-color: rgb(28, 28, 32);
