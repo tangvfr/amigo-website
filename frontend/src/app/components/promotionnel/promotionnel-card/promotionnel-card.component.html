@@ -1,0 +1,28 @@
+<div class="entreprise">
+  <div class="blur"></div>
+  <div class="top">
+    <div class="left">
+      <div class="logo">
+      </div>
+
+    </div>
+    <div class="middle">
+      <div class="title-container">
+        <h2>{{this.partner?.company?.name}}</h2>
+        <h3>{{this.partner?.company.activities}}</h3>
+        <p>{{this.partner.company.description}}</p>
+      </div>
+    </div>
+    <div class="right">
+      <h4>Avantage pour les adhérent:</h4>
+      <p>{{this.partner.advantages}}</p>
+    </div>
+  </div>
+  <div class="bottom">
+    <ul>
+      <li><a><img [src]="'assets/images/localisateur.png'"></a></li>
+    </ul>
+    <p>Partenaire de puis : {{this.partner?.bgedDate}}</p>
+  </div>
+
+</div>
