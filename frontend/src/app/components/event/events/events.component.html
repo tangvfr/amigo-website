@@ -6,12 +6,16 @@
   <div *ngIf="selectedEvent" class="details-poster">
       <div id="top-left">
         <h2>{{selectedEvent.name}}</h2>
-        <h3>{{selectedEvent.types}}</h3>
+        <h3>
+          <span *ngFor="let tt of selectedEvent.types">
+            {{ tt.label }}
+          </span>
+        </h3>
         <p>{{selectedEvent.description}}
         </p>
       </div>
       <div id="top-right">
-        <img src="assets/images/{{selectedEvent.img}}">
+        <img [src]="selectedEvent.img ? environment.imageURL + selectedEvent.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
       </div>
       <div id="bottom">
         <ul>

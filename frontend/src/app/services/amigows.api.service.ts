@@ -110,28 +110,28 @@ export class AmigowsApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getCompany(id: bigint): Observable<components["schemas"]["Company.jsonld-infoCompany"]>
+  getCompany(id: number): Observable<components["schemas"]["Company.jsonld-infoCompany"]>
   {
     return this.http.get<components["schemas"]["Company.jsonld-infoCompany"]>
     (`${this.baseApiUrl}/companies/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getEvent(id: bigint): Observable<components["schemas"]["Event.jsonld-detailEvent"]>
+  getEvent(id: number): Observable<components["schemas"]["Event.jsonld-detailEvent"]>
   {
     return this.http.get<components["schemas"]["Event.jsonld-detailEvent"]>
     (`${this.baseApiUrl}/events/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getEventType(id: bigint): Observable<components["schemas"]["EventType.jsonld-detailEventType"]>
+  getEventType(id: number): Observable<components["schemas"]["EventType.jsonld-detailEventType"]>
   {
     return this.http.get<components["schemas"]["EventType.jsonld-detailEventType"]>
     (`${this.baseApiUrl}/event_types/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  getLocations(id: bigint): Observable<components["schemas"]["Location.jsonld"]>
+  getLocations(id: number): Observable<components["schemas"]["Location.jsonld"]>
   {
     return this.http.get<components["schemas"]["Location.jsonld"]>
     (`${this.baseApiUrl}/locations/${id}`)

@@ -7,13 +7,14 @@ import {MarkdownComponent} from "ngx-markdown";
 import {OfferSearchFieldsComponent} from "../offer-search-fields/offer-search-fields.component";
 import {OfferSearch} from "../../models/search/offer-search";
 import {MatCard, MatCardContent, MatCardModule} from "@angular/material/card";
+import {OfferCardComponent} from "../offer-card/offer-card.component";
 
 //https://blog.markdowntools.com/posts/how-to-render-markdown-in-angular
 
 @Component({
   selector: 'app-offers',
   standalone: true,
-  imports: [NgFor, MarkdownComponent, OfferSearchFieldsComponent, MatCardModule],
+  imports: [NgFor, MarkdownComponent, OfferSearchFieldsComponent, MatCardModule, OfferCardComponent],
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css'
 })

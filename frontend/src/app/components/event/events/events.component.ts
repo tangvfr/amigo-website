@@ -36,7 +36,7 @@ export class EventsComponent implements OnInit {
   ) {}
 
   showEventDetails(event: components["schemas"]["Event.jsonld-minimalEvent"]) {
-    let eventid: bigint = BigInt(event.id);
+    let eventid: number = event.id;
     this.amigowsApiService.getEvent(eventid).subscribe((eventDetail: components["schemas"]["Event.jsonld-detailEvent"]) => {
       this.selectedEvent = eventDetail;
     });
