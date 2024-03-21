@@ -1,0 +1,99 @@
+
+<app-event-search-fields (search)="search($event)"/>
+<!-- le ! apres le nom de la variable eprmet de dire a typescript , tkt c pas undefined -->
+<section id="galerie-event-page">
+
+  <div *ngIf="selectedEvent" class="details-poster">
+      <div id="top-left">
+        <h2>{{selectedEvent.name}}</h2>
+        <h3>{{selectedEvent.types}}</h3>
+        <p>{{selectedEvent.description}}
+        </p>
+      </div>
+      <div id="top-right">
+        <img src="assets/images/{{selectedEvent.img}}">
+      </div>
+      <div id="bottom">
+        <ul>
+          <li>Places disponibles : {{selectedEvent.quotaStu}}</li>
+          <li>Réservé aux Miagiste : {{selectedEvent.onlyMiagist}}</li>
+          <li>Publiée le : {{selectedEvent.publicationDate}}</li>
+        </ul>
+      </div>
+
+  </div>
+  <div *ngIf="beNormal()">
+    <div class="poster-container">
+      @if (events!['hydra:member'].length == 0){
+        <div class="notFound">
+          <p>Aucun Evénement n'est prévu </p>
+        </div>
+      }
+    @for (event of events!['hydra:member']; track event) {
+
+      <div class="poster">
+        <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+        <div class="overlay">
+          <p>{{ event.name }} </p>
+          <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->
+        </div>
+      </div>
+    }
+  </div>
+
+
+  <h3>Event passé</h3>
+    <div class="poster-container">
+      @if (pastEvents!['hydra:member'].length == 0){
+        <div class="notFound">
+          <p>Aucun Evénement passé </p>
+        </div>
+      }
+    @for (event of pastEvents!['hydra:member']; track event.id) {
+        <div class="poster">
+          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <div class="overlay">
+            <p>{{ event.name }} </p>
+            <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button>
+          </div>
+        </div>
+    }
+    </div>
+  </div>
+
+  @if (beSearch()) {
+
+
+
+    <div class="poster-container">
+      @if (events!['hydra:member'].length == 0){
+        <div class="notFound">
+          <p>Aucun Evénement ne correspond a votre recherche </p>
+        </div>
+      }
+      @for (event of events!['hydra:member']; track event.id) {
+
+        <div class="poster">
+
+          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <div class="overlay">
+            <p>{{ event.name }} </p>
+            <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+
+  @if (beLoading()) {
+    <div class="poster-container">
+      <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+        <mat-spinner />
+      </div>
+    </div>
+  }
+
+
+
+</section>

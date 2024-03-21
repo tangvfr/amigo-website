@@ -1,16 +1,17 @@
- <header>
+<header>
   <nav>
     <ul id="nav-ul">
-      <li class=" cursor"><a routerLink="/acceuil">Accueil</a></li>
-      <li class=" cursor"><a routerLink="/event">Evenement</a></li>
-      <li class=" cursor"><a routerLink="/about">MIAGE</a></li>
-      <li id="logo"><a><img src="../../../../ressources/images/amigo.png"></a></li>
-      <li class=" cursor"><a routerLink="/about">AMIGO</a></li>
+      <li class=" cursor"><a routerLink="/home">Accueil</a>
+      </li>
+      <li class=" cursor"><a routerLink="/events">Evenements</a></li>
+      <li class=" cursor"><a routerLink="/aboutM">MIAGE</a></li>
+      <li id="logo"><a routerLink="/testh"><img ngSrc="assets/images/amigo_logo.png" width="300" height="300" priority/></a></li>
+      <li class=" cursor"><a routerLink="/office">AMIGO</a></li>
       <li class="trigger-deroulant  cursor">
         <a routerLink="/partenaire">Partenaire</a>
         <ul class="deroulant">
-          <li><a href="#">Challenge</a></li>
-          <li><a href="#">Promotionnelle</a></li>
+          <li><a routerLink="/challenger">Challenge</a></li>
+          <li><a routerLink="/partenaireP">Promotionnelle</a></li>
         </ul>
       </li>
       <li class=" cursor"><a routerLink="/offer">Offre</a></li>
