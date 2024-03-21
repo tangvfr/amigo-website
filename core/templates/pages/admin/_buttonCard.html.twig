@@ -1,0 +1,26 @@
+{% set url = ea_url()
+    .setController('App\\Controller\\Admin\\' ~ url)
+    .setAction('index')
+%}
+
+<style>
+    .btn-shadow-when-mouse:hover
+    {
+        box-shadow: 0px 0px 10px grey;
+        /*filter: drop-shadow(0px 0px 10px grey);*/
+    }
+</style>
+
+<div class="card flex-fill btn-shadow-when-mouse">
+    <a href="{{ url }}" class="text-white">
+        <div class="card-header">
+            {{ entity }}
+        </div>
+        <div class="card-body inline-flex">
+            <div class="d-flex flex-row justify-content-center align-items-baseline gap-3">
+                <i class="fas {{ icon }}"></i>
+                <p>Aller sur la page des {{ entity }}</p>
+            </div>
+        </div>
+    </a>
+</div>
