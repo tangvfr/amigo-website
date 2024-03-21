@@ -9,6 +9,7 @@ use App\Repository\CompanyRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class PartnerFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -18,7 +19,7 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create('fr_FR');
+        $faker = Factory::create('fr_FR');
 
         $companies = $this->companyRepository->findAll();
 
@@ -28,11 +29,10 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
                 $faker,
                 ConstantesFixtures::PARTNER_DATE_BETWEEN_MIN,
                 ConstantesFixtures::PARTNER_DATE_BETWEEN_MAX,
-                false
+                false, ConstantesFixtures::PARTNER_GAP_BEGIN_END_DATE
             );
 
-            $datetime = UtilFixtures::bgeDateToDateTime($date->getEndDate());
-
+            $datetime = UtilFixtures::bgeDateToDateTime($date->getBeginDate());
             $publicationDate1 = $datetime->modify(ConstantesFixtures::PARTNER_GAP_PUBLICATION_DATE);
 
             $partner = new Partner();
@@ -43,7 +43,8 @@ class PartnerFixtures extends Fixture implements DependentFixtureInterface
             ;
 
             if ($faker->boolean(ConstantesFixtures::PUBLICATION_DATE_PROBA)) {
-                $partner->setPublicationDate(UtilFixtures::randomDateBetween($publicationDate1, $date->getEndDate()));
+                //$partner->setPublicationDate(UtilFixtures::randomDateBetween($publicationDate1, $date->getBeginDate()));
+                $partner->setPublicationDate($publicationDate1);
             }
 
             $manager->persist($partner);

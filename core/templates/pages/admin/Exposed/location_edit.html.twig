@@ -1,0 +1,66 @@
+{# templates/pages/admin/Exposed/location_edit.html.twig #}
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+
+{% block content %}
+    {# Appel au bloc parent pour inclure le contenu par défaut du formulaire #}
+    {{ parent() }}
+
+    {# Ajoutez ici votre contenu supplémentaire #}
+       
+    <div id="map" class="map"></div>
+     
+    {# Inclure les fichiers JavaScript et CSS de Leaflet.js #}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        let latitude = {{ entity.instance.latitude }} ;
+        let longitude = {{ entity.instance.longitude }};
+
+        // Créer une instance de la carte Leaflet
+        const map = L.map('map').setView([latitude, longitude], 13);
+
+        // Ajouter une couche de tuiles OpenStreetMap à la carte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajouter un marqueur pour l'entité avec la latitude et la longitude actuelles
+        const marker = L.marker([latitude, longitude]).addTo(map);
+
+        // Mettre à jour la position du marqueur lorsque la latitude et la longitude de l'entité changent
+        function updateMarker(lat, lon) {
+            marker.setLatLng([lat, lon]);
+            map.setView([lat, lon], map.getZoom());
+        }
+    </script>
+
+    <style>
+        .map {
+            height: 30vh;
+            border: 1px solid #AAA;
+            border-radius: 5px;
+        }
+        .content-wrapper{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        /* Pour les écrans de taille large (lg), définissez la largeur sur 66.666% */
+        @media (min-width: 992px) {
+            .map {
+                width: 66.666%;
+            }
+        }
+
+        /* Pour les écrans extra-larges (xl), définissez la largeur sur 50% */
+        @media (min-width: 1200px) {
+            .map {
+                width: 49%;
+                margin-top: -10vh;
+                margin-left: 51%;
+            }
+        }
+    </style>
+{% endblock %}

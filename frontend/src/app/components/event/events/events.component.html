@@ -6,12 +6,16 @@
   <div *ngIf="selectedEvent" class="details-poster">
       <div id="top-left">
         <h2>{{selectedEvent.name}}</h2>
-        <h3>{{selectedEvent.types}}</h3>
+        <h3>
+          <span *ngFor="let tt of selectedEvent.types">
+            {{ tt.label }}
+          </span>
+        </h3>
         <p>{{selectedEvent.description}}
         </p>
       </div>
       <div id="top-right">
-        <img src="assets/images/{{selectedEvent.img}}">
+        <img [src]="selectedEvent.img ? environment.imageURL + selectedEvent.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
       </div>
       <div id="bottom">
         <ul>
@@ -32,7 +36,7 @@
     @for (event of events!['hydra:member']; track event) {
 
       <div class="poster">
-        <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+        <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
         <div class="overlay">
           <p>{{ event.name }} </p>
           <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->
@@ -51,7 +55,7 @@
       }
     @for (event of pastEvents!['hydra:member']; track event.id) {
         <div class="poster">
-          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
           <div class="overlay">
             <p>{{ event.name }} </p>
             <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button>
@@ -75,7 +79,7 @@
 
         <div class="poster">
 
-          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
           <div class="overlay">
             <p>{{ event.name }} </p>
             <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->

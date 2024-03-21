@@ -74,7 +74,7 @@ class CompanyCrudController extends AbstractImageCrudController
                 ->setUploadedFileNamePattern(ConstantesCrud::COMPANY_PATTERN_IMG)
                 ->setRequired(false)
                 ->setSortable(false)
-                ->setHelp(self::HELP_IMAGE)
+                ->setHelp(self::HELP_IMAGE.'Ne concerne que les partenariats commercials')
                 ->setFormTypeOptions([
                     'attr' => [
                         'accept' => self::TYPE_IMAGE,
@@ -115,3 +115,4 @@ class CompanyCrudController extends AbstractImageCrudController
         parent::deleteEntity($entityManager, $entityInstance);
     }
 }
+

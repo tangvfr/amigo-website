@@ -13,12 +13,12 @@ abstract class ConstantesCrud {
     const COMPANY_TYPE_NAME = 'Entreprise Type';
     const EVENT_NAME = 'Évènement';
     const EVENT_TYPE_NAME = 'Évènement Type';
-    const HUB_NAME = 'Pole';
+    const HUB_NAME = 'Pôle';
     const LOCATION_NAME = 'Localisation';
     const MANDATE_NAME = 'Mandat';
     const OFFER_NAME = 'Offre';
     const PARTNER_NAME = 'Partenaire';
-    const ROLE_NAME = 'Role';
+    const ROLE_NAME = 'Rôle';
     const STUDENT_NAME = 'Étudiant';
 
 
@@ -62,8 +62,8 @@ abstract class ConstantesCrud {
     const COMPANY_PROPERTY_LOCALISATION = 'located';
     const COMPANY_LABEL_LOCALISATION = 'Localisation';
     const COMPANY_HELP_LOCALISATION = 'Sélectionnez les emplacements où l\'entreprise est présente';
-    const COMPANY_LABEL_ACT = 'activities';
-    const COMPANY_PROPERTY_ACT = 'Activités';
+    const COMPANY_LABEL_ACT = 'Activités';
+    const COMPANY_PROPERTY_ACT = 'activities';
     const COMPANY_HELP_ACT = 'Sélectionnez les activités de l\'entreprise';
 
 
@@ -101,9 +101,13 @@ abstract class ConstantesCrud {
     const PANEL_NAME_ADRESSE = 'ADRESSE';
     const PANEL_NAME_COORDONNEES = 'COORDONNEES';
     const PANEL_NAME_BANNIERE = 'BANNIERE';
+    const PANEL_NAME_POSTER = 'AFFICHE';
     const PANEL_NAME_PRIX = 'PRIX';
     const PANEL_NAME_QUOTAS = 'QUOTAS';
     const PANEL_NAME_INFOS = 'INFOS';
     const PASSWORD_NAME = 'Changer de mot de passe';
+
+
+
 
 }

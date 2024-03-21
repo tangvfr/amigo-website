@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\CompanyTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CompanyTypeRepository::class)]
+#[UniqueEntity(fields: 'label')]
 class CompanyType
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]

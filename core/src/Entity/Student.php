@@ -40,7 +40,6 @@ class Student extends AbstractEditableEntity
     private ?string $studentNumber = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\Unique]
     #[Assert\NotNull, Assert\Email]
     private ?string $email = null;
 

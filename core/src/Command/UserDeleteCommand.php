@@ -74,7 +74,7 @@ class UserDeleteCommand extends Command
             $comment[] = 'Utilisateur supprimer:';
             $comment[] = 'id utilisateur: ' . $user->getId();
             $comment[] = 'roles: ' . implode(',', $user->getRoles());
-            $comment[] = 'login: ' . $user->getLogin();
+            $comment[] = 'identifiant: ' . $user->getLogin();
 
             $io->info(join("\n", $comment));
             $io->success('Vous venez de supprimer un utilisateur !');

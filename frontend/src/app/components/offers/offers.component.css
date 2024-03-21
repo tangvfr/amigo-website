@@ -1,0 +1,17 @@
+#offerMain {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 4rem;
+}
+
+#searchBarIn {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  justify-content: center;
+}
+
+#searchBar {
+  margin-bottom: 2rem;
+}

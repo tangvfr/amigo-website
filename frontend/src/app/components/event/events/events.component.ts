@@ -9,6 +9,7 @@ import {EventSearch} from "../../../models/search/event-search";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {Observable} from "rxjs";
 import {MatButton} from "@angular/material/button";
+import {environment} from "../../../../environments/environment";
 
 export const enum Stat {
   LOADING,
@@ -35,7 +36,7 @@ export class EventsComponent implements OnInit {
   ) {}
 
   showEventDetails(event: components["schemas"]["Event.jsonld-minimalEvent"]) {
-    let eventid: bigint = BigInt(event.id);
+    let eventid: number = event.id;
     this.amigowsApiService.getEvent(eventid).subscribe((eventDetail: components["schemas"]["Event.jsonld-detailEvent"]) => {
       this.selectedEvent = eventDetail;
     });
@@ -126,4 +127,6 @@ export class EventsComponent implements OnInit {
   {
     this.stat = this.stat === Stat.PARTIAL ? Stat.NORMAL : Stat.PARTIAL;
   }
+
+    protected readonly environment = environment;
 }

@@ -1,15 +1,17 @@
-<h2>Formulaire test ?</h2>
-<app-offer-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
-<p>Nous avons {{ offers["hydra:totalItems"] }} offre de stage !</p>
-<ul>
-  <li *ngFor="let offer of offers['hydra:member']">
-    <h2>{{ offer.label}}</h2>
-    <p>
-      By: {{ offer.provider.name }}
-    </p>
-    <p>
-      <!-- Voir pour peu etre mettre un css spécial pour le h1 h2 h... p li ol dans les balises mardown-->
-      <markdown [data]="offer.description" />
-    </p>
-  </li>
-</ul>
+<div id="offerMain">
+  <mat-card id="searchBar">
+    <mat-card-content>
+      <div id="searchBarIn">
+        <app-offer-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="offerCard" *ngFor="let offer of offers['hydra:member']">
+    <mat-card-content>
+      <div class="offerContent">
+        <app-offer-card [offer]="offer" />
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
