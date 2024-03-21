@@ -137,5 +137,19 @@
   margin-bottom: 2rem;
 }
 
+.bottom button{
+  width: 5vw;
+  height: 4vh;
+  background-color: rgb(28, 28, 32);
+  border: rgb(28, 28, 32);
+  font-family: Kadwa, 'Courier New', Courier, monospace;
+  margin-bottom: 1%;
+
+
+
+
+
+}
+
 
 
