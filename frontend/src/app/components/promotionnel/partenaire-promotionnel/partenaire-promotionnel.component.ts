@@ -5,6 +5,7 @@ import {HydraList} from "../../../models/hydra-list";
 import {components} from "../../../models/schema.api";
 import {AmigowsApiService} from "../../../services/amigows.api.service";
 import {PromotionnelCardComponent} from "../promotionnel-card/promotionnel-card.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-partenaire-promotionnel',
@@ -12,7 +13,8 @@ import {PromotionnelCardComponent} from "../promotionnel-card/promotionnel-card.
   imports: [
     EntrepriseCardComponent,
     MatProgressSpinner,
-    PromotionnelCardComponent
+    PromotionnelCardComponent,
+    NgForOf
   ],
   templateUrl: './partenaire-promotionnel.component.html',
   styleUrl: './partenaire-promotionnel.component.css'

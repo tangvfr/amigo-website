@@ -3,76 +3,31 @@
   background-color: #2A2C37;
   width: 100%;
   position: relative;
+}
 
+#form-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  grid-auto-rows: auto;
+  padding: 2rem;
+  color: aliceblue;
+  background-color: #1E1E1E;
+  text-decoration: none;
+  border-radius: 0.5rem;
 }
 
 #form-event-page #form{
   position: absolute;
-  top: 15%;
+  top: 20%;
   height: 70%;
   width: 80%;
-  background-color: #1E1E1E;
   left: 10%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-content: center;
   /* Centrer horizontalement */
   align-items: center;
   /* Centrer verticalement */
-  color: aliceblue;
-  text-decoration: none;
-  border-radius: 5%;
 }
-
-#form-event-page #form .line{
-  /* background-color: aqua; */
-
-  max-height: 29%;
-  overflow: hidden;
-  width: 80%;
-  display: flex;
-  justify-content: space-evenly;
-  font-family: kadwa, 'Courier New', Courier, monospace;
-
-
-
-  text-align: center;
-
-
-}
-
-
-#form-event-page #form .line mat-form-field{
-
-  vertical-align: middle;
-  width: 30%;
-  display: inline-block
-
-}
-
-#form-event-page #form .line div {
-  width: 20%;
-  height: 100%;
-  display: flex;
-  font-family: ministro, 'Courier New', Courier, monospace;
-  justify-content: center;
-  /* Centrer horizontalement */
-  align-items: center;
-  /* Centrer verticalement */
-
-}
-
-
-button{
-
-
-  display: flex;
-  font-family: ministro, 'Courier New', Courier, monospace;
-  justify-content: center;
-  /* Centrer horizontalement */
-
-}
-
-
-
-

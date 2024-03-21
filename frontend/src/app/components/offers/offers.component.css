@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 3rem;
   padding: 2rem 4rem;
+  background-color: #2A2C37;
 }
 
 #searchBarIn {
@@ -14,4 +15,8 @@
 
 #searchBar {
   margin-bottom: 2rem;
+}
+
+mat-card {
+  background-color: #1E1E1E;
 }

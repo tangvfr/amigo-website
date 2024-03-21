@@ -25,7 +25,7 @@
     <div style="display:flex; flex-direction: row; justify-content: center;">
       <button mat-flat-button (click)="mapService.showMapTruc(this.partner!.company!.name, this.partner!.company!.located)">Localiser</button>
     </div>
-    <p>Partenaire de puis : {{this.partner!.bgedDate!.beginDate}}</p>
+    <p style="margin-bottom: 1rem;">Partenaire de puis : {{this.partner!.bgedDate!.beginDate  | date: 'M/d/yy'}}</p>
   </div>
 
 </div>

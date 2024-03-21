@@ -7,12 +7,7 @@
     </div>
     <div id="entreprise-container">
       @if (ready){
-        {{partners?.["hydra:totalItems"]}}
-        @for (partner of partners!['hydra:member']; track partner){
-          <app-promotionnel-card [partner]="partner"/>
-
-        }
-
+        <app-promotionnel-card *ngFor="let partner of partners!['hydra:member']" [partner]="partner"/>
       }
       @if (!ready){
         <div class="poster-container">

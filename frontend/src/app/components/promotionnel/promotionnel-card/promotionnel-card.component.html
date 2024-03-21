@@ -1,5 +1,3 @@
-
-
 <div class="entreprise">
   <div class="blur"></div>
   <div class="top">
@@ -9,21 +7,25 @@
     </div>
     <div class="middle">
       <div class="title-container">
-        <h2>{{this.partner?.company?.name}}</h2>
-        <h3>{{this.partner?.company?.activities}}</h3>
-        <p>{{this.partner?.company?.description}}</p>
+        <h2>{{this.partner.company.name}}</h2>
+        <h3>
+          <span *ngFor="let ac of this.partner!.company!.activities">
+            {{ ac.label }}
+          </span>
+        </h3>
+        <p>{{this.partner.company.description}}</p>
       </div>
     </div>
     <div class="right">
       <h4>Avantage pour les adhérent:</h4>
-      <p>{{this.partner?.advantages}}</p>
+      <p>{{this.partner.advantages}}</p>
     </div>
   </div>
   <div class="bottom">
     <div style="display:flex; flex-direction: row; justify-content: center;">
-      <button mat-flat-button (click)="mapService.showMapTruc(this.partner!.company!.name, this.partner!.company!.located)">Localiser</button>
+      <button mat-flat-button (click)="mapService.showMapTruc(this.partner.company.name, this.partner.company.located)">Localiser</button>
     </div>
-    <p>Partenaire de puis : {{this.partner?.bgedDate}}</p>
+    <p style="margin-bottom: 1.5rem;">Partenaire de puis : {{this.partner.bgedDate?.beginDate | date: 'M/d/yy'}}</p>
   </div>
 
 </div>

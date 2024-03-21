@@ -1,24 +1,32 @@
-<div class="searchCont">
-  <mat-form-field >
-    <mat-label>Recherche</mat-label>
-    <input matInput [(ngModel)]="searchData.searching" #searching placeholder="Votre recherche" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+<div id="form-out">
+  <div id="form-inner">
+    <mat-form-field>
+      <mat-label>Recherche</mat-label>
+      <input matInput [(ngModel)]="searchData.searching" #searching placeholder="Votre recherche" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Après</mat-label>
-    <input matInput [matDatepicker]="dtbeg" #indtbeg [(ngModel)]="searchData.beginAfter" />
-    <mat-datepicker-toggle matIconSuffix [for]="dtbeg"></mat-datepicker-toggle>
-    <mat-datepicker #dtbeg />
-  </mat-form-field>
+    <div id="form-grid">
+      <mat-form-field>
+        <mat-label>Après</mat-label>
+        <input matInput [matDatepicker]="dtbeg" #indtbeg [(ngModel)]="searchData.beginAfter" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtbeg"></mat-datepicker-toggle>
+        <mat-datepicker #dtbeg />
+      </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Avant</mat-label>
-    <input matInput [matDatepicker]="dtend" #indtend [(ngModel)]="searchData.endBefore" />
-    <mat-datepicker-toggle matIconSuffix [for]="dtend"></mat-datepicker-toggle>
-    <mat-datepicker #dtend />
-  </mat-form-field>
+      <mat-form-field>
+        <mat-label>Avant</mat-label>
+        <input matInput [matDatepicker]="dtend" #indtend [(ngModel)]="searchData.endBefore" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtend"></mat-datepicker-toggle>
+        <mat-datepicker #dtend />
+      </mat-form-field>
 
-  <button mat-raised-button color="accent" (click)="onReset()">Réinitialiser</button>
-  <button mat-raised-button color="primary" (click)="onSumbit()">Rechercher</button>
+      <button mat-raised-button color="accent" (click)="onReset()">
+        Réinitialiser
+      </button>
+      <button mat-raised-button color="primary" (click)="onSumbit()">
+        Rechercher
+      </button>
+    </div>
+  </div>
 </div>

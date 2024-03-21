@@ -1,11 +1,5 @@
 <div id="offerMain">
-  <mat-card id="searchBar">
-    <mat-card-content>
-      <div id="searchBarIn">
-        <app-offer-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <app-offer-search-fields #searchField (search)="search($event)" (keydown.enter)="searchField.onSumbit()" />
 
   <mat-card class="offerCard" *ngFor="let offer of offers['hydra:member']">
     <mat-card-content>
