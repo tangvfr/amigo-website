@@ -71,8 +71,7 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('ADRESSE'),
             CountryField::new('country', 'Pays')
                 ->setEmptyData("FR"),
-            TextField::new('city', 'Ville')
-                ->setRequired(true),
+            TextField::new('city', 'Ville'),
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse', 'Adresse'),
 
