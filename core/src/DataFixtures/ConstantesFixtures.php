@@ -42,7 +42,7 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour hubFixtures
-    public const HUB_NB = 5;
+    public const HUB_NB = 8;
 
 
     //constantes pour locationFixtures
@@ -51,11 +51,12 @@ abstract class ConstantesFixtures {
 
 
     //constantes pour mandateFixtures
-    public const MANDATE_NB = 20;
+    public const MANDATE_NB = 30;
     public const VISIBLE_PROBA = 95;
 
     public const MANDATE_DATE_BETWEEN_MIN = '-18 months';
     public const MANDATE_DATE_BETWEEN_MAX = '+18 months';
+    public const MANDATE_DATE_GAP = '+365 days';//jsp pk faut en days, ->modif accept que ça
 
 
     //constantes pour offerFixtures
