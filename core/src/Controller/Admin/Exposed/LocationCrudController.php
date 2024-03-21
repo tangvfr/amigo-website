@@ -3,7 +3,6 @@
 namespace App\Controller\Admin\Exposed;
 
 use App\Controller\Admin\ConstantesCrud;
-use App\Controller\Admin\DashboardController;
 use App\Entity\Location;
 use App\Service\GeocodeServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterCrudActionEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
@@ -29,6 +29,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationCrudController extends AbstractCrudController
 {
@@ -36,7 +37,8 @@ class LocationCrudController extends AbstractCrudController
     private const ENTITY_LABEL_IN_PLURAL = 'Localisations';
 
     public function __construct(
-        private readonly GeocodeServiceInterface $geocodeService
+        private readonly GeocodeServiceInterface $geocodeService,
+        private readonly TranslatorInterface $translator
     )
     {
     }
@@ -69,7 +71,8 @@ class LocationCrudController extends AbstractCrudController
             FormField::addPanel('ADRESSE'),
             CountryField::new('country', 'Pays')
                 ->setEmptyData("FR"),
-            TextField::new('city', 'Ville'),
+            TextField::new('city', 'Ville')
+                ->setRequired(true),
             NumberField::new('postalCode', 'Code postal'),
             TextField::new('adresse', 'Adresse'),
 
@@ -168,8 +171,16 @@ class LocationCrudController extends AbstractCrudController
                 $coord = $coords[0];
                 $entityInstance->setLatitude($coord->latitude);
                 $entityInstance->setLongitude($coord->longitude);
+            } else {
+                $this->addFlashError('Les latitudes, longitude n\'ont pas pu être trouvé pour votre adresse');
             }
         }
         return $entityInstance;
+    }
+
+    // Ajoutez cette méthode pour afficher un message d'erreur personnalisé
+    protected function addFlashError(string $message, array $parameters = []): void
+    {
+        $this->addFlash('error', $this->translator->trans($message, $parameters));
     }
 }
