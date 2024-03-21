@@ -13,6 +13,38 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
+    <style>
+        .map {
+            width: 49%;
+            height: 40vh;
+            border: 1px solid #AAA;
+            border-radius: 5px;
+        }
+        .content-wrapper{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        /* Pour les écrans de taille large (lg), définissez la largeur sur 66.666% */
+        @media (min-width: 992px) {
+            .map {
+                width: 66.666%;
+                height: 40vh;
+            }
+        }
+
+        /* Pour les écrans extra-larges (xl), définissez la largeur sur 50% */
+        @media (min-width: 1200px) {
+            .map {
+                width: 49%;
+                height: 30vh;
+                margin-top: -10vh;
+                margin-left: 51%;
+            }
+        }
+    </style>
     <script>
         let latitude = {{ entity.instance.latitude }} ;
         let longitude = {{ entity.instance.longitude }};
@@ -34,33 +66,4 @@
             map.setView([lat, lon], map.getZoom());
         }
     </script>
-
-    <style>
-        .map {
-            height: 30vh;
-            border: 1px solid #AAA;
-            border-radius: 5px;
-        }
-        .content-wrapper{
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-        }
-
-        /* Pour les écrans de taille large (lg), définissez la largeur sur 66.666% */
-        @media (min-width: 992px) {
-            .map {
-                width: 66.666%;
-            }
-        }
-
-        /* Pour les écrans extra-larges (xl), définissez la largeur sur 50% */
-        @media (min-width: 1200px) {
-            .map {
-                width: 49%;
-                margin-top: -10vh;
-                margin-left: 51%;
-            }
-        }
-    </style>
 {% endblock %}
