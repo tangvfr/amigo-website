@@ -1,8 +1,8 @@
 <div class="office-member">
 
-  <a><img [src]="'assert/images/member?.student.img'"></a>
-  <h3>{{member?.student?.lastName}}<br>{{member?.student?.name}}</h3>
-  <h4>{{member?.role?.name}}</h4>
-  <p>{{member?.student?.level?.toUpperCase()}}</p>
+  <a><img [src]="member.student.img ? environment.imageURL + member!.student!.img! : 'assets/images/amigo_favicon256.png'"></a>
+  <h3>{{member?.student?.name}} {{member.student.lastName}}</h3>
+  <h4>{{member.role.name}}</h4>
+  <p>{{member.student.level?.toUpperCase()}}</p>
 
 </div>

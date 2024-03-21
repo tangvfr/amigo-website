@@ -32,7 +32,7 @@
     @for (event of events!['hydra:member']; track event) {
 
       <div class="poster">
-        <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+        <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
         <div class="overlay">
           <p>{{ event.name }} </p>
           <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->
@@ -51,7 +51,7 @@
       }
     @for (event of pastEvents!['hydra:member']; track event.id) {
         <div class="poster">
-          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
           <div class="overlay">
             <p>{{ event.name }} </p>
             <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button>
@@ -75,7 +75,7 @@
 
         <div class="poster">
 
-          <img [src]="event.img ? 'assets/images/' + event.img : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
+          <img [src]="event.img ? environment.imageURL + event.img! : 'assets/images/Affiche_sweats_anniversaire.png '" alt="Image">
           <div class="overlay">
             <p>{{ event.name }} </p>
             <button mat-button color="accent" (click)="showEventDetails(event)">Afficher les détails</button> -->

@@ -19,5 +19,11 @@ export class MapService {
         title: title,
       }});
   }
+  showMapTruc(
+    title: string,
+    locations: any
+  ) {
+    this.showMap(title, locations);
+  }
 
 }

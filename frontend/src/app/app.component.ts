@@ -16,5 +16,4 @@ import {FooterComponent} from "./components/static/footer/footer.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  aVariable = 'For example !';
 }

@@ -101,6 +101,7 @@ abstract class ConstantesCrud {
     const PANEL_NAME_ADRESSE = 'ADRESSE';
     const PANEL_NAME_COORDONNEES = 'COORDONNEES';
     const PANEL_NAME_BANNIERE = 'BANNIERE';
+    const PANEL_NAME_POSTER = 'AFFICHE';
     const PANEL_NAME_PRIX = 'PRIX';
     const PANEL_NAME_QUOTAS = 'QUOTAS';
     const PANEL_NAME_INFOS = 'INFOS';

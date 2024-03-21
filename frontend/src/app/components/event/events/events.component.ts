@@ -9,6 +9,7 @@ import {EventSearch} from "../../../models/search/event-search";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {Observable} from "rxjs";
 import {MatButton} from "@angular/material/button";
+import {environment} from "../../../../environments/environment";
 
 export const enum Stat {
   LOADING,
@@ -126,4 +127,6 @@ export class EventsComponent implements OnInit {
   {
     this.stat = this.stat === Stat.PARTIAL ? Stat.NORMAL : Stat.PARTIAL;
   }
+
+    protected readonly environment = environment;
 }
