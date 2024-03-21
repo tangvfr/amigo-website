@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-footer',
@@ -12,4 +13,5 @@ import {NgOptimizedImage} from "@angular/common";
 })
 export class FooterComponent {
 
+  protected readonly environment = environment;
 }

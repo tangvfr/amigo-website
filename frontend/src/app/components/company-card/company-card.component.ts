@@ -1,26 +1,27 @@
 import {Component, Input} from '@angular/core';
-import {Post} from "../../../models/office/post";
-import {components} from "../../../models/schema.api";
+import {components} from "../../models/schema.api";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {MatButton} from "@angular/material/button";
-import {MapService} from "../../../services/map.service";
+import {MapService} from "../../services/map.service";
 
 @Component({
-  selector: 'app-entreprise-card',
+  selector: 'app-company-card',
   standalone: true,
   imports: [
     NgOptimizedImage,
     MatButton,
     NgForOf
   ],
-  templateUrl: './entreprise-card.component.html',
-  styleUrl: './entreprise-card.component.css'
+  templateUrl: './company-card.component.html',
+  styleUrl: './company-card.component.css'
 })
-export class EntrepriseCardComponent {
+export class CompanyCardComponent {
   constructor(
     public mapService: MapService
   ) {}
-  @Input({required: true}) partner!: components["schemas"]["Partner.jsonld-challengerCompany"] ;
+
+  @Input({required: true}) public company!: components['schemas']['Company.jsonld-infoCompany']
+
   protected readonly environment = environment;
 }
