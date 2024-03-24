@@ -16,7 +16,7 @@ import {
 } from "./components/promotionnel/partenaire-promotionnel/partenaire-promotionnel.component";
 
 export const routes: Routes = [
-  {path: '', component: TesthComponent},
+  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'events', component: EventsComponent},
   {path: 'testh', component: TesthComponent},
